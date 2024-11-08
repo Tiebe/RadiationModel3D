@@ -20,7 +20,7 @@ namespace RadiationModel.substances
          */
         public abstract double halfLife { get; }
 
-        /** 
+        /**
          * The atomic weight of the substance in atomic mass units
          */
         public abstract double atomicWeight { get; }
