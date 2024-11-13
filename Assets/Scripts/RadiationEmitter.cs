@@ -27,6 +27,7 @@ public class RadiationEmitter : MonoBehaviour
         
     }
 
+    int emmitted;
     private void FixedUpdate()
     {
         double time = Time.deltaTime;
@@ -57,6 +58,8 @@ public class RadiationEmitter : MonoBehaviour
                         {
                             receiver.RadiationHit(particle);
                         }
+                        emmitted++;
+                        // Debug.Log("emitted: " + emmitted);
                     }
                 }
                 else
