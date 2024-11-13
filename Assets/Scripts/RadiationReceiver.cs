@@ -9,7 +9,10 @@ public abstract class RadiationReceiver : MonoBehaviour
     private void Start()
     {
         radiationReceivers.Add(gameObject, this);
+        StartOverride();
     }
+
+    protected abstract void StartOverride();
 
     public abstract void RadiationHit(RadioactiveSubstance particle);
 }
