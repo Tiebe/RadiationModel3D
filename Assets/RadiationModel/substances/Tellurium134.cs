@@ -1,0 +1,23 @@
+
+using System;
+using System.Collections.Generic;
+using RadiationModel.constants;
+
+namespace RadiationModel.substances
+{
+    public class Tellurium134 : RadioactiveSubstance
+    {
+        public override string name { get; } = "Tellurium134";
+        public override double halfLife { get; } = 2508.0d;
+        public override double atomicWeight { get; } = 133.9114d;
+
+        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        {
+
+            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(), new Iodine134() } },
+
+        };
+    }
+}
+    
+    

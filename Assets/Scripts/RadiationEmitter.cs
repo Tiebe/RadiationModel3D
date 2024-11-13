@@ -40,7 +40,7 @@ public class RadiationEmitter : MonoBehaviour
                 var particle = decay.Key;
                 var particleAmount = decay.Value;
 
-                if (particle is GammaParticle or ElectronParticle)
+                if (particle is GammaParticle or BetaParticle)
                 {
                     for (var i = 0; i < particleAmount; i++)
                     {
@@ -67,8 +67,7 @@ public class RadiationEmitter : MonoBehaviour
                             if (done) continue;
                             
                             hitPoints.Add(new KeyValuePair<GameObject, Vector3[]>(hit.collider.gameObject, new Vector3[2] {hit.point, Vector3.zero}));
-                        }
-                        
+                        } 
                         foreach (var (hitGameObject, points) in hitPoints)
                         {
                             var entryPoint = points[0];
@@ -86,7 +85,7 @@ public class RadiationEmitter : MonoBehaviour
                                 {
                                     continue;
                                 }
-                            } else if (particle is ElectronParticle electronParticle)
+                            } else if (particle is BetaParticle electronParticle)
                             {
                                 // todo: implement electron attenuation
                             }

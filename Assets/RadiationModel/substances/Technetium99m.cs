@@ -1,22 +1,25 @@
-﻿using System.Collections.Generic;
+
+using System;
+using System.Collections.Generic;
 using RadiationModel.constants;
 
 namespace RadiationModel.substances
 {
-
     public class Technetium99m : RadioactiveSubstance
     {
-        public override string name => "Technetium-99m";
-        public override double halfLife { get; } = 6.0067 * TimeConstants.SECONDS_IN_HOUR;
-        public override double atomicWeight => 98.9063;
+        public override string name { get; } = "Technetium99m";
+        public override double halfLife { get; } = 21623.76d;
+        public override double atomicWeight { get; } = 98.9064d;
 
-        // TODO: find sources for decay products and probabilities
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new ()
+        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            {0.88, new List<RadioactiveSubstance>() { new Technetium99(), new GammaParticle() } },
-            {0.12, new List<RadioactiveSubstance>() { new Technetium99(1), new ElectronParticle() } }
+
+            { 1.0d, new List<RadioactiveSubstance> { new GammaParticle(), new Technetium99() } },
+
+            { 3.7000000000000005e-05d, new List<RadioactiveSubstance> { new BetaParticle(), new Ruthenium99() } },
+
         };
-
-
     }
 }
+    
+    

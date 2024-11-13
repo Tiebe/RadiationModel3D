@@ -1,0 +1,23 @@
+
+using System;
+using System.Collections.Generic;
+using RadiationModel.constants;
+
+namespace RadiationModel.substances
+{
+    public class Francium201 : RadioactiveSubstance
+    {
+        public override string name { get; } = "Francium201";
+        public override double halfLife { get; } = 0.0628d;
+        public override double atomicWeight { get; } = 201.00385d;
+
+        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        {
+
+            { 1.0d, new List<RadioactiveSubstance> { new AlphaParticle(), new Astatine197() } },
+
+        };
+    }
+}
+    
+    

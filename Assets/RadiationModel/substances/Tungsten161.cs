@@ -1,0 +1,25 @@
+
+using System;
+using System.Collections.Generic;
+using RadiationModel.constants;
+
+namespace RadiationModel.substances
+{
+    public class Tungsten161 : RadioactiveSubstance
+    {
+        public override string name { get; } = "Tungsten161";
+        public override double halfLife { get; } = 0.409d;
+        public override double atomicWeight { get; } = 160.96725d;
+
+        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        {
+
+            { 0.73d, new List<RadioactiveSubstance> { new AlphaParticle(), new Hafnium157() } },
+
+            { 0.27d, new List<RadioactiveSubstance> { new BetaParticle(), new Tantalum161() } },
+
+        };
+    }
+}
+    
+    

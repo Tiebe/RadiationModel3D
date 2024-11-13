@@ -14,6 +14,12 @@ public class GeigerTeller : RadiationReceiver
     {
         
     }
+
+    protected override void StartOverride()
+    {
+        var text = gameObject.GetComponent<TextMeshProUGUI>();
+        text.text = "0";
+    }
     
     public override void RadiationHit(RadioactiveSubstance particle)
     {
@@ -21,7 +27,7 @@ public class GeigerTeller : RadiationReceiver
         {
             hits++;
         }
-        else if ((particle is ElectronParticle) && detectBeta)
+        else if ((particle is BetaParticle) && detectBeta)
         {
             hits++;
         }

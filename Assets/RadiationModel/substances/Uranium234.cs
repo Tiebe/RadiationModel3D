@@ -1,12 +1,29 @@
-﻿using System.Collections.Generic;
+
+using System;
+using System.Collections.Generic;
+using RadiationModel.constants;
 
 namespace RadiationModel.substances
 {
     public class Uranium234 : RadioactiveSubstance
     {
-        public override string name { get; } = "Uranium-234";
-        public override double halfLife { get; } = 245500;
-        public override double atomicWeight { get; } = 234.0436;
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new();
+        public override string name { get; } = "Uranium234";
+        public override double halfLife { get; } = 7747231716000.0d;
+        public override double atomicWeight { get; } = 234.04095d;
+
+        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        {
+
+            { 1.0d, new List<RadioactiveSubstance> { new AlphaParticle(), new Thorium230() } },
+
+            { 1.64e-11d, new List<RadioactiveSubstance> {  } },
+
+            { 1.4e-13d, new List<RadioactiveSubstance> { new Magnesium28(), new Mercury206() } },
+
+            { 9e-14d, new List<RadioactiveSubstance> { new Neon24(), new Neon26(), new Hafnium184() } },
+
+        };
     }
 }
+    
+    
