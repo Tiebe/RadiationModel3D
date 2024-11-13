@@ -52,6 +52,7 @@ public class RadiationEmitter : MonoBehaviour
                     for (var i = 0; i < particleAmount; i++)
                     {
                         var direction = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f));
+                        // Debug.DrawRay(transform.position, direction, Color.green, 0.1f);
                         //var direction = new Vector3(0, 0, 1);
                         if (!Physics.Raycast(transform.position, direction, out var hit)) continue;
                         if (RadiationReceiver.radiationReceivers.TryGetValue(hit.collider.gameObject, out var receiver))
