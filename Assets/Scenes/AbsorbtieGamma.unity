@@ -883,7 +883,7 @@ GameObject:
   - component: {fileID: 997832042}
   - component: {fileID: 997832041}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Lead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
