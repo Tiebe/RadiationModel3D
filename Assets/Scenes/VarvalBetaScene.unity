@@ -346,15 +346,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1831489590}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 7e78e9f442cdf2b4da2c763834d7b0af, type: 3}
       propertyPath: m_LocalScale.x
-      value: 13.933001
+      value: 13.933
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7e78e9f442cdf2b4da2c763834d7b0af, type: 3}
       propertyPath: m_LocalScale.y
-      value: 13.933001
+      value: 13.933
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7e78e9f442cdf2b4da2c763834d7b0af, type: 3}
       propertyPath: m_LocalScale.z
@@ -370,7 +370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7e78e9f442cdf2b4da2c763834d7b0af, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.07399996
+      value: -0.074
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 7e78e9f442cdf2b4da2c763834d7b0af, type: 3}
       propertyPath: m_LocalRotation.w
@@ -482,6 +482,9 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: ee730ca47649dcc45826c63f07bead06, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 428706693}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: ee730ca47649dcc45826c63f07bead06, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 140816062}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: ee730ca47649dcc45826c63f07bead06, type: 3}
       insertIndex: -1
@@ -588,7 +591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9620dbbd13924d739ed03279fd96056f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectGamma: 1
+  detectGamma: 0
   detectBeta: 1
 --- !u!64 &898667836
 MeshCollider:
@@ -621,7 +624,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 930139049}
-  - component: {fileID: 930139050}
   - component: {fileID: 930139051}
   m_Layer: 0
   m_Name: Detector
@@ -646,20 +648,6 @@ Transform:
   - {fileID: 898667831}
   m_Father: {fileID: 1831489590}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &930139050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 930139048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9620dbbd13924d739ed03279fd96056f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detectGamma: 1
-  detectBeta: 1
 --- !u!64 &930139051
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1256,6 +1244,5 @@ SceneRoots:
   - {fileID: 1953188117}
   - {fileID: 136283733}
   - {fileID: 1535069133}
-  - {fileID: 428706692}
   - {fileID: 850791062}
   - {fileID: 1092801771}
