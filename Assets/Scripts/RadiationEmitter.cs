@@ -11,11 +11,22 @@ public class RadiationEmitter : MonoBehaviour
 
     [FormerlySerializedAs("amount")] public int initalAmount;
     public string radioactiveSubstanceName;
+    public bool emitting = false;
 
     private Dictionary<RadioactiveSubstance, long> particles = new();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
+    {
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+        
+    }
+
+    public void Emit()
     {
         var substance = Substances.GetSubstanceByName(radioactiveSubstanceName);
         particles.Add(substance, initalAmount);
@@ -23,6 +34,11 @@ public class RadiationEmitter : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!emitting)
+        {
+            return;
+        }
+        
         double time = Time.deltaTime;
 
         // create copy of particles dictionary to iterate over, since editing a dictionary that is currently being iterated over, throws an error
@@ -46,6 +62,7 @@ public class RadiationEmitter : MonoBehaviour
                     {
                         var origin = transform.position;
                         var direction = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f));
+                        // Debug.DrawRay(transform.position, direction, Color.green, 0.1f);
                         //var direction = new Vector3(0, 0, 1);
                         var ray = new Ray(origin, direction);
                         // ReSharper disable once Unity.PreferNonAllocApi
