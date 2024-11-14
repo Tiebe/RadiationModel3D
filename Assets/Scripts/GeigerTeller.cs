@@ -1,4 +1,5 @@
-﻿using RadiationModel.substances;
+﻿using RadiationModel;
+using RadiationModel.substances;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -22,20 +23,15 @@ public class GeigerTeller : RadiationReceiver
         }
     
         counter.text = "0";
-    } 
-    
-    private void Update()
-    {
-        
     }
-    
+
     public override void RadiationHit(RadioactiveSubstance particle)
     {
         if ((particle is GammaParticle) && detectGamma)
         {
             hits++;
         }
-        else if ((particle is ElectronParticle) && detectBeta)
+        else if ((particle is BetaParticle) && detectBeta)
         {
             hits++;
         }
