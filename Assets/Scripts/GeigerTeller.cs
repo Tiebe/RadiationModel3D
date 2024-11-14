@@ -11,15 +11,13 @@ public class GeigerTeller : RadiationReceiver
     public bool detectBeta;
 
     private Manager manager;
-    
+
     protected override void StartOverride()
     {
         if (manager == null)
         {
             manager = GameObject.FindWithTag("Manager").GetComponent<Manager>();
         }
-    
-        counter.text = "0";
     }
 
     public override void RadiationHit(RadioactiveSubstance particle)
@@ -33,3 +31,4 @@ public class GeigerTeller : RadiationReceiver
             manager.hits++;
         }
     }
+}
