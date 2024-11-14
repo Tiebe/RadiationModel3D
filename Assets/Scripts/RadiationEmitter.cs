@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RadiationModel;
 using RadiationModel.statistics;
 using RadiationModel.substances;
 using UnityEngine;
@@ -56,17 +57,63 @@ public class RadiationEmitter : MonoBehaviour
                 var particle = decay.Key;
                 var particleAmount = decay.Value;
 
-                if (particle is GammaParticle or ElectronParticle)
+                if (particle is GammaParticle or BetaParticle)
                 {
                     for (var i = 0; i < particleAmount; i++)
                     {
+                        var origin = transform.position;
                         var direction = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f));
                         // Debug.DrawRay(transform.position, direction, Color.green, 0.1f);
                         //var direction = new Vector3(0, 0, 1);
-                        if (!Physics.Raycast(transform.position, direction, out var hit)) continue;
-                        if (RadiationReceiver.radiationReceivers.TryGetValue(hit.collider.gameObject, out var receiver))
+                        var ray = new Ray(origin, direction);
+                        // ReSharper disable once Unity.PreferNonAllocApi
+                        var hits = Physics.RaycastAll(ray);
+                        
+                        List<KeyValuePair<GameObject, Vector3[]>> hitPoints = new();
+
+                        foreach (var hit in hits)
                         {
-                            receiver.RadiationHit(particle);
+                            var done = false;
+                            foreach (var previousHitPair in hitPoints
+                                         .Where(previousHitPair => previousHitPair.Key == hit.collider.gameObject)
+                                         .Where(previousHitPair => previousHitPair.Value[1] == Vector3.zero))
+                            {
+                                previousHitPair.Value[1] = hit.point;
+                                done = true;
+                                break;
+                            }
+                            if (done) continue;
+                            
+                            hitPoints.Add(new KeyValuePair<GameObject, Vector3[]>(hit.collider.gameObject, new Vector3[2] {hit.point, Vector3.zero}));
+                        } 
+                        foreach (var (hitGameObject, points) in hitPoints)
+                        {
+                            var entryPoint = points[0];
+                            var exitPoint = points[1];
+                            var distance = Vector3.Distance(entryPoint, exitPoint);
+                            
+                            var material = RadiationModelMaterial.GetRadiationModelMaterial(hitGameObject);
+                            if (material is not null)
+                            {
+                                if (particle is GammaParticle gammaParticle)
+                                {
+                                    var attenuation = Math.Exp(-material.MassAttenuationCoefficient * distance);
+                                    var absorbed = 1 - attenuation;
+                                    if (UnityEngine.Random.value < absorbed)
+                                    {
+                                        continue;
+                                    }
+                                }
+                                else if (particle is BetaParticle electronParticle)
+                                {
+                                    // todo: implement electron attenuation
+                                }
+                            }
+
+                            if (RadiationReceiver.radiationReceivers.TryGetValue(hitGameObject, out var receiver))
+                            {
+                                receiver.RadiationHit(particle);
+                            }
                         }
                     }
                 }

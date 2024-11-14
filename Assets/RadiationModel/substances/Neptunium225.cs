@@ -1,0 +1,21 @@
+using System;
+using System.Collections.Generic;
+using RadiationModel.constants;
+
+namespace RadiationModel.substances
+{
+    public class Neptunium225 : RadioactiveSubstance
+    {
+        public override string name { get; } = "Neptunium225";
+        public override double halfLife { get; } = 0.0065d;
+        public override double atomicWeight { get; } = 225.03395d;
+
+        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        {
+            { 1.0d, new List<RadioactiveSubstance> { new AlphaParticle(9845047.4), new Protactinium221() } },
+
+        };
+    }
+}
+    
+    
