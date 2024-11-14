@@ -290,14 +290,18 @@ def timeWithUnitToSeconds(time, unit):
 def keVToAtomicMass(massExcessKeV):
     return massExcessKeV / 931493.6148
 
+def atomicMassToKeV(atomicMass):
+    return atomicMass * 931493.6148
+
 class Isotope:
-    def __init__(self, name, halfLife, atomicWeight, massNumber, elementNumber):
+    def __init__(self, name, halfLife, atomicWeight, massNumber, elementNumber, massKeV):
         self.name = name
         self.halfLife = halfLife
         self.atomicWeight = atomicWeight
         self.decayProducts = []
         self.massNumber = massNumber
         self.elementNumber = elementNumber
+        self.massKeV = massKeV
 
     def setDecayProducts(self, products):
         self.decayProducts = products
@@ -321,18 +325,22 @@ def getBetaDecayProducts(isotope: Isotope, resultChance, decayType):
     add = 0
     betaRelease = True
     amount = 1
+    charge = 0
     if len(decayType) > 2:
         if decayType != "EC+B+":
             amount = int(decayType[0])
     if decayType.endswith('B-'):
         add = amount
+        charge = -amount
     elif decayType.endswith('B+') or decayType.endswith('e+'):
         add = -amount
+        charge = amount
     elif decayType.endswith('EC'):
         add = -amount
         betaRelease = False
     if decayType == "EC+B+":
         add = 2
+        charge = 1
 
 
     startingMass = isotope.massNumber
@@ -344,7 +352,7 @@ def getBetaDecayProducts(isotope: Isotope, resultChance, decayType):
 
     resultsList = []
     if betaRelease:
-        resultsList.append({ "type": "beta" })
+        resultsList.append({ "type": "beta", "charge": charge })
 
     if '[' in resultChance:
         # Handle cases with multiple possible results
@@ -507,7 +515,8 @@ def parseDatabase():
             else:
                 halfLife = timeWithUnitToSeconds(float(halfLifeText), halfLifeUnit)
 
-            isotope = Isotope(element + str(mass) + s, halfLife, atomicWeight, mass, atomicNumber)
+            massKeV = atomicMassToKeV(atomicWeight)
+            isotope = Isotope(element + str(mass) + s, halfLife, atomicWeight, mass, atomicNumber, massKeV)
 
             decayModes = line[119:209].strip().split(';')
             #print(f"Line: {line}")
@@ -518,13 +527,56 @@ def parseDatabase():
     return isotopes
 
 
-def getDecayProductString(decayProduct):
+def getIsotopeFromMassElementInfo(isotopes, mass, element, info):
+    name = atomic_numbers[element] + str(mass) + info
+    return next((x for x in isotopes if x.name == name), None)
+
+def getDecayProductString(isotopes, isotope, decayProduct, decayProducts):
     if decayProduct["type"] == "alpha":
-        return "new AlphaParticle()"
+        originalEnergy = isotope.massKeV
+        finalEnergy = 3.7273794118*(10**6) # mass of alpha particle in keV
+        for product in decayProducts["results"]:
+            if product["type"] == "substance":
+                newIsotope = getIsotopeFromMassElementInfo(isotopes, product["mass"], product["element"], product.get("info", ""))
+                if newIsotope is not None:
+                    finalEnergy += newIsotope.massKeV
+                else:
+                    print(f"Could not find isotope {product['mass']} {product['element']} {product.get('info', '')}")
+
+        return f"new AlphaParticle({round(originalEnergy - finalEnergy, 5) * 1000})"
     if decayProduct["type"] == "beta":
-        return "new BetaParticle()"
+        charge = decayProduct["charge"]
+        originalEnergy = isotope.massKeV
+        finalEnergy = 0
+        for product in decayProducts["results"]:
+            if product["type"] == "substance":
+                newIsotope = getIsotopeFromMassElementInfo(isotopes, product["mass"], product["element"], product.get("info", ""))
+                if newIsotope is not None:
+                    finalEnergy += newIsotope.massKeV
+                else:
+                    print(f"Could not find isotope {product['mass']} {product['element']} {product.get('info', '')}")
+
+        return f"new BetaParticle({charge}, {round(originalEnergy - finalEnergy, 5) * 1000})"
     if decayProduct["type"] == "gamma":
-        return "new GammaParticle()"
+        originalEnergy = isotope.massKeV
+        finalEnergy = 0
+        for product in decayProducts["results"]:
+            if product["type"] == "substance":
+                newIsotope = getIsotopeFromMassElementInfo(isotopes, product["mass"], product["element"], product.get("info", ""))
+                if newIsotope is not None:
+                    finalEnergy += newIsotope.massKeV
+                else:
+                    print(f"Could not find isotope {product['mass']} {product['element']} {product.get('info', '')}")
+
+        leftOver = (originalEnergy - finalEnergy) * (1.602176634 * (10 ** -16))
+        planck = 6.62607015 * (10 ** -25)
+        c = 299792458
+
+        if leftOver == 0:
+            leftOver = 0.00000001
+
+        wavelength = round((planck * c) / leftOver, 5)
+        return f"new GammaParticle({wavelength})"
     if decayProduct["type"] == "proton":
         return "new ProtonParticle()"
     if decayProduct["type"] == "neutron":
@@ -536,7 +588,7 @@ def getDecayProductString(decayProduct):
         return f"new {name}()"
     return ""
 
-def generateFile(isotope: Isotope):
+def generateFile(isotopes, isotope: Isotope):
     name = isotope.name
     halfLife = round(isotope.halfLife, 5)
     if halfLife == 0:
@@ -547,12 +599,10 @@ def generateFile(isotope: Isotope):
 
     decayProducts = ""
     for decayProduct in isotope.decayProducts:
-        decayProducts += f"""
-            {{ {str(decayProduct["chance"])}d, new List<RadioactiveSubstance> {{ {', '.join([getDecayProductString(product) for product in decayProduct["results"]])} }} }},
+        decayProducts += f"""            {{ {str(decayProduct["chance"])}d, new List<RadioactiveSubstance> {{ {', '.join([getDecayProductString(isotopes, isotope, product, decayProduct) for product in decayProduct["results"]])} }} }},
 """
 
-    return f"""
-using System;
+    return f"""using System;
 using System.Collections.Generic;
 using RadiationModel.constants;
 
@@ -574,6 +624,35 @@ namespace RadiationModel.substances
     """
 
 
+def generateSubstancesFile(isotopes):
+    with open("Substances.cs", 'w') as file:
+        file.write(f"""using System;
+using System.Collections.Generic;
+using RadiationModel.substances;
+
+namespace RadiationModel
+{{
+    // list of all radioactive substances names with their respective class
+    public static class Substances
+    {{
+        private static readonly Dictionary<string, Type> substances = new()
+        {{
+            {{ "AlphaParticle", typeof(AlphaParticle) }},
+            {{ "BetaParticle", typeof(BetaParticle) }},
+            {{ "GammaParticle", typeof(GammaParticle) }}, 
+
+            {',\n            '.join([f'{{ "{isotope.name}", typeof({isotope.name}) }}' for isotope in isotopes])}
+        }};
+        
+        public static RadioactiveSubstance GetSubstanceByName(string name)
+        {{
+            return (RadioactiveSubstance) Activator.CreateInstance(substances[name]);
+        }}
+    }}
+
+}}
+""")
+
 def main():
     isotopes = parseDatabase()
 
@@ -586,7 +665,9 @@ def main():
 
     for isotope in isotopes:
         with open(f"{folder}/{isotope.name}.cs", "w") as file:
-            file.write(generateFile(isotope))
+            file.write(generateFile(isotopes, isotope))
+
+    generateSubstancesFile(isotopes)
 
 if __name__ == "__main__":
     main()

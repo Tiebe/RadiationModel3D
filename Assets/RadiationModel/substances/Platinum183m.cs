@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using RadiationModel.constants;
@@ -13,10 +12,8 @@ namespace RadiationModel.substances
 
         public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
         {
-
-            { 0.9690000000000001d, new List<RadioactiveSubstance> { new BetaParticle(), new Iridium183() } },
-
-            { 0.031d, new List<RadioactiveSubstance> { new GammaParticle(), new Platinum183() } },
+            { 0.9690000000000001d, new List<RadioactiveSubstance> { new BetaParticle(1, 4464000.0), new Iridium183() } },
+            { 0.031d, new List<RadioactiveSubstance> { new GammaParticle(0.03542), new Platinum183() } },
 
         };
     }

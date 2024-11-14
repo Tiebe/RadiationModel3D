@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RadiationModel;
 using RadiationModel.statistics;
 using RadiationModel.substances;
 using UnityEngine;
@@ -92,19 +93,21 @@ public class RadiationEmitter : MonoBehaviour
                             var distance = Vector3.Distance(entryPoint, exitPoint);
                             
                             var material = RadiationModelMaterial.GetRadiationModelMaterial(hitGameObject);
-                            if (material is null) continue;
-                            
-                            if (particle is GammaParticle gammaParticle)
+                            if (material is not null)
                             {
-                                var attenuation = Math.Exp(-material.MassAttenuationCoefficient * distance);
-                                var absorbed = 1 - attenuation;
-                                if (UnityEngine.Random.value < absorbed)
+                                if (particle is GammaParticle gammaParticle)
                                 {
-                                    continue;
+                                    var attenuation = Math.Exp(-material.MassAttenuationCoefficient * distance);
+                                    var absorbed = 1 - attenuation;
+                                    if (UnityEngine.Random.value < absorbed)
+                                    {
+                                        continue;
+                                    }
                                 }
-                            } else if (particle is BetaParticle electronParticle)
-                            {
-                                // todo: implement electron attenuation
+                                else if (particle is BetaParticle electronParticle)
+                                {
+                                    // todo: implement electron attenuation
+                                }
                             }
 
                             if (RadiationReceiver.radiationReceivers.TryGetValue(hitGameObject, out var receiver))
