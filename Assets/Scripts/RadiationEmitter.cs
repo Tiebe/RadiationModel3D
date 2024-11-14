@@ -11,14 +11,13 @@ public class RadiationEmitter : MonoBehaviour
 
     [FormerlySerializedAs("amount")] public int initalAmount;
     public string radioactiveSubstanceName;
+    public bool emitting = false;
 
     private Dictionary<RadioactiveSubstance, long> particles = new();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
-        var substance = Substances.GetSubstanceByName(radioactiveSubstanceName);
-        particles.Add(substance, initalAmount);
     }
 
     // Update is called once per frame
@@ -27,9 +26,19 @@ public class RadiationEmitter : MonoBehaviour
         
     }
 
-    int emmitted;
+    public void Emit()
+    {
+        var substance = Substances.GetSubstanceByName(radioactiveSubstanceName);
+        particles.Add(substance, initalAmount);
+    }
+
     private void FixedUpdate()
     {
+        if (!emitting)
+        {
+            return;
+        }
+        
         double time = Time.deltaTime;
 
         // create copy of particles dictionary to iterate over, since editing a dictionary that is currently being iterated over, throws an error
@@ -59,8 +68,6 @@ public class RadiationEmitter : MonoBehaviour
                         {
                             receiver.RadiationHit(particle);
                         }
-                        emmitted++;
-                        // Debug.Log("emitted: " + emmitted);
                     }
                 }
                 else
