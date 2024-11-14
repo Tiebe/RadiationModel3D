@@ -7,7 +7,6 @@ TagManager:
   - Anchor
   - Counter
   - Emitter
-  - Manager
   layers:
   - Default
   - TransparentFX

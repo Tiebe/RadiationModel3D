@@ -7,28 +7,35 @@ using UnityEngine.UI;
 
 public class GeigerTeller : RadiationReceiver
 {
+    private int hits = 0;
+
     public bool detectGamma;
     public bool detectBeta;
 
-    private Manager manager;
-
+    private TextMeshProUGUI counter;
+    
     protected override void StartOverride()
     {
-        if (manager == null)
+        if (counter == null)
         {
-            manager = GameObject.FindWithTag("Manager").GetComponent<Manager>();
+            var go = GameObject.FindWithTag("Counter");
+            counter = go.GetComponents<TextMeshProUGUI>()[0];
         }
+    
+        counter.text = "0";
     }
 
     public override void RadiationHit(RadioactiveSubstance particle)
     {
         if ((particle is GammaParticle) && detectGamma)
         {
-            manager.hits++;
+            hits++;
         }
         else if ((particle is BetaParticle) && detectBeta)
         {
-            manager.hits++;
+            hits++;
         }
+        
+        counter.text = hits.ToString();
     }
 }
