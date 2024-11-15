@@ -552,6 +552,7 @@ MonoBehaviour:
   initalAmount: 50000
   radioactiveSubstanceName: Protactinium234m
   emitting: 0
+  debugRender: 1
 --- !u!1 &184090137
 GameObject:
   m_ObjectHideFlags: 0
@@ -2707,3 +2708,4 @@ SceneRoots:
   - {fileID: 1535069133}
   - {fileID: 850791062}
   - {fileID: 1092801771}
+  - {fileID: 554212339}
