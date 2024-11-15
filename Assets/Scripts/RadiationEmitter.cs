@@ -12,7 +12,8 @@ public class RadiationEmitter : MonoBehaviour
 
     [FormerlySerializedAs("amount")] public int initalAmount;
     public string radioactiveSubstanceName;
-    public bool emitting = false;
+    public bool emitting;
+    public bool debugRender = false;
 
     private Dictionary<RadioactiveSubstance, long> particles = new();
 
@@ -63,7 +64,13 @@ public class RadiationEmitter : MonoBehaviour
                     {
                         var origin = transform.position;
                         var direction = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f));
-                        // Debug.DrawRay(transform.position, direction, Color.green, 0.1f);
+                        
+                        // renders green lines for debugging
+                        if (debugRender)
+                        {
+                            Debug.DrawRay(transform.position, direction, Color.green, 0.1f);
+                        }
+
                         //var direction = new Vector3(0, 0, 1);
                         var ray = new Ray(origin, direction);
                         // ReSharper disable once Unity.PreferNonAllocApi
