@@ -785,6 +785,8 @@ MonoBehaviour:
   toggle: {fileID: 0}
   manager: {fileID: 0}
   emitter: {fileID: 0}
+  toggleOff: 0
+  toggleOn: 1
 --- !u!114 &389115415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1025,7 +1027,8 @@ MonoBehaviour:
   emitter: {fileID: 0}
   counter: {fileID: 0}
   hits: 0
-  tenSecMode: 0
+  currentMode: 0
+  experimentDuration: 270
 --- !u!4 &554212339
 Transform:
   m_ObjectHideFlags: 0

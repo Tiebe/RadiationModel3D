@@ -9,7 +9,14 @@ public class Manager : MonoBehaviour
     public RadiationEmitter emitter;
     public TextMeshProUGUI counter;
     public int hits = 0;
-    public bool tenSecMode;
+    public Modes currentMode = Modes.Default; // should in most cases be Modes.Default
+    public int experimentDuration = 270; //270 is the total duration of the decay beta experiment
+    
+    public enum Modes
+    {
+        Default,
+        TenSecondInterval,
+    }
     
     private float timer = 10f;
     private int timeSpent = 0;
@@ -31,43 +38,52 @@ public class Manager : MonoBehaviour
             emitter = GameObject.FindWithTag("Emitter").GetComponent<RadiationEmitter>();
         }
     }
-
+    
     private void Update()
     {
         if (!emitter.emitting)
         {
             return;
         }
-        
-        counter.text = hits.ToString();
-        
-        if (!tenSecMode)
-        {
-            return;
-        }
 
-        if (timer > 0)
+        switch (currentMode)
         {
-            timer -= Time.deltaTime;
-            return;
-        }
-        
-        timeSpent += 10;
-        sb.AppendLine(timeSpent.ToString() + "," + hits.ToString());
-        hits = 0;
-        timer += 10f;
-        
-        if (timeSpent >= 270)
-        {
-            var folder = Application.streamingAssetsPath;
-            var filepath = Path.Combine(folder, "VervalBetaData.csv");
-
-            using var writer = new StreamWriter(filepath, false);
-            writer.Write(sb.ToString());
+            case Modes.Default:
+                counter.text = hits.ToString();
+                break;
             
-            Debug.Log("Written file to: " + filepath);
+            case Modes.TenSecondInterval:
+                counter.text = hits.ToString();
 
-            emitter.emitting = false;
+                if (timer > 0)
+                {
+                    timer -= Time.deltaTime;
+                    return;
+                }
+
+                timeSpent += 10;
+                sb.AppendLine(timeSpent.ToString() + "," + hits.ToString());
+                hits = 0;
+                timer += 10f;
+
+                if (timeSpent >= experimentDuration)
+                {
+                    var folder = Path.Combine(Application.dataPath, "Output");
+                    if (!Directory.Exists(folder))
+                    {
+                        Directory.CreateDirectory(folder);
+                    }
+
+                    var filepath = Path.Combine(folder, "VervalBetaData.csv");
+
+                    using var writer = new StreamWriter(filepath, false);
+                    writer.Write(sb.ToString());
+
+                    Debug.Log("Written file to: " + filepath);
+
+                    emitter.emitting = false;
+                }
+                break;
         }
     }
 }
