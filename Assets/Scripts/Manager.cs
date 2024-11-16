@@ -68,22 +68,32 @@ public class Manager : MonoBehaviour
 
                 if (timeSpent >= experimentDuration)
                 {
-                    var folder = Path.Combine(Application.dataPath, "Output");
-                    if (!Directory.Exists(folder))
-                    {
-                        Directory.CreateDirectory(folder);
-                    }
-
-                    var filepath = Path.Combine(folder, "VervalBetaData.csv");
-
-                    using var writer = new StreamWriter(filepath, false);
-                    writer.Write(sb.ToString());
-
-                    Debug.Log("Written file to: " + filepath);
-
+                    WriteData(sb, "VarvalBetaData");
                     emitter.emitting = false;
                 }
                 break;
         }
+    }
+
+    /**
+     * writes output data of an experiment to a csv file
+     * <param name="data">StringBuilder containing the data to be written to the file</param>
+     * <param name="fileName">file name of the csv file (do not append csvm the function already does that</param>
+     */
+    private void WriteData(StringBuilder data, string fileName)
+    {
+        var documentFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
+        var folder = Path.Combine(documentFolder, "RadiationModel3D", "Output");
+        if (!Directory.Exists(folder))
+        {
+            Directory.CreateDirectory(folder);
+        }
+        
+        var filepath = Path.Combine(folder, fileName + ".csv");
+        
+        using var writer = new StreamWriter(filepath, false);
+        writer.Write(data.ToString());
+        
+        Debug.Log("Written file to: " + filepath);
     }
 }
