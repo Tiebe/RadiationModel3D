@@ -1041,7 +1041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3606e9cdaa064a92a28b1da1b1b03ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MassAttenuationCoefficient: 235.6
+  MassAttenuationCoefficient: 6.74
 --- !u!1 &1128307925
 GameObject:
   m_ObjectHideFlags: 0
