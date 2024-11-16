@@ -39,6 +39,7 @@ public class StartButton : MonoBehaviour
                 emitter.initalAmount = Int32.Parse(inputField.text);
             }
 
+            // TODO add method for this to be set to false when the experiment finishes
             inputField.readOnly = true;
             
             emitter.emitting = true;
