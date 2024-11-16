@@ -1,0 +1,21 @@
+using System;
+using System.Collections.Generic;
+using RadiationModel.constants;
+
+namespace RadiationModel.substances
+{
+    public class Antimony116n : RadioactiveSubstance
+    {
+        public override string name { get; } = "Antimony116n";
+        public override double halfLife { get; } = 3618.0d;
+        public override double atomicWeight { get; } = 115.9072d;
+
+        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        {
+            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(1, 5085980.0), new Tin116() } },
+
+        };
+    }
+}
+    
+    
