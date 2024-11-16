@@ -288,10 +288,10 @@ def timeWithUnitToSeconds(time, unit):
     print(f"Unknown unit: {unit}")
 
 def keVToAtomicMass(massExcessKeV):
-    return massExcessKeV / 931493.6148
+    return massExcessKeV / 931494.103472
 
 def atomicMassToKeV(atomicMass):
-    return atomicMass * 931493.6148
+    return atomicMass * 931494.103472
 
 class Isotope:
     def __init__(self, name, halfLife, atomicWeight, massNumber, elementNumber, massKeV):
@@ -515,7 +515,7 @@ def parseDatabase():
             else:
                 halfLife = timeWithUnitToSeconds(float(halfLifeText), halfLifeUnit)
 
-            massKeV = atomicMassToKeV(atomicWeight)
+            massKeV = atomicMassToKeV(mass) + massExcessKeV
             isotope = Isotope(element + str(mass) + s, halfLife, atomicWeight, mass, atomicNumber, massKeV)
 
             decayModes = line[119:209].strip().split(';')
@@ -530,6 +530,9 @@ def parseDatabase():
 def getIsotopeFromMassElementInfo(isotopes, mass, element, info):
     name = atomic_numbers[element] + str(mass) + info
     return next((x for x in isotopes if x.name == name), None)
+
+def eVToJoules(eV):
+    return eV * 1.6021766339999 * (10 ** -19)
 
 def getDecayProductString(isotopes, isotope, decayProduct, decayProducts):
     if decayProduct["type"] == "alpha":
@@ -568,15 +571,16 @@ def getDecayProductString(isotopes, isotope, decayProduct, decayProducts):
                 else:
                     print(f"Could not find isotope {product['mass']} {product['element']} {product.get('info', '')}")
 
-        leftOver = (originalEnergy - finalEnergy) * (1.602176634 * (10 ** -16))
-        planck = 6.62607015 * (10 ** -25)
-        c = 299792458
+        leftOverEnergyEV = (originalEnergy - finalEnergy) * 1000
 
-        if leftOver == 0:
-            leftOver = 0.00000001
+        planckEV = 4.135667696 * (10 ** -15)
+        c = 299792458.0
 
-        wavelength = round((planck * c) / leftOver, 5)
-        return f"new GammaParticle({wavelength})"
+        if leftOverEnergyEV == 0:
+            leftOverEnergyEV = 0.00000001
+
+        wavelength = round(((planckEV * c) / leftOverEnergyEV) * 10**9, 5)
+        return f"new GammaParticle({round(leftOverEnergyEV, 5), wavelength})"
     if decayProduct["type"] == "proton":
         return "new ProtonParticle()"
     if decayProduct["type"] == "neutron":

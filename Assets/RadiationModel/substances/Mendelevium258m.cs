@@ -14,7 +14,7 @@ namespace RadiationModel.substances
         {
             { 0.85d, new List<RadioactiveSubstance> { new Fermium258() } },
             { 0.15d, new List<RadioactiveSubstance> {  } },
-            { 0.012d, new List<RadioactiveSubstance> { new AlphaParticle(8290847.4), new Einsteinium254() } },
+            { 0.012d, new List<RadioactiveSubstance> { new AlphaParticle(8292802.089999999), new Einsteinium254() } },
 
         };
     }

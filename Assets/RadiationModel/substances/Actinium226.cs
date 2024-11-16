@@ -14,7 +14,7 @@ namespace RadiationModel.substances
         {
             { 0.83d, new List<RadioactiveSubstance> { new BetaParticle(-1, 1111000.0), new Thorium226() } },
             { 0.17d, new List<RadioactiveSubstance> { new Radium226() } },
-            { 6e-05d, new List<RadioactiveSubstance> { new AlphaParticle(6526047.4), new Francium222() } },
+            { 6e-05d, new List<RadioactiveSubstance> { new AlphaParticle(6528002.09), new Francium222() } },
 
         };
     }
