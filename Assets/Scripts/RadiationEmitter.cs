@@ -72,29 +72,51 @@ public class RadiationEmitter : MonoBehaviour
                         //var direction = new Vector3(0, 0, 1);
                         var ray = new Ray(origin, direction);
                         // ReSharper disable once Unity.PreferNonAllocApi
-                        var hits = Physics.RaycastAll(ray);
+                        var hits = Physics.RaycastAll(ray).ToList();
+                        // sort hits by distance
+                        hits.Sort((hit1, hit2) => hit1.distance.CompareTo(hit2.distance));
+                        
+                        // renders green lines for debugging
+                        if (debugRender)
+                        {
+                            Debug.DrawRay(transform.position, direction, Color.green, 0.1f);
+                        }
+                        
+                        if (hits.Count == 0)
+                        {
+                            continue;
+                        }
+                        
+                        // furthest hit
+                        var lastHit = hits.Last();
+                        // remove last hit from hits, as we will not be hitting this again on the way back
+                        hits.RemoveAt(hits.Count - 1);
+                        // send ray from last hit to origin
+                        var lastRay = new Ray(lastHit.point, origin - lastHit.point);
+                        
+                        // ReSharper disable once Unity.PreferNonAllocApi
+                        var returningHits = Physics.RaycastAll(lastRay).ToList();
+                        // sort hits by distance
+                        returningHits.Sort((hit1, hit2) => hit1.distance.CompareTo(hit2.distance));
                         
                         List<KeyValuePair<GameObject, Vector3[]>> hitPoints = new();
-
-                        foreach (var hit in hits)
+                        
+                        for (var j = hits.Count - 1; j >= 0; j--)
                         {
-                            var done = false;
-                            foreach (var previousHitPair in hitPoints
-                                         .Where(previousHitPair => previousHitPair.Key == hit.collider.gameObject)
-                                         .Where(previousHitPair => previousHitPair.Value[1] == Vector3.zero))
-                            {
-                                previousHitPair.Value[1] = hit.point;
-                                done = true;
-                                break;
-                            }
-                            if (done) continue;
+                            var entryHit = hits[hits.Count - 1 - j];
+                            var exitHit = returningHits[j];
                             
-                            hitPoints.Add(new KeyValuePair<GameObject, Vector3[]>(hit.collider.gameObject, new Vector3[2] {hit.point, Vector3.zero}));
-                        } 
+                            hitPoints.Add(new KeyValuePair<GameObject, Vector3[]>(entryHit.collider.gameObject, new Vector3[2] {entryHit.point, exitHit.point}));
+                        }
+                        
                         foreach (var (hitGameObject, points) in hitPoints)
                         {
                             var entryPoint = points[0];
                             var exitPoint = points[1];
+                            if (exitPoint.Equals(Vector3.zero))
+                            {
+                                Debug.Log("No exit point found. Is the collider configured correctly?");
+                            }
                             var distance = Vector3.Distance(entryPoint, exitPoint);
                             
                             var material = RadiationModelMaterial.GetRadiationModelMaterial(hitGameObject);
@@ -108,7 +130,7 @@ public class RadiationEmitter : MonoBehaviour
                                     {
                                         if (debugRender)
                                         {
-                                            Debug.DrawRay(transform.position, direction, Color.red, 0.1f);
+                                            Debug.DrawRay(transform.position, direction, Color.red, 0.2f);
                                         }
                                         
                                         continue;
@@ -118,12 +140,6 @@ public class RadiationEmitter : MonoBehaviour
                                 {
                                     // todo: implement electron attenuation
                                 }
-                            }
-                            
-                            // renders green lines for debugging
-                            if (debugRender)
-                            {
-                                Debug.DrawRay(transform.position, direction, Color.green, 0.1f);
                             }
 
                             if (RadiationReceiver.radiationReceivers.TryGetValue(hitGameObject, out var receiver))
