@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using TMPro;
@@ -8,23 +9,25 @@ public class Manager : MonoBehaviour
 {
     public RadiationEmitter emitter;
     public TextMeshProUGUI counter;
+    public Transform absorber;
     public int hits = 0;
     public Modes currentMode = Modes.Default; // should in most cases be Modes.Default
     public int experimentDuration = 270; //270 is the total duration of the decay beta experiment
+    public float[] thicknesses = { 0.3f, 0.5f, 0.6f, 1f, 1.2f, 1.5f, 1.7f, 1.8f, 2.2f }; // in cm because im stupid
     
     public enum Modes
     {
         Default,
         TenSecondInterval,
+        AbsorbtieGamma,
     }
     
     private float timer = 10f;
-    private int timeSpent = 0;
+    private int iteration = 0;
     private StringBuilder sb = new System.Text.StringBuilder();
 
     private void Start()
     {
-        sb.AppendLine("t(s),hits");
         if (counter == null)
         {
             var go = GameObject.FindWithTag("Counter");
@@ -36,6 +39,11 @@ public class Manager : MonoBehaviour
         if (emitter == null)
         {
             emitter = GameObject.FindWithTag("Emitter").GetComponent<RadiationEmitter>();
+        }
+
+        if (absorber == null)
+        {
+            absorber  = GameObject.FindWithTag("Absorber").GetComponent<Transform>();
         }
     }
     
@@ -53,6 +61,11 @@ public class Manager : MonoBehaviour
                 break;
             
             case Modes.TenSecondInterval:
+                if (sb.Length == 0)
+                {
+                    sb.AppendLine("t(s), hits");
+                }
+                
                 counter.text = hits.ToString();
 
                 if (timer > 0)
@@ -61,16 +74,48 @@ public class Manager : MonoBehaviour
                     return;
                 }
 
-                timeSpent += 10;
-                sb.AppendLine(timeSpent.ToString() + "," + hits.ToString());
+                iteration += 1;
+                sb.AppendLine((iteration*10).ToString() + "," + hits.ToString());
                 hits = 0;
                 timer += 10f;
 
-                if (timeSpent >= experimentDuration)
+                if (iteration*10 >= experimentDuration)
                 {
                     WriteData(sb, "VarvalBetaData");
                     emitter.emitting = false;
                 }
+                break;
+            case Modes.AbsorbtieGamma:
+                if (sb.Length == 0)
+                {
+                    sb.AppendLine("d(cm), I (pulsen/10s)");
+                }
+                
+                counter.text = hits.ToString();
+                
+                absorber.localScale = new Vector3(thicknesses[iteration/3] * 0.01f, 0.15f, 0.15f);
+
+                if (timer > 0)
+                {
+                    timer -= Time.deltaTime;
+                    return;
+                }
+                
+                sb.AppendLine(thicknesses[iteration/3].ToString() + "," + hits.ToString());
+                Debug.Log(thicknesses[iteration/3].ToString() + "," + hits.ToString() + ", " + iteration);
+                hits = 0;
+                timer += 10f;
+                iteration += 1;
+                
+                //! reset source (may cause issues im not sure)
+                emitter.Emit();
+
+                if (iteration >= thicknesses.Length*3)
+                {
+                    WriteData(sb, "AbsorbtieGammaData");
+                    emitter.emitting = false;
+                }
+                
                 break;
         }
     }

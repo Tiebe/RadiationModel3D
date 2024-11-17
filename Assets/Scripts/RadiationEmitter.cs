@@ -35,6 +35,10 @@ public class RadiationEmitter : MonoBehaviour
     public void Emit()
     {
         var substance = Substances.GetSubstanceByName(radioactiveSubstanceName);
+        
+        //this is so the function can be used to reset the emitter
+        particles.Clear();
+        
         particles.Add(substance, initalAmount);
     }
 

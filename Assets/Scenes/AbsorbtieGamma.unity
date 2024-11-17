@@ -149,9 +149,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emitter: {fileID: 0}
   counter: {fileID: 0}
+  absorber: {fileID: 0}
   hits: 0
-  currentMode: 0
+  currentMode: 2
   experimentDuration: 270
+  thicknesses:
+  - 0.3
+  - 0.5
+  - 0.6
+  - 1
+  - 1.2
+  - 1.5
+  - 1.7
+  - 1.8
+  - 2.2
 --- !u!4 &19748622
 Transform:
   m_ObjectHideFlags: 0
@@ -562,7 +573,7 @@ Transform:
   m_GameObject: {fileID: 448574870}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.003, y: 0.85, z: 0}
+  m_LocalPosition: {x: 0.0512, y: 0.85, z: 0}
   m_LocalScale: {x: 0.1, y: 0.03, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -822,7 +833,7 @@ Transform:
   m_GameObject: {fileID: 680841582}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.26380002, y: 0.85, z: 0}
+  m_LocalPosition: {x: 0.2374, y: 0.85, z: 0}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -840,7 +851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c46b99df390134696370df8d175f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initalAmount: 963000
+  initalAmount: 5000000
   radioactiveSubstanceName: Cobalt60m
   emitting: 1
   debugRender: 1
@@ -935,7 +946,7 @@ GameObject:
   - component: {fileID: 997832044}
   m_Layer: 0
   m_Name: Lead
-  m_TagString: Untagged
+  m_TagString: Absorber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -950,7 +961,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.14, y: 0.85, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.15, z: 0.15}
+  m_LocalScale: {x: 0.022, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 62432305}
