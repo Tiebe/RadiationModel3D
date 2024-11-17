@@ -68,12 +68,6 @@ public class RadiationEmitter : MonoBehaviour
                     {
                         var origin = transform.position;
                         var direction = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f));
-                        
-                        // renders green lines for debugging
-                        if (debugRender)
-                        {
-                            Debug.DrawRay(transform.position, direction, Color.green, 0.1f);
-                        }
 
                         //var direction = new Vector3(0, 0, 1);
                         var ray = new Ray(origin, direction);
@@ -112,6 +106,11 @@ public class RadiationEmitter : MonoBehaviour
                                     var absorbed = 1 - attenuation;
                                     if (UnityEngine.Random.value < absorbed)
                                     {
+                                        if (debugRender)
+                                        {
+                                            Debug.DrawRay(transform.position, direction, Color.red, 0.1f);
+                                        }
+                                        
                                         continue;
                                     }
                                 }
@@ -119,6 +118,12 @@ public class RadiationEmitter : MonoBehaviour
                                 {
                                     // todo: implement electron attenuation
                                 }
+                            }
+                            
+                            // renders green lines for debugging
+                            if (debugRender)
+                            {
+                                Debug.DrawRay(transform.position, direction, Color.green, 0.1f);
                             }
 
                             if (RadiationReceiver.radiationReceivers.TryGetValue(hitGameObject, out var receiver))
