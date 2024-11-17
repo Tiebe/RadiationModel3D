@@ -13,7 +13,7 @@ public class Manager : MonoBehaviour
     public int hits = 0;
     public Modes currentMode = Modes.Default; // should in most cases be Modes.Default
     public int experimentDuration = 270; //270 is the total duration of the decay beta experiment
-    public float[] thicknesses = { 0.3f, 0.5f, 0.6f, 1f, 1.2f, 1.5f, 1.7f, 1.8f, 2.2f }; // in cm because im stupid
+    private float[] thicknesses = { 0.3f, 0.6f, 0.9f, 1.2f, 1.5f, 1.8f, 2.1f }; // in cm because im stupid
     
     public enum Modes
     {
@@ -86,6 +86,11 @@ public class Manager : MonoBehaviour
                 }
                 break;
             case Modes.AbsorbtieGamma:
+                if (emitter.resetter)
+                {
+                    return;
+                }
+                
                 if (sb.Length == 0)
                 {
                     sb.AppendLine("d(cm), I (pulsen/10s)");
@@ -107,14 +112,14 @@ public class Manager : MonoBehaviour
                 timer += 10f;
                 iteration += 1;
                 
-                //! reset source (may cause issues im not sure)
-                emitter.Emit();
-
                 if (iteration >= thicknesses.Length*3)
                 {
                     WriteData(sb, "AbsorbtieGammaData");
                     emitter.emitting = false;
                 }
+                
+                emitter.resetter = true;
+                Debug.Log("Resetting");
                 
                 break;
         }

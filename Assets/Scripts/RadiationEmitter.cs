@@ -14,11 +14,10 @@ public class RadiationEmitter : MonoBehaviour
     public string radioactiveSubstanceName;
     public bool emitting;
     public bool debugRender = false;
+    public bool resetter = false; // DO NOT TOUCH IN EDITOR
 
     private Dictionary<RadioactiveSubstance, long> particles = new();
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void Start()
+    private void OnEnable()
     {
         if (emitting)
         {
@@ -26,24 +25,27 @@ public class RadiationEmitter : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    private void Update()
+    private void OnDisable()
     {
-        
+        particles.Clear();
     }
 
     public void Emit()
     {
         var substance = Substances.GetSubstanceByName(radioactiveSubstanceName);
-        
-        //this is so the function can be used to reset the emitter
-        particles.Clear();
-        
         particles.Add(substance, initalAmount);
     }
 
     private void FixedUpdate()
     {
+        if (resetter)
+        {
+            particles.Clear();
+            Emit();
+            resetter = false;
+            return;
+        }
+        
         if (!emitting)
         {
             return;
