@@ -23,6 +23,7 @@ public class RadiationEmitter : MonoBehaviour
         {
             Emit();
         }
+        if (emitting) Emit();
     }
 
     private void OnDisable()
