@@ -10,7 +10,7 @@ using UnityEngine.Serialization;
 public class RadiationEmitter : MonoBehaviour
 {
 
-    [FormerlySerializedAs("amount")] public int initalAmount;
+    [FormerlySerializedAs("amount")] public long initalAmount;
     public string radioactiveSubstanceName;
     public bool emitting;
     public bool debugRender = false;
