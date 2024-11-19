@@ -13,7 +13,7 @@ namespace RadiationModel.substances
         public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
         {
             { 0.544d, new List<RadioactiveSubstance> { new BetaParticle(-1, 3328800.0), new Osmium190() } },
-            { 0.456d, new List<RadioactiveSubstance> { new GammaParticle(0.00608), new Rhenium190() } },
+            { 0.456d, new List<RadioactiveSubstance> { new GammaParticle((204000.0, 0.00608)), new Rhenium190() } },
 
         };
     }

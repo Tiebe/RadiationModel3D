@@ -8,7 +8,7 @@ namespace RadiationModel.substances
     {
         public override string name { get; } = "Palladium124";
         public override double halfLife { get; } = 0.088d;
-        public override double atomicWeight { get; } = 123.9373d;
+        public override double atomicWeight { get; } = 123.93731d;
 
         public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
         {

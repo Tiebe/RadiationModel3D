@@ -14,10 +14,10 @@ namespace RadiationModel.substances
         {
             { 0.39399999999999996d, new List<RadioactiveSubstance> { new NeutronParticle(), new Beryllium7() } },
             { 0.11699999999999999d, new List<RadioactiveSubstance> { new Hydrogen3(), new Lithium5() } },
-            { 0.079d, new List<RadioactiveSubstance> { new AlphaParticle(28606131.529999997), new Helium4() } },
+            { 0.079d, new List<RadioactiveSubstance> { new AlphaParticle(28608086.220000003), new Helium4() } },
             { 0.069d, new List<RadioactiveSubstance> { new ProtonParticle(), new Lithium7() } },
             { 0.066d, new List<RadioactiveSubstance> { new Helium3(), new Helium5() } },
-            { 0.006d, new List<RadioactiveSubstance> { new GammaParticle(5e-05), new Beryllium8() } },
+            { 0.006d, new List<RadioactiveSubstance> { new GammaParticle((27494330.0, 5e-05)), new Beryllium8() } },
 
         };
     }
