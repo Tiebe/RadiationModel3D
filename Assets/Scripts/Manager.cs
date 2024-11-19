@@ -14,7 +14,8 @@ public class Manager : MonoBehaviour
     public int hits = 0;
     public Modes currentMode = Modes.Default; // should in most cases be Modes.Default
     public int experimentDuration = 270; //270 is the total duration of the decay beta experiment
-    private float[] DistanceList = { 0.2f, 0.25f, 0.3f, 0.4f, 0.5f, 0.7f }; // in meters
+    private float[] DistanceList = { 0.2f, 0.25f, 0.3f, 0.4f, 0.5f, 0.6f }; // in meters
+    public float tScale = 1f; // changes timescale at start (please be carefull with this)
     
     public enum Modes
     {
@@ -23,7 +24,7 @@ public class Manager : MonoBehaviour
         Distance,
     }
     
-    private float timer = 10f;
+    private float timer;
     private int iteration = 0;
     private StringBuilder sb = new System.Text.StringBuilder();
 
@@ -47,7 +48,8 @@ public class Manager : MonoBehaviour
         {
             detector = GameObject.FindWithTag("Detector").GetComponent<Transform>();
         }
-        
+
+        Time.timeScale = tScale;
     }
     
     private void Update()
@@ -67,6 +69,7 @@ public class Manager : MonoBehaviour
                 if (sb.Length == 0)
                 {
                     sb.AppendLine("t(s), hits");
+                    timer += 10f;
                 }
                 
                 counter.text = hits.ToString();
@@ -92,7 +95,8 @@ public class Manager : MonoBehaviour
 
                 if (sb.Length == 0)
                 {
-                    sb.AppendLine("d(m), hits");
+                    sb.AppendLine("d(m), hits/60s");
+                    timer += 60f;
                 }
                 
                 counter.text = hits.ToString();
@@ -112,7 +116,7 @@ public class Manager : MonoBehaviour
                 
                 sb.AppendLine(distance.ToString() + "," + hits.ToString());
                 hits = 0;
-                timer += 10f;
+                timer += 60f;
                 iteration++;
 
                 if (iteration >= DistanceList.Length * 3)

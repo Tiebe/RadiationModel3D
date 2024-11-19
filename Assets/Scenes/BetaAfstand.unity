@@ -839,6 +839,7 @@ MonoBehaviour:
   hits: 0
   currentMode: 2
   experimentDuration: 270
+  tScale: 1
 --- !u!4 &1265684219
 Transform:
   m_ObjectHideFlags: 0
