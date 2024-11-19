@@ -22,7 +22,7 @@ public class GeigerTeller : RadiationReceiver
 
     public override void RadiationHit(RadioactiveSubstance particle)
     {
-        if ((particle is GammaParticle) && detectGamma)
+        if (particle is GammaParticle && detectGamma)
         {
             manager.hits++;
         }
