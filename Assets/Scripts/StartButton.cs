@@ -36,7 +36,7 @@ public class StartButton : MonoBehaviour
         {
             if (inputField.text.Length != 0)
             {
-                emitter.initalAmount = Int32.Parse(inputField.text);
+                emitter.initalAmount = long.Parse(inputField.text);
             }
 
             // TODO add method for this to be set to false when the experiment finishes
