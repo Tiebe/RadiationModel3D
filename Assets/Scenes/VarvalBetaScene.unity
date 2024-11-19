@@ -551,7 +551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initalAmount: 50000
   radioactiveSubstanceName: Protactinium234m
-  emitting: 0
+  emitting: 1
   debugRender: 1
 --- !u!1 &184090137
 GameObject:
@@ -1026,6 +1026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emitter: {fileID: 0}
   counter: {fileID: 0}
+  detector: {fileID: 0}
   hits: 0
   currentMode: 0
   experimentDuration: 270
@@ -1266,7 +1267,7 @@ GameObject:
   - component: {fileID: 898667836}
   m_Layer: 0
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Detector
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
