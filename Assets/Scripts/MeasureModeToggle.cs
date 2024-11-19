@@ -1,14 +1,16 @@
 using System;
-using managers;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MeasureModeToggle : MonoBehaviour
 {
     public Toggle toggle;
-    public GameObject manager;
     public RadiationEmitter emitter;
-    void Start()
+
+    public Manager managerWhenOff;
+    public Manager managerWhenOn;
+
+    private void Start()
     {
         if (toggle == null)
         {
@@ -16,13 +18,8 @@ public class MeasureModeToggle : MonoBehaviour
         }
         toggle.onValueChanged.AddListener(OnToggle);
 
-        if (manager == null)
-        {
-            manager = GameObject.FindWithTag("Manager");
-        }
-
         // if the manager mode is set to a value that is neither toggle on nor toggle of that will lead to unexpected behaviour
-        toggle.isOn = manager.GetComponent<IntervalManager>().enabled;
+        toggle.isOn = managerWhenOff.enabled;
 
         if (emitter == null)
         {
@@ -41,12 +38,12 @@ public class MeasureModeToggle : MonoBehaviour
         switch (value)
         {
             case false:
-                manager.GetComponent<IntervalManager>().enabled = false;
-                manager.GetComponent<DefaultRadiationManager>().enabled = true;
+                managerWhenOn.enabled = false;
+                managerWhenOff.enabled = true;
                 break;
             case true:
-                manager.GetComponent<DefaultRadiationManager>().enabled = false;
-                manager.GetComponent<IntervalManager>().enabled = true;
+                managerWhenOff.enabled = false;
+                managerWhenOn.enabled = true;
                 break;
         }
     }
