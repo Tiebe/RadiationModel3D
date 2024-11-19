@@ -14,7 +14,7 @@ namespace RadiationModel.substances
         {
             { 0.735d, new List<RadioactiveSubstance> { new BetaParticle(1, 5871000.0), new Bismuth199() } },
             { 0.24d, new List<RadioactiveSubstance> { new AlphaParticle(7406047.4), new Lead195() } },
-            { 0.025d, new List<RadioactiveSubstance> { new GammaParticle(0.00397), new Polonium199() } },
+            { 0.025d, new List<RadioactiveSubstance> { new GammaParticle(0.00397, 312000.0), new Polonium199() } },
 
         };
     }

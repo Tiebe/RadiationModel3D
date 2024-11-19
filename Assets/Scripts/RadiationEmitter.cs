@@ -114,6 +114,8 @@ public class RadiationEmitter : MonoBehaviour
                             
                             hitPoints.Add(new KeyValuePair<GameObject, Vector3[]>(entryHit.collider.gameObject, new Vector3[2] {entryHit.point, exitHit.point}));
                         }
+
+                        var done = false;
                         
                         foreach (var (hitGameObject, points) in hitPoints)
                         {
@@ -139,7 +141,9 @@ public class RadiationEmitter : MonoBehaviour
                                             Debug.DrawRay(transform.position, direction, Color.red, 0.2f);
                                         }
                                         
-                                        continue;
+                                        // kill this loop, which will cause it to continue in the parent loop
+                                        done = true;
+                                        break;
                                     }
                                 }
                                 else if (particle is BetaParticle electronParticle)
@@ -148,10 +152,18 @@ public class RadiationEmitter : MonoBehaviour
                                 }
                             }
 
+                            
                             if (RadiationReceiver.radiationReceivers.TryGetValue(hitGameObject, out var receiver))
                             {
                                 receiver.RadiationHit(particle);
                             }
+                            
+                        }
+                        
+                        // do last hit
+                        if (!done && RadiationReceiver.radiationReceivers.TryGetValue(lastHit.collider.gameObject, out var receiverLast))
+                        {
+                            receiverLast.RadiationHit(particle);
                         }
                     }
                 }

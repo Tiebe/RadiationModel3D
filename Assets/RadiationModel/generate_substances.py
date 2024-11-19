@@ -576,7 +576,7 @@ def getDecayProductString(isotopes, isotope, decayProduct, decayProducts):
             leftOver = 0.00000001
 
         wavelength = round((planck * c) / leftOver, 5)
-        return f"new GammaParticle({wavelength})"
+        return f"new GammaParticle({wavelength}, {round(originalEnergy - finalEnergy, 5) * 1000})"
     if decayProduct["type"] == "proton":
         return "new ProtonParticle()"
     if decayProduct["type"] == "neutron":
