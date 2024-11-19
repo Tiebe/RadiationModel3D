@@ -14,7 +14,8 @@ public class RadiationEmitter : MonoBehaviour
     public string radioactiveSubstanceName;
     public bool emitting;
     public bool debugRender = false;
-    public bool resetter = false; // DO NOT TOUCH IN EDITOR
+    [HideInInspector]
+    public bool resetter = false;
 
     private Dictionary<RadioactiveSubstance, long> particles = new();
     private void OnEnable()
