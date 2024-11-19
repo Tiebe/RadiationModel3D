@@ -168,6 +168,7 @@ MonoBehaviour:
   radioactiveSubstanceName: Strontium90
   emitting: 1
   debugRender: 1
+  resetter: 0
 --- !u!23 &172069026
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -813,7 +814,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1265684219}
-  - component: {fileID: 1265684218}
+  - component: {fileID: 1265684220}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Manager
@@ -821,25 +822,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1265684218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1265684217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed0b34eb6ba98314e8cb84aff5ef3893, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  emitter: {fileID: 0}
-  counter: {fileID: 0}
-  detector: {fileID: 0}
-  hits: 0
-  currentMode: 2
-  experimentDuration: 270
-  tScale: 1
 --- !u!4 &1265684219
 Transform:
   m_ObjectHideFlags: 0
@@ -855,6 +837,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1265684220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265684217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936a735b16d040d7891bdb783a003810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emitter: {fileID: 0}
+  counter: {fileID: 0}
+  absorber: {fileID: 0}
+  detector: {fileID: 0}
+  hits: 0
+  timeScale: 1
 --- !u!1 &1685469451
 GameObject:
   m_ObjectHideFlags: 0
