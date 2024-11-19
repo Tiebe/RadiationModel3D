@@ -8,6 +8,7 @@ TagManager:
   - Counter
   - Emitter
   - Manager
+  - Detector
   layers:
   - Default
   - TransparentFX
