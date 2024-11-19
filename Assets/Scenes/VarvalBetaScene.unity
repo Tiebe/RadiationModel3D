@@ -553,6 +553,7 @@ MonoBehaviour:
   radioactiveSubstanceName: Protactinium234m
   emitting: 1
   debugRender: 1
+  resetter: 0
 --- !u!1 &184090137
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,10 +784,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toggle: {fileID: 0}
-  manager: {fileID: 0}
   emitter: {fileID: 0}
-  toggleOff: 0
-  toggleOn: 1
+  managerWhenOff: {fileID: 554212341}
+  managerWhenOn: {fileID: 425687368}
 --- !u!114 &389115415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -835,6 +835,58 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!1 &425687367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 425687369}
+  - component: {fileID: 425687368}
+  m_Layer: 0
+  m_Name: IntervalManager
+  m_TagString: Manager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &425687368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425687367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89670c9cc122494eb7a79a80cc6d8b3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emitter: {fileID: 0}
+  counter: {fileID: 0}
+  absorber: {fileID: 0}
+  detector: {fileID: 0}
+  hits: 0
+  timeScale: 1
+  experimentDuration: 270
+  interval: 10
+--- !u!4 &425687369
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425687367}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.13386758, y: 0.70502156, z: 0.37985063}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &428706692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1004,32 +1056,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 554212339}
-  - component: {fileID: 554212338}
+  - component: {fileID: 554212341}
   m_Layer: 0
-  m_Name: Manager
+  m_Name: DefaultManager
   m_TagString: Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &554212338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 554212337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed0b34eb6ba98314e8cb84aff5ef3893, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  emitter: {fileID: 0}
-  counter: {fileID: 0}
-  detector: {fileID: 0}
-  hits: 0
-  currentMode: 0
-  experimentDuration: 270
 --- !u!4 &554212339
 Transform:
   m_ObjectHideFlags: 0
@@ -1045,6 +1079,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &554212341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554212337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7f92b7a253448cab47a7a7312331130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emitter: {fileID: 0}
+  counter: {fileID: 0}
+  absorber: {fileID: 0}
+  detector: {fileID: 0}
+  hits: 0
+  timeScale: 1
 --- !u!1001 &850791062
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2658,3 +2710,4 @@ SceneRoots:
   - {fileID: 850791062}
   - {fileID: 1092801771}
   - {fileID: 554212339}
+  - {fileID: 425687369}
