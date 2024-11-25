@@ -7,15 +7,13 @@ namespace RadiationModel.substances
     public class Cadmium129n : RadioactiveSubstance
     {
         public override string name { get; } = "Cadmium129n";
-        public override double halfLife { get; } = 0.0036d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 128.93469d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new GammaParticle((2283000.0, 0.00054)), new Cadmium129() } },
 
         };
     }
 }
-    
     

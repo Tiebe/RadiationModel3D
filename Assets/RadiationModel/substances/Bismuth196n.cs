@@ -10,14 +10,13 @@ namespace RadiationModel.substances
         public override double halfLife { get; } = 240.0d;
         public override double atomicWeight { get; } = 195.98096d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 0.742d, new List<RadioactiveSubstance> { new BetaParticle(1, 7611000.0), new Lead196() } },
-            { 0.258d, new List<RadioactiveSubstance> { new GammaParticle((272000.0, 0.00456)), new Bismuth196() } },
-            { 3.8e-06d, new List<RadioactiveSubstance> { new AlphaParticle(6730002.09), new Thallium192() } },
+            { 0.742d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Thallium196() }, { 1.0d, new BetaParticle(1, 4880000.0) }, { 0.5d, new GammaParticle(59200.0, 0.02094) }, { 0.162d, new GammaParticle(138400.0, 0.00896) }, { 0.021d, new GammaParticle(164500.0, 0.00754) }, { 0.024d, new GammaParticle(283200.0, 0.00438) }, { 0.01d, new GammaParticle(288700.0, 0.00429) }, { 0.00064d, new GammaParticle(306900.0, 0.00404) }, { 0.0048d, new GammaParticle(306900.0, 0.00404) }, { 0.244d, new GammaParticle(337500.0, 0.00367) }, { 0.69d, new GammaParticle(372200.0, 0.00333) }, { 0.0048d, new GammaParticle(400900.0, 0.00309) }, { 0.12300000000000001d, new GammaParticle(421700.0, 0.00294) }, { 0.045d, new GammaParticle(496300.0, 0.0025) }, { 0.67d, new GammaParticle(689300.0, 0.0018) }, { 0.053d, new GammaParticle(748800.0, 0.00166) }, { 0.0064d, new GammaParticle(749000.0, 0.00166) }, { 0.0032d, new GammaParticle(803100.0, 0.00154) }, { 0.73d, new GammaParticle(1049400.0, 0.00118) }, { 0.0048d, new GammaParticle(1449700.0, 0.00086) }, { 0.6452d, new GammaParticle(511000.0, 0.00243) }, { 0.313961578257852d, new GammaParticle(12522.0, 0.09901) }, { 0.13966725346280032d, new GammaParticle(72805.0, 0.01703) }, { 0.23473487976941232d, new GammaParticle(74970.0, 0.01654) }, { 0.08022902854975986d, new GammaParticle(84986.0, 0.01459) }, { 0.10445819517178734d, new GammaParticle(86022.0, 0.01441) }, { 0.024229166622027475d, new GammaParticle(87301.0, 0.0142) } } },
+            { 0.258d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Bismuth196() }, { 0.0017000000000000001d, new GammaParticle(102000.0, 0.01216) }, { 0.0033d, new GammaParticle(158300.0, 0.00783) }, { 0.14183057755d, new GammaParticle(12904.0, 0.09608) }, { 0.024356791725996748d, new GammaParticle(74815.0, 0.01657) }, { 0.040750864524003255d, new GammaParticle(77108.0, 0.01608) }, { 0.01395876244257274d, new GammaParticle(87388.0, 0.01419) }, { 0.01823014375d, new GammaParticle(88458.0, 0.01402) }, { 0.0042713813074272584d, new GammaParticle(89784.0, 0.01381) } } },
+            { 3.8e-06d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Thallium192() }, { 1.0d, new AlphaParticle(6730002.09) } } },
 
         };
     }
 }
-    
     

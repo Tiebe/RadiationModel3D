@@ -7,15 +7,15 @@ namespace RadiationModel.substances
     public class Cadmium129 : RadioactiveSubstance
     {
         public override string name { get; } = "Cadmium129";
-        public override double halfLife { get; } = 0.147d;
+        public override double halfLife { get; } = 0.154d;
         public override double atomicWeight { get; } = 128.93224d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(-1, 9712900.0), new Indium129() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Indium129() }, { 1.0d, new BetaParticle(-1, 4856450.0) } } },
+            { 0.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Indium129() }, { 1.0d, new BetaParticle(-1, 4856450.0) } } },
 
         };
     }
 }
-    
     

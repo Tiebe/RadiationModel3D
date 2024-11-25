@@ -7,15 +7,15 @@ namespace RadiationModel.substances
     public class Moscovium289 : RadioactiveSubstance
     {
         public override string name { get; } = "Moscovium289";
-        public override double halfLife { get; } = 0.41d;
+        public override double halfLife { get; } = 0.296d;
         public override double atomicWeight { get; } = 289.19397d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new AlphaParticle(11507002.09), new Nihonium285() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Nihonium285() }, { 1.0d, new AlphaParticle(11507002.09) } } },
+            { 0.05d, new Dictionary<double, RadioactiveSubstance> {  } },
 
         };
     }
 }
-    
     

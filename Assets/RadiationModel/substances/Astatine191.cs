@@ -7,15 +7,14 @@ namespace RadiationModel.substances
     public class Astatine191 : RadioactiveSubstance
     {
         public override string name { get; } = "Astatine191";
-        public override double halfLife { get; } = 0.0021d;
+        public override double halfLife { get; } = 0.0017d;
         public override double atomicWeight { get; } = 191.00415d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new AlphaParticle(8844002.09), new Bismuth187() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Bismuth187() }, { 1.0d, new AlphaParticle(8844002.09) } } },
 
         };
     }
 }
-    
     

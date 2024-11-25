@@ -7,15 +7,15 @@ namespace RadiationModel.substances
     public class Germanium62 : RadioactiveSubstance
     {
         public override string name { get; } = "Germanium62";
-        public override double halfLife { get; } = 0.0825d;
+        public override double halfLife { get; } = 0.129d;
         public override double atomicWeight { get; } = 61.95476d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(1, 9847000.0), new Gallium62() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Zinc62() }, { 1.0d, new BetaParticle(1, 9514050.0) } } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> {  } },
 
         };
     }
 }
-    
     

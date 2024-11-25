@@ -7,15 +7,14 @@ namespace RadiationModel.substances
     public class Nobelium252m : RadioactiveSubstance
     {
         public override string name { get; } = "Nobelium252m";
-        public override double halfLife { get; } = 0.1091d;
+        public override double halfLife { get; } = 0.109d;
         public override double atomicWeight { get; } = 252.09031d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new GammaParticle((1254000.0, 0.00099)), new Nobelium252() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Nobelium252() } } },
 
         };
     }
 }
-    
     

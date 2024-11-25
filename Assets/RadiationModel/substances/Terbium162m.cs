@@ -7,14 +7,13 @@ namespace RadiationModel.substances
     public class Terbium162m : RadioactiveSubstance
     {
         public override string name { get; } = "Terbium162m";
-        public override double halfLife { get; } = 600.0d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 161.92958d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
 
         };
     }
 }
-    
     

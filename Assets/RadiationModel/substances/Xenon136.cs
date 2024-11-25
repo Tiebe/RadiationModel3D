@@ -7,15 +7,14 @@ namespace RadiationModel.substances
     public class Xenon136 : RadioactiveSubstance
     {
         public override string name { get; } = "Xenon136";
-        public override double halfLife { get; } = 6.879415536e+28d;
+        public override double halfLife { get; } = 6.832074473499168e+28d;
         public override double atomicWeight { get; } = 135.90721d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(-2, 2457910.0), new Barium136() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Barium136() }, { 1.0d, new BetaParticle(-1, 1228955.0) }, { 1.0d, new BetaParticle(-1, 1228955.0) } } },
 
         };
     }
 }
-    
     

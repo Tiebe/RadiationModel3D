@@ -7,15 +7,13 @@ namespace RadiationModel.substances
     public class Erbium145m : RadioactiveSubstance
     {
         public override string name { get; } = "Erbium145m";
-        public override double halfLife { get; } = 1.0d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 144.95809d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(1, 10080000.0), new Holmium145() } },
 
         };
     }
 }
-    
     

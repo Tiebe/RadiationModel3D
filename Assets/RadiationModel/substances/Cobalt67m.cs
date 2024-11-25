@@ -7,15 +7,13 @@ namespace RadiationModel.substances
     public class Cobalt67m : RadioactiveSubstance
     {
         public override string name { get; } = "Cobalt67m";
-        public override double halfLife { get; } = 0.496d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 66.94114d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 0.8d, new List<RadioactiveSubstance> { new GammaParticle((492000.0, 0.00252)), new Cobalt67() } },
 
         };
     }
 }
-    
     

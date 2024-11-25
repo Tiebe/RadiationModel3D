@@ -7,16 +7,15 @@ namespace RadiationModel.substances
     public class Darmstadtium279 : RadioactiveSubstance
     {
         public override string name { get; } = "Darmstadtium279";
-        public override double halfLife { get; } = 0.21d;
+        public override double halfLife { get; } = 0.216d;
         public override double atomicWeight { get; } = 279.15998d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 0.88d, new List<RadioactiveSubstance> {  } },
-            { 0.12d, new List<RadioactiveSubstance> { new AlphaParticle(11127002.09), new Hassium275() } },
+            { 0.885d, new Dictionary<double, RadioactiveSubstance> {  } },
+            { 0.125d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Hassium275() }, { 1.0d, new AlphaParticle(11127002.09) } } },
 
         };
     }
 }
-    
     

@@ -7,15 +7,16 @@ namespace RadiationModel.substances
     public class Zirconium112 : RadioactiveSubstance
     {
         public override string name { get; } = "Zirconium112";
-        public override double halfLife { get; } = 0.043d;
+        public override double halfLife { get; } = 0.03d;
         public override double atomicWeight { get; } = 111.9652d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(-1, 11650000.0), new Niobium112() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Niobium112() }, { 1.0d, new BetaParticle(-1, 5825000.0) } } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> {  } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> {  } },
 
         };
     }
 }
-    
     

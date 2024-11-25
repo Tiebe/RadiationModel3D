@@ -7,15 +7,14 @@ namespace RadiationModel.substances
     public class Niobium103 : RadioactiveSubstance
     {
         public override string name { get; } = "Niobium103";
-        public override double halfLife { get; } = 1.34d;
+        public override double halfLife { get; } = 1.5d;
         public override double atomicWeight { get; } = 102.91945d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(-1, 5925000.0), new Molybdenum103() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Molybdenum103() }, { 1.0d, new BetaParticle(-1, 2962500.0) } } },
 
         };
     }
 }
-    
     

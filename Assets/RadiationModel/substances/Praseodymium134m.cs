@@ -7,15 +7,13 @@ namespace RadiationModel.substances
     public class Praseodymium134m : RadioactiveSubstance
     {
         public override string name { get; } = "Praseodymium134m";
-        public override double halfLife { get; } = 660.0d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 133.91577d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(1, 6373000.0), new Cerium134() } },
 
         };
     }
 }
-    
     

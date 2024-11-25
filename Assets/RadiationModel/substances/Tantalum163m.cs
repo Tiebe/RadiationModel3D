@@ -7,14 +7,13 @@ namespace RadiationModel.substances
     public class Tantalum163m : RadioactiveSubstance
     {
         public override string name { get; } = "Tantalum163m";
-        public override double halfLife { get; } = 10.0d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 162.95448d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
 
         };
     }
 }
-    
     

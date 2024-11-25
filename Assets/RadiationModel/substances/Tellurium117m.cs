@@ -7,15 +7,13 @@ namespace RadiationModel.substances
     public class Tellurium117m : RadioactiveSubstance
     {
         public override string name { get; } = "Tellurium117m";
-        public override double halfLife { get; } = 0.103d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 116.90896d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new GammaParticle((296000.0, 0.00419)), new Tellurium117() } },
 
         };
     }
 }
-    
     

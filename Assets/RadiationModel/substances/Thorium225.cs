@@ -10,12 +10,12 @@ namespace RadiationModel.substances
         public override double halfLife { get; } = 525.0d;
         public override double atomicWeight { get; } = 225.02395d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 0.9d, new List<RadioactiveSubstance> { new AlphaParticle(7943002.09), new Radium221() } },
+            { 0.9d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Radium221() }, { 1.0d, new AlphaParticle(7943002.09) }, { 0.0012d, new GammaParticle(50500.0, 0.02455) }, { 0.009899999999999999d, new GammaParticle(53200.0, 0.02331) }, { 0.0049d, new GammaParticle(68800.0, 0.01802) }, { 0.009000000000000001d, new GammaParticle(103500.0, 0.01198) }, { 0.0012d, new GammaParticle(121900.0, 0.01017) }, { 0.0017000000000000001d, new GammaParticle(126400.0, 0.00981) }, { 0.0014000000000000002d, new GammaParticle(128900.0, 0.00962) }, { 0.0095d, new GammaParticle(146800.0, 0.00845) }, { 0.0018d, new GammaParticle(148500.0, 0.00835) }, { 0.0060999999999999995d, new GammaParticle(151200.0, 0.0082) }, { 0.0038d, new GammaParticle(164000.0, 0.00756) }, { 0.0097d, new GammaParticle(177200.0, 0.007) }, { 0.0018d, new GammaParticle(212000.0, 0.00585) }, { 0.0038d, new GammaParticle(217700.0, 0.0057) }, { 0.0506d, new GammaParticle(246000.0, 0.00504) }, { 0.0083d, new GammaParticle(299200.0, 0.00414) }, { 0.040999999999999995d, new GammaParticle(305900.0, 0.00405) }, { 0.225d, new GammaParticle(321400.0, 0.00386) }, { 0.040999999999999995d, new GammaParticle(359000.0, 0.00345) }, { 0.0034000000000000002d, new GammaParticle(381800.0, 0.00325) }, { 0.00068d, new GammaParticle(485400.0, 0.00255) }, { 0.223164140597848d, new GammaParticle(14920.0, 0.0831) }, { 0.068028825146423d, new GammaParticle(85432.0, 0.01451) }, { 0.11112189667824732d, new GammaParticle(88471.0, 0.01401) }, { 0.038986866421182015d, new GammaParticle(100119.0, 0.01238) }, { 0.05177455860732972d, new GammaParticle(101370.0, 0.01223) }, { 0.012787692186147703d, new GammaParticle(102948.0, 0.01204) } } },
+            { 0.1d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Actinium225() } } },
 
         };
     }
 }
-    
     

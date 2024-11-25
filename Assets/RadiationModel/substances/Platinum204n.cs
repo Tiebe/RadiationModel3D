@@ -7,15 +7,13 @@ namespace RadiationModel.substances
     public class Platinum204n : RadioactiveSubstance
     {
         public override string name { get; } = "Platinum204n";
-        public override double halfLife { get; } = 6e-05d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 203.98326d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new GammaParticle((2030000.0, 0.00061)), new Platinum204() } },
 
         };
     }
 }
-    
     

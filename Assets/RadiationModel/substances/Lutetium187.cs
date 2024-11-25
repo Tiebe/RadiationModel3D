@@ -7,14 +7,15 @@ namespace RadiationModel.substances
     public class Lutetium187 : RadioactiveSubstance
     {
         public override string name { get; } = "Lutetium187";
-        public override double halfLife { get; } = 7.0d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 186.97019d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Hafnium187() }, { 1.0d, new BetaParticle(-1, 2615000.0) } } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> {  } },
 
         };
     }
 }
-    
     

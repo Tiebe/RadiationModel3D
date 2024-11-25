@@ -10,13 +10,11 @@ namespace RadiationModel.substances
         public override double halfLife { get; } = 31363200.0d;
         public override double atomicWeight { get; } = 143.9126d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new Neodymium144() } },
-            { 8.000000000000001e-07d, new List<RadioactiveSubstance> { new BetaParticle(1, 2331900.0), new Neodymium144() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Praseodymium144() }, { 1.0d, new BetaParticle(1, -332750.0) }, { 0.0017908199999999998d, new GammaParticle(301700.0, 0.00411) }, { 0.437756d, new GammaParticle(476780.0, 0.0026) }, { 0.00189031d, new GammaParticle(582400.0, 0.00213) }, { 0.9849509999999999d, new GammaParticle(618010.0, 0.00201) }, { 0.00547195d, new GammaParticle(694000.0, 0.00179) }, { 0.9948999999999999d, new GammaParticle(696490.0, 0.00178) }, { 0.01502299d, new GammaParticle(778570.0, 0.00159) }, { 0.00547195d, new GammaParticle(814140.0, 0.00152) }, { 0.00038801099999999995d, new GammaParticle(890100.0, 0.00139) }, { 4.87501e-06d, new GammaParticle(1396600.0, 0.00089) }, { 4.27807e-05d, new GammaParticle(1413000.0, 0.00088) }, { 1.9898e-06d, new GammaParticle(1508100.0, 0.00082) }, { 1.2933700000000002e-06d, new GammaParticle(1510600.0, 0.00082) }, { 0.1210483372640625d, new GammaParticle(5870.0, 0.21122) }, { 0.2206988882125411d, new GammaParticle(36848.0, 0.03365) }, { 0.40192840687040815d, new GammaParticle(37362.0, 0.03318) }, { 0.12343573741819487d, new GammaParticle(42380.0, 0.02926) }, { 0.15515872193467095d, new GammaParticle(42810.0, 0.02896) }, { 0.03172298451647608d, new GammaParticle(43335.0, 0.02861) } } },
 
         };
     }
 }
-    
     

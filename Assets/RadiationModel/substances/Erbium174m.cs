@@ -7,15 +7,13 @@ namespace RadiationModel.substances
     public class Erbium174m : RadioactiveSubstance
     {
         public override string name { get; } = "Erbium174m";
-        public override double halfLife { get; } = 3.9d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 173.94542d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new GammaParticle((1110000.0, 0.00112)), new Erbium174() } },
 
         };
     }
 }
-    
     

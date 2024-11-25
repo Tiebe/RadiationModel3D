@@ -7,15 +7,15 @@ namespace RadiationModel.substances
     public class Tungsten159 : RadioactiveSubstance
     {
         public override string name { get; } = "Tungsten159";
-        public override double halfLife { get; } = 0.0082d;
+        public override double halfLife { get; } = 0.0073d;
         public override double atomicWeight { get; } = 158.9727d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new AlphaParticle(7477002.09), new Hafnium155() } },
+            { 0.9990000000000001d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Hafnium155() }, { 1.0d, new AlphaParticle(7477002.09) } } },
+            { 0.001d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Hafnium159() }, { 1.0d, new BetaParticle(1, 8711500.0) } } },
 
         };
     }
 }
-    
     

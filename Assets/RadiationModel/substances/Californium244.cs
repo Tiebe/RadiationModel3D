@@ -7,16 +7,14 @@ namespace RadiationModel.substances
     public class Californium244 : RadioactiveSubstance
     {
         public override string name { get; } = "Californium244";
-        public override double halfLife { get; } = 1170.0d;
+        public override double halfLife { get; } = 1164.0d;
         public override double atomicWeight { get; } = 244.066d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 0.75d, new List<RadioactiveSubstance> { new AlphaParticle(8350902.09), new Curium240() } },
-            { 0.25d, new List<RadioactiveSubstance> { new Berkelium244() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Curium240() }, { 1.0d, new AlphaParticle(8350902.09) } } },
 
         };
     }
 }
-    
     

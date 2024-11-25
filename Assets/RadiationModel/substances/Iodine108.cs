@@ -7,16 +7,16 @@ namespace RadiationModel.substances
     public class Iodine108 : RadioactiveSubstance
     {
         public override string name { get; } = "Iodine108";
-        public override double halfLife { get; } = 0.0264d;
+        public override double halfLife { get; } = 0.036d;
         public override double atomicWeight { get; } = 107.94335d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 0.995d, new List<RadioactiveSubstance> { new AlphaParticle(5127002.09), new Antimony104() } },
-            { 0.005d, new List<RadioactiveSubstance> { new ProtonParticle(), new Tellurium107() } },
+            { 0.91d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Antimony104() }, { 1.0d, new AlphaParticle(5127002.09) } } },
+            { 0.09d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Antimony108() }, { 1.0d, new BetaParticle(1, 9837500.0) } } },
+            { 0.01d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Tellurium107() }, { 1.0d, new ProtonParticle() } } },
 
         };
     }
 }
-    
     

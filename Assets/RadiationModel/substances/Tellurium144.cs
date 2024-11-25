@@ -7,15 +7,16 @@ namespace RadiationModel.substances
     public class Tellurium144 : RadioactiveSubstance
     {
         public override string name { get; } = "Tellurium144";
-        public override double halfLife { get; } = 0.093d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 143.96112d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(-1, 9110000.0), new Iodine144() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Iodine144() }, { 1.0d, new BetaParticle(-1, 4555000.0) } } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> {  } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> {  } },
 
         };
     }
 }
-    
     

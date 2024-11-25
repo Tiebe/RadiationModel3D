@@ -7,15 +7,15 @@ namespace RadiationModel.substances
     public class Rutherfordium263 : RadioactiveSubstance
     {
         public override string name { get; } = "Rutherfordium263";
-        public override double halfLife { get; } = 660.0d;
+        public override double halfLife { get; } = 600.0d;
         public override double atomicWeight { get; } = 263.11246d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> {  } },
+            { 0.3d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Nobelium259() }, { 1.0d, new AlphaParticle(9278002.09) } } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> {  } },
 
         };
     }
 }
-    
     

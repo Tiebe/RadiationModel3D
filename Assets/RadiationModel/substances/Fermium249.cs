@@ -7,15 +7,15 @@ namespace RadiationModel.substances
     public class Fermium249 : RadioactiveSubstance
     {
         public override string name { get; } = "Fermium249";
-        public override double halfLife { get; } = 96.0d;
+        public override double halfLife { get; } = 123.0d;
         public override double atomicWeight { get; } = 249.07893d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 0.33d, new List<RadioactiveSubstance> { new AlphaParticle(8730802.09), new Californium245() } },
+            { 0.84d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Californium249() }, { 1.0d, new BetaParticle(1, 1898150.00001) } } },
+            { 0.16d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Californium245() }, { 1.0d, new AlphaParticle(8730802.09) } } },
 
         };
     }
 }
-    
     

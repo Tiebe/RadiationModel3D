@@ -7,15 +7,14 @@ namespace RadiationModel.substances
     public class Neptunium220 : RadioactiveSubstance
     {
         public override string name { get; } = "Neptunium220";
-        public override double halfLife { get; } = double.PositiveInfinity;
+        public override double halfLife { get; } = 3e-05d;
         public override double atomicWeight { get; } = 220.03272d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new AlphaParticle(11253002.09), new Protactinium216() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Protactinium216() }, { 1.0d, new AlphaParticle(11253002.09) } } },
 
         };
     }
 }
-    
     

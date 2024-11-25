@@ -10,12 +10,12 @@ namespace RadiationModel.substances
         public override double halfLife { get; } = 5.5d;
         public override double atomicWeight { get; } = 86.92869d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(-1, 7465900.0), new Bromine87() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Bromine87() }, { 1.0d, new BetaParticle(-1, 3732950.0) } } },
+            { 0.0036d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Bromine87() }, { 1.0d, new BetaParticle(-1, 3732950.0) } } },
 
         };
     }
 }
-    
     

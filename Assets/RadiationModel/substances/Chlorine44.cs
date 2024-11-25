@@ -7,15 +7,15 @@ namespace RadiationModel.substances
     public class Chlorine44 : RadioactiveSubstance
     {
         public override string name { get; } = "Chlorine44";
-        public override double halfLife { get; } = 0.562d;
+        public override double halfLife { get; } = 0.54d;
         public override double atomicWeight { get; } = 43.97801d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(-1, 12193300.0), new Argon44() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Argon44() }, { 1.0d, new BetaParticle(-1, 6096650.0) } } },
+            { 0.08d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Argon44() }, { 1.0d, new BetaParticle(-1, 6096650.0) } } },
 
         };
     }
 }
-    
     

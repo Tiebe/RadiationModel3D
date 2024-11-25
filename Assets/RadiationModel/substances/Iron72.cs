@@ -7,15 +7,15 @@ namespace RadiationModel.substances
     public class Iron72 : RadioactiveSubstance
     {
         public override string name { get; } = "Iron72";
-        public override double halfLife { get; } = 0.017d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 71.9686d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(-1, 11050000.0), new Cobalt72() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Cobalt72() }, { 1.0d, new BetaParticle(-1, 5525000.0) } } },
+            { 0.276d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Cobalt72() }, { 1.0d, new BetaParticle(-1, 5525000.0) } } },
 
         };
     }
 }
-    
     

@@ -7,15 +7,15 @@ namespace RadiationModel.substances
     public class Dubnium255 : RadioactiveSubstance
     {
         public override string name { get; } = "Dubnium255";
-        public override double halfLife { get; } = 0.054d;
+        public override double halfLife { get; } = 1.6d;
         public override double atomicWeight { get; } = 255.10692d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 0.67d, new List<RadioactiveSubstance> {  } },
+            { 0.8d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new AlphaParticle(233903216973.56) } } },
+            { 0.2d, new Dictionary<double, RadioactiveSubstance> {  } },
 
         };
     }
 }
-    
     

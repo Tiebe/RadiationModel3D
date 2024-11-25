@@ -7,15 +7,13 @@ namespace RadiationModel.substances
     public class Lead214m : RadioactiveSubstance
     {
         public override string name { get; } = "Lead214m";
-        public override double halfLife { get; } = 1e-05d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 214.00133d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new GammaParticle((1420000.0, 0.00087)), new Lead214() } },
 
         };
     }
 }
-    
     

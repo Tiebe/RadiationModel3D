@@ -7,15 +7,14 @@ namespace RadiationModel.substances
     public class Carbon11 : RadioactiveSubstance
     {
         public override string name { get; } = "Carbon11";
-        public override double halfLife { get; } = 1220.412d;
+        public override double halfLife { get; } = 1221.84d;
         public override double atomicWeight { get; } = 11.01143d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(1, 1981692.0), new Boron11() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Beryllium11() }, { 1.0d, new BetaParticle(1, -4763885.0) }, { 1.995338d, new GammaParticle(511000.0, 0.00243) } } },
 
         };
     }
 }
-    
     

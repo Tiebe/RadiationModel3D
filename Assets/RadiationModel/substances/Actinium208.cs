@@ -7,15 +7,15 @@ namespace RadiationModel.substances
     public class Actinium208 : RadioactiveSubstance
     {
         public override string name { get; } = "Actinium208";
-        public override double halfLife { get; } = 0.097d;
+        public override double halfLife { get; } = 0.095d;
         public override double atomicWeight { get; } = 208.01155d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new AlphaParticle(8750002.09), new Francium204() } },
+            { 0.99d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Francium204() }, { 1.0d, new AlphaParticle(8750002.09) } } },
+            { 0.01d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Radium208() } } },
 
         };
     }
 }
-    
     

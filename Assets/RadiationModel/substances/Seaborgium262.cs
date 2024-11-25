@@ -7,15 +7,15 @@ namespace RadiationModel.substances
     public class Seaborgium262 : RadioactiveSubstance
     {
         public override string name { get; } = "Seaborgium262";
-        public override double halfLife { get; } = 0.0103d;
+        public override double halfLife { get; } = 0.0069d;
         public override double atomicWeight { get; } = 262.11634d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 0.94d, new List<RadioactiveSubstance> {  } },
+            { 0.78d, new Dictionary<double, RadioactiveSubstance> {  } },
+            { 0.22d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Rutherfordium258() }, { 1.0d, new AlphaParticle(10622002.09) } } },
 
         };
     }
 }
-    
     

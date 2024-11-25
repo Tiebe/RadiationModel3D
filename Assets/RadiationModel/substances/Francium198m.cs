@@ -7,15 +7,14 @@ namespace RadiationModel.substances
     public class Francium198m : RadioactiveSubstance
     {
         public override string name { get; } = "Francium198m";
-        public override double halfLife { get; } = 0.0011d;
+        public override double halfLife { get; } = 0.015d;
         public override double atomicWeight { get; } = 198.01028d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new AlphaParticle(8893002.09), new Astatine194() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Astatine194() }, { 1.0d, new AlphaParticle(8893002.09) } } },
 
         };
     }
 }
-    
     

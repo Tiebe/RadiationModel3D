@@ -7,15 +7,15 @@ namespace RadiationModel.substances
     public class Roentgenium279 : RadioactiveSubstance
     {
         public override string name { get; } = "Roentgenium279";
-        public override double halfLife { get; } = 0.17d;
+        public override double halfLife { get; } = 0.09d;
         public override double atomicWeight { get; } = 279.16288d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new AlphaParticle(11547002.09), new Meitnerium275() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Meitnerium275() }, { 1.0d, new AlphaParticle(11547002.09) } } },
+            { 0.25d, new Dictionary<double, RadioactiveSubstance> {  } },
 
         };
     }
 }
-    
     

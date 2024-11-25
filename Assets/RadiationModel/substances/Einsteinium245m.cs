@@ -7,14 +7,13 @@ namespace RadiationModel.substances
     public class Einsteinium245m : RadioactiveSubstance
     {
         public override string name { get; } = "Einsteinium245m";
-        public override double halfLife { get; } = 5e-05d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 245.07123d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
 
         };
     }
 }
-    
     

@@ -7,15 +7,15 @@ namespace RadiationModel.substances
     public class Iridium170 : RadioactiveSubstance
     {
         public override string name { get; } = "Iridium170";
-        public override double halfLife { get; } = 0.91d;
+        public override double halfLife { get; } = 0.87d;
         public override double atomicWeight { get; } = 169.97512d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 0.052000000000000005d, new List<RadioactiveSubstance> { new AlphaParticle(7257002.09), new Rhenium166() } },
+            { 0.948d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Rhenium170() }, { 1.0d, new BetaParticle(1, 7862000.0) } } },
+            { 0.052000000000000005d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Rhenium166() }, { 1.0d, new AlphaParticle(7257002.09) } } },
 
         };
     }
 }
-    
     

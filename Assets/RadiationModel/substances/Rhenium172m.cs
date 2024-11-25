@@ -7,15 +7,13 @@ namespace RadiationModel.substances
     public class Rhenium172m : RadioactiveSubstance
     {
         public override string name { get; } = "Rhenium172m";
-        public override double halfLife { get; } = 15.0d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 171.95549d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(1, 7637000.0), new Tungsten172() } },
 
         };
     }
 }
-    
     

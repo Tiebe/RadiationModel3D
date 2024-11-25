@@ -7,15 +7,14 @@ namespace RadiationModel.substances
     public class Praseodymium121 : RadioactiveSubstance
     {
         public override string name { get; } = "Praseodymium121";
-        public override double halfLife { get; } = 0.012d;
+        public override double halfLife { get; } = 0.01d;
         public override double atomicWeight { get; } = 120.95539d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new ProtonParticle(), new Cerium120() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new ProtonParticle() } } },
 
         };
     }
 }
-    
     

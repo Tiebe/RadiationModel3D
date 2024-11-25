@@ -7,15 +7,14 @@ namespace RadiationModel.substances
     public class Bismuth190m : RadioactiveSubstance
     {
         public override string name { get; } = "Bismuth190m";
-        public override double halfLife { get; } = 6.2d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 189.98876d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 0.7d, new List<RadioactiveSubstance> { new AlphaParticle(8010002.09), new Thallium186() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Bismuth190() } } },
 
         };
     }
 }
-    
     

@@ -7,15 +7,14 @@ namespace RadiationModel.substances
     public class Strontium90 : RadioactiveSubstance
     {
         public override string name { get; } = "Strontium90";
-        public override double halfLife { get; } = 912311482.32d;
+        public override double halfLife { get; } = 912310729.92545d;
         public override double atomicWeight { get; } = 89.90773d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(-1, 546000.0), new Yttrium90() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Yttrium90() }, { 1.0d, new BetaParticle(-1, 273000.0) } } },
 
         };
     }
 }
-    
     

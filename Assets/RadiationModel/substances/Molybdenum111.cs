@@ -7,15 +7,15 @@ namespace RadiationModel.substances
     public class Molybdenum111 : RadioactiveSubstance
     {
         public override string name { get; } = "Molybdenum111";
-        public override double halfLife { get; } = 0.1936d;
+        public override double halfLife { get; } = 0.186d;
         public override double atomicWeight { get; } = 110.93565d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(-1, 9085000.0), new Technetium111() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Technetium111() }, { 1.0d, new BetaParticle(-1, 4542500.0) } } },
+            { 0.12d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Technetium111() }, { 1.0d, new BetaParticle(-1, 4542500.0) } } },
 
         };
     }
 }
-    
     

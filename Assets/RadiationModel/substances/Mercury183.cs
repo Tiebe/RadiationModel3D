@@ -10,13 +10,13 @@ namespace RadiationModel.substances
         public override double halfLife { get; } = 9.4d;
         public override double atomicWeight { get; } = 182.97444d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 0.883d, new List<RadioactiveSubstance> { new BetaParticle(1, 6386000.0), new Gold183() } },
-            { 0.11699999999999999d, new List<RadioactiveSubstance> { new AlphaParticle(7060002.09), new Platinum179() } },
+            { 0.883d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Platinum183() }, { 1.0d, new BetaParticle(1, 5984000.0) } } },
+            { 0.11699999999999999d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Platinum179() }, { 1.0d, new AlphaParticle(7060002.09) }, { 0.0015d, new GammaParticle(71400.0, 0.01736) }, { 0.00049d, new GammaParticle(87400.0, 0.01419) }, { 0.000119d, new GammaParticle(153800.0, 0.00806) }, { 0.002295592906d, new GammaParticle(11070.0, 0.112) }, { 0.00015487167598831345d, new GammaParticle(65122.0, 0.01904) }, { 0.0002647379076723307d, new GammaParticle(66832.0, 0.01855) }, { 8.90773066402456e-05d, new GammaParticle(75821.0, 0.01635) }, { 0.00011455341633935585d, new GammaParticle(76725.0, 0.01616) }, { 2.547610969911024e-05d, new GammaParticle(77832.0, 0.01593) } } },
+            { 2.5999999999999997e-06d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Platinum182() }, { 1.0d, new ProtonParticle() } } },
 
         };
     }
 }
-    
     

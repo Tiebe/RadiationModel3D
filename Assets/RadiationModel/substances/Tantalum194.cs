@@ -7,14 +7,15 @@ namespace RadiationModel.substances
     public class Tantalum194 : RadioactiveSubstance
     {
         public override string name { get; } = "Tantalum194";
-        public override double halfLife { get; } = 2.0d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 193.98161d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Tungsten194() }, { 1.0d, new BetaParticle(-1, 3640000.0) } } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> {  } },
 
         };
     }
 }
-    
     

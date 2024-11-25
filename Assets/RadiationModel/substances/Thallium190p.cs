@@ -7,15 +7,13 @@ namespace RadiationModel.substances
     public class Thallium190p : RadioactiveSubstance
     {
         public override string name { get; } = "Thallium190p";
-        public override double halfLife { get; } = 0.06d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 189.97418d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new GammaParticle((314000.0, 0.00395)), new Thallium190() } },
 
         };
     }
 }
-    
     

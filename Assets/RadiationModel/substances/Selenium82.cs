@@ -7,15 +7,14 @@ namespace RadiationModel.substances
     public class Selenium82 : RadioactiveSubstance
     {
         public override string name { get; } = "Selenium82";
-        public override double halfLife { get; } = 2.7643889951999997e+27d;
+        public override double halfLife { get; } = 3.029464893560832e+27d;
         public override double atomicWeight { get; } = 81.9167d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(-2, 2997895.0), new Krypton82() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Krypton82() }, { 1.0d, new BetaParticle(-1, 1498947.5) }, { 1.0d, new BetaParticle(-1, 1498947.5) } } },
 
         };
     }
 }
-    
     

@@ -7,15 +7,15 @@ namespace RadiationModel.substances
     public class Promethium162 : RadioactiveSubstance
     {
         public override string name { get; } = "Promethium162";
-        public override double halfLife { get; } = 0.63d;
+        public override double halfLife { get; } = 0.467d;
         public override double atomicWeight { get; } = 161.95057d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(-1, 8339000.0), new Samarium162() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Samarium162() }, { 1.0d, new BetaParticle(-1, 4169500.0) } } },
+            { 0.0179d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Samarium162() }, { 1.0d, new BetaParticle(-1, 4169500.0) } } },
 
         };
     }
 }
-    
     

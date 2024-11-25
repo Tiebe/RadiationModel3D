@@ -7,15 +7,16 @@ namespace RadiationModel.substances
     public class Phosphorus43 : RadioactiveSubstance
     {
         public override string name { get; } = "Phosphorus43";
-        public override double halfLife { get; } = 0.0358d;
+        public override double halfLife { get; } = 0.0365d;
         public override double atomicWeight { get; } = 43.00541d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(-1, 17235000.0), new Sulfur43() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Sulfur43() }, { 1.0d, new BetaParticle(-1, 8617500.0) } } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Sulfur43() }, { 1.0d, new BetaParticle(-1, 8617500.0) } } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> {  } },
 
         };
     }
 }
-    
     

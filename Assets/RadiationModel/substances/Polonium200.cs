@@ -7,16 +7,15 @@ namespace RadiationModel.substances
     public class Polonium200 : RadioactiveSubstance
     {
         public override string name { get; } = "Polonium200";
-        public override double halfLife { get; } = 690.6d;
+        public override double halfLife { get; } = 692.4d;
         public override double atomicWeight { get; } = 199.98181d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 0.889d, new List<RadioactiveSubstance> { new BetaParticle(1, 3429000.0), new Bismuth200() } },
-            { 0.111d, new List<RadioactiveSubstance> { new AlphaParticle(7003002.09), new Lead196() } },
+            { 0.887d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Lead200() }, { 1.0d, new BetaParticle(1, 4654500.0) } } },
+            { 0.113d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Lead196() }, { 1.0d, new AlphaParticle(7003002.09) } } },
 
         };
     }
 }
-    
     

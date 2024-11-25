@@ -7,15 +7,14 @@ namespace RadiationModel.substances
     public class Neodymium156 : RadioactiveSubstance
     {
         public override string name { get; } = "Neodymium156";
-        public override double halfLife { get; } = 5.06d;
+        public override double halfLife { get; } = 5.26d;
         public override double atomicWeight { get; } = 155.93537d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(-1, 3964700.0), new Promethium156() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Promethium156() }, { 1.0d, new BetaParticle(-1, 1982350.00001) } } },
 
         };
     }
 }
-    
     

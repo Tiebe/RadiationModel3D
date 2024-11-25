@@ -7,15 +7,13 @@ namespace RadiationModel.substances
     public class Antimony121m : RadioactiveSubstance
     {
         public override string name { get; } = "Antimony121m";
-        public override double halfLife { get; } = 0.00018d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 120.90676d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new GammaParticle((2751200.0, 0.00045)), new Antimony121() } },
 
         };
     }
 }
-    
     

@@ -7,14 +7,14 @@ namespace RadiationModel.substances
     public class Tungsten191 : RadioactiveSubstance
     {
         public override string name { get; } = "Tungsten191";
-        public override double halfLife { get; } = 14.0d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 190.96653d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Rhenium191() }, { 1.0d, new BetaParticle(-1, 1585000.0) } } },
 
         };
     }
 }
-    
     

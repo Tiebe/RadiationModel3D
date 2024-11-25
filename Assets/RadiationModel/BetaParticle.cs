@@ -9,7 +9,7 @@ namespace RadiationModel
         public override string name => "Electron";
         public override double halfLife => double.PositiveInfinity;
         public override double atomicWeight => 0;
-        public double energy { get; }
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new();
+        public double energy { get; set; }
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new();
     }
 }

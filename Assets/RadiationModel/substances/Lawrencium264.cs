@@ -7,14 +7,14 @@ namespace RadiationModel.substances
     public class Lawrencium264 : RadioactiveSubstance
     {
         public override string name { get; } = "Lawrencium264";
-        public override double halfLife { get; } = 36000.0d;
+        public override double halfLife { get; } = 17640.0d;
         public override double atomicWeight { get; } = 264.1142d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> {  } },
 
         };
     }
 }
-    
     

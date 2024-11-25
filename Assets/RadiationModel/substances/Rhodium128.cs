@@ -7,14 +7,16 @@ namespace RadiationModel.substances
     public class Rhodium128 : RadioactiveSubstance
     {
         public override string name { get; } = "Rhodium128";
-        public override double halfLife { get; } = 0.008d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 127.97065d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Palladium128() }, { 1.0d, new BetaParticle(-1, 8525000.0) } } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> {  } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> {  } },
 
         };
     }
 }
-    
     

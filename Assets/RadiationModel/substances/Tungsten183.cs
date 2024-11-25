@@ -7,14 +7,14 @@ namespace RadiationModel.substances
     public class Tungsten183 : RadioactiveSubstance
     {
         public override string name { get; } = "Tungsten183";
-        public override double halfLife { get; } = double.PositiveInfinity;
+        public override double halfLife { get; } = 2.114314040297664e+28d;
         public override double atomicWeight { get; } = 182.95022d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> {  } },
 
         };
     }
 }
-    
     

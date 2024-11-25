@@ -7,15 +7,14 @@ namespace RadiationModel.substances
     public class Gold175 : RadioactiveSubstance
     {
         public override string name { get; } = "Gold175";
-        public override double halfLife { get; } = 0.2d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 174.98132d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 0.88d, new List<RadioactiveSubstance> { new AlphaParticle(7607002.09), new Iridium171() } },
+            { 0.9d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Iridium171() }, { 1.0d, new AlphaParticle(7607002.09) } } },
 
         };
     }
 }
-    
     

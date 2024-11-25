@@ -7,15 +7,13 @@ namespace RadiationModel.substances
     public class Holmium156n : RadioactiveSubstance
     {
         public override string name { get; } = "Holmium156n";
-        public override double halfLife { get; } = 456.0d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 155.92989d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 0.75d, new List<RadioactiveSubstance> { new BetaParticle(1, 5225400.0), new Dysprosium156() } },
 
         };
     }
 }
-    
     

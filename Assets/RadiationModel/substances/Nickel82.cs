@@ -7,14 +7,13 @@ namespace RadiationModel.substances
     public class Nickel82 : RadioactiveSubstance
     {
         public override string name { get; } = "Nickel82";
-        public override double halfLife { get; } = 0.016d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 81.98849d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
 
         };
     }
 }
-    
     

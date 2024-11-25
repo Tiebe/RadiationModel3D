@@ -7,15 +7,14 @@ namespace RadiationModel.substances
     public class Lanthanum123 : RadioactiveSubstance
     {
         public override string name { get; } = "Lanthanum123";
-        public override double halfLife { get; } = 17.0d;
+        public override double halfLife { get; } = 16.3d;
         public override double atomicWeight { get; } = 122.9263d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(1, 7005000.0), new Barium123() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Cesium123() }, { 1.0d, new BetaParticle(1, 6197000.0) } } },
 
         };
     }
 }
-    
     

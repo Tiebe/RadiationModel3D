@@ -7,15 +7,13 @@ namespace RadiationModel.substances
     public class Radon197m : RadioactiveSubstance
     {
         public override string name { get; } = "Radon197m";
-        public override double halfLife { get; } = 0.0256d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 197.00183d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new AlphaParticle(8631002.09), new Polonium193() } },
 
         };
     }
 }
-    
     

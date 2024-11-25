@@ -7,15 +7,13 @@ namespace RadiationModel.substances
     public class Fermium250m : RadioactiveSubstance
     {
         public override string name { get; } = "Fermium250m";
-        public override double halfLife { get; } = 1.92d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 250.08081d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new GammaParticle((1199000.0, 0.00103)), new Fermium250() } },
 
         };
     }
 }
-    
     

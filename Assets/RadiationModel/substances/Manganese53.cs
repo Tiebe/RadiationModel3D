@@ -7,15 +7,14 @@ namespace RadiationModel.substances
     public class Manganese53 : RadioactiveSubstance
     {
         public override string name { get; } = "Manganese53";
-        public override double halfLife { get; } = 116760722400000.0d;
+        public override double halfLife { get; } = 116760626105990.4d;
         public override double atomicWeight { get; } = 52.94129d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new Chromium53() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Chromium53() }, { 0.0064605491999999995d, new GammaParticle(597.0, 2.07679) }, { 0.07645109885275231d, new GammaParticle(5406.0, 0.22935) }, { 0.15016911972648264d, new GammaParticle(5415.0, 0.22896) }, { 0.030503081420765032d, new GammaParticle(5966.0, 0.20782) }, { 0.030503081420765032d, new GammaParticle(5966.0, 0.20782) } } },
 
         };
     }
 }
-    
     

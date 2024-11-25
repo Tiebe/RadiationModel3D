@@ -11,6 +11,6 @@ namespace RadiationModel
         public override double atomicWeight { get; } = 0;
         public double wavelength { get; } = 0;
         public double energy { get; } = 0;
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new();
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new();
     }
 }

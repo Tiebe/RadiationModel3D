@@ -7,15 +7,14 @@ namespace RadiationModel.substances
     public class Bohrium272 : RadioactiveSubstance
     {
         public override string name { get; } = "Bohrium272";
-        public override double halfLife { get; } = 11.3d;
+        public override double halfLife { get; } = 10.5d;
         public override double atomicWeight { get; } = 272.13826d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new AlphaParticle(10327002.09), new Dubnium268() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Dubnium268() }, { 1.0d, new AlphaParticle(10327002.09) } } },
 
         };
     }
 }
-    
     

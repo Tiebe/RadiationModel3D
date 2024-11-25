@@ -7,16 +7,15 @@ namespace RadiationModel.substances
     public class Lawrencium253 : RadioactiveSubstance
     {
         public override string name { get; } = "Lawrencium253";
-        public override double halfLife { get; } = 0.632d;
+        public override double halfLife { get; } = 0.57d;
         public override double atomicWeight { get; } = 253.09503d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 0.9d, new List<RadioactiveSubstance> { new AlphaParticle(9937002.09), new Mendelevium249() } },
-            { 0.01d, new List<RadioactiveSubstance> {  } },
+            { 0.987d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Mendelevium249() }, { 1.0d, new AlphaParticle(9937002.09) } } },
+            { 0.013000000000000001d, new Dictionary<double, RadioactiveSubstance> {  } },
 
         };
     }
 }
-    
     

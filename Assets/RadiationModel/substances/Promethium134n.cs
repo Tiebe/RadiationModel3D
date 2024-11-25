@@ -7,15 +7,13 @@ namespace RadiationModel.substances
     public class Promethium134n : RadioactiveSubstance
     {
         public override string name { get; } = "Promethium134n";
-        public override double halfLife { get; } = 2e-05d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 133.92846d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new GammaParticle((120000.0, 0.01033)), new Promethium134() } },
 
         };
     }
 }
-    
     

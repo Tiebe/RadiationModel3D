@@ -7,15 +7,15 @@ namespace RadiationModel.substances
     public class Uranium218m : RadioactiveSubstance
     {
         public override string name { get; } = "Uranium218m";
-        public override double halfLife { get; } = 0.00041d;
+        public override double halfLife { get; } = 0.00056d;
         public override double atomicWeight { get; } = 218.02577d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new AlphaParticle(11906002.09), new Thorium214() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> {  } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> {  } },
 
         };
     }
 }
-    
     

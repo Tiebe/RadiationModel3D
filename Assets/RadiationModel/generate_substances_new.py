@@ -1,6 +1,7 @@
 import requests
 import csv
 import pickle
+import os
 
 atomic_numbers = {
     0: 'Neutron',
@@ -247,7 +248,7 @@ element_symbols = {
 
 
 class Isotope:
-    def __init__(self, name, halfLife, atomicWeight, massNumber, elementNumber, massKeV):
+    def __init__(self, name, halfLife, atomicWeight, massNumber, elementNumber, massKeV, simple_name):
         self.name = name
         self.halfLife = halfLife
         self.atomicWeight = atomicWeight
@@ -255,6 +256,7 @@ class Isotope:
         self.massNumber = massNumber
         self.elementNumber = elementNumber
         self.massKeV = massKeV
+        self.simple_name = simple_name
 
     def setDecayProducts(self, products):
         self.decayProducts = products
@@ -271,6 +273,7 @@ def get_all_basic_isotope_info():
         for line in lines:
             line = line.replace('\n', '')
             if line[0] == "#" or line[18:31].strip() == '':
+                print("Skipping line: " + line)
                 continue
 
             mass = int(line[0:3])
@@ -280,6 +283,7 @@ def get_all_basic_isotope_info():
 
             massText = line[18:31].replace('#', '').strip()
             if massText == '':
+                print("Skipping line: " + line)
                 continue
             massExcessKeV = float(massText)
             massKeV = atomicMassToKeV(mass) + massExcessKeV
@@ -315,13 +319,13 @@ def get_isomer_levels(isotope: str):
 
 gamma_emission_cache = {}
 
-def get_gamma_emissions(isotope: str, energy: float):
+def get_gamma_emissions(isotope: str, energy: float, decay_type: str):
     if isotope in gamma_emission_cache:
         all_emissions = gamma_emission_cache[isotope]
     else:
         all_emissions = do_iaea_request(f"fields=decay_rads&nuclides={isotope}&rad_types=g")
         gamma_emission_cache[isotope] = all_emissions
-    return filter(lambda x: x[17] == energy, all_emissions)
+    return filter(lambda x: len(x) != 0 and x[17] != '' and float(x[17]) == energy and x[26] == decay_type, all_emissions)
 
 def find_level(levels, value, uncertainty):
     target_min = value - uncertainty
@@ -357,7 +361,7 @@ def get_ground_state_info():
 def get_isotope_info(z: int, n: int):
     ground_states = get_ground_state_info()
     for state in ground_states:
-        if len(state) != 0 and state[0] == str(z) and state[1] == str(n):
+        if len(state) != 0 and state[0] == str(z) and state[1] == str(n - z):
             return state
 
     return None
@@ -397,7 +401,7 @@ def get_neutron_decay_products(decay_type: str):
 
 def get_decay_results(isotope: Isotope, decay_type: str, isomer_info: list):
     energy = float(isomer_info[5])
-    decay_type = decay_type.replace("B-A", "B-").replace("B-N", "B-").replace("B+A", "B+").replace("B-P", "B-").replace("D", "").replace("3H", "")
+    decay_type = decay_type.replace("B-A", "B-").replace("B-N", "B-").replace("B+A", "B+").replace("B-P", "B-").replace("D", "").replace("3H", "").replace("SF", "")
     if decay_type == "":
         return []
 
@@ -449,17 +453,39 @@ def get_decay_results(isotope: Isotope, decay_type: str, isomer_info: list):
         addMass += addMass2
         addElement += addElement2
         result.extend(result2)
+    elif decay_type == "B-2N":
+        (addMass, addElement, result) = get_beta_decay_products("B-")
+        (addMass2, addElement2, result2) = get_neutron_decay_products("2N")
+        addMass += addMass2
+        addElement += addElement2
+        result.extend(result2)
+    elif decay_type == "2B-":
+        (addMass, addElement, result) = get_beta_decay_products("B-")
+        (addMass2, addElement2, result2) = get_beta_decay_products("B-")
+        addMass += addMass2
+        addElement += addElement2
+        result.extend(result2)
+    elif decay_type == "2EC":
+        (addMass, addElement, result) = get_ec_decay_products()
+        (addMass2, addElement2, result2) = get_ec_decay_products()
+        addMass += addMass2
+        addElement += addElement2
+        result.extend(result2)
     elif decay_type.endswith("P"):
         (addMass, addElement, result) = get_proton_decay_products(decay_type)
     elif decay_type.endswith("N"):
         (addMass, addElement, result) = get_neutron_decay_products(decay_type)
     else:
+        print("Unknown decay type: " + decay_type)
         return []
 
     results.append({ "type": "substance", "mass": initialMass + addMass, "element": initialElement + addElement, "chance": 1.0 })
     results.extend(result)
 
-    for gamma_emission in get_gamma_emissions(isotope.name, energy):
+    gamma_emissions = get_gamma_emissions(isotope.simple_name, energy, decay_type)
+    for gamma_emission in gamma_emissions:
+        if gamma_emission[2] == '':
+            continue
         results.append({ "type": "gamma", "energy": float(gamma_emission[0]) * 1000, "chance": float(gamma_emission[2]) / 100.0 })
 
     return results
@@ -473,17 +499,21 @@ def get_all_isotopes() -> list[Isotope]:
         mass, atomicNumber, base_name, s, isomer_energy, uncertainty, massKeV = basic_isotope
         isotope_info = get_isotope_info(atomicNumber, mass)
         if isotope_info is None:
+            print(f"Could not find isotope info for {atomicNumber} {mass}")
             continue
         isomer_info = get_isomer_info(base_name, isomer_energy, uncertainty)
 
         if isomer_info is None:
-            #TODO: add isotope with no isomer info
+            #print(f"Could not find isomer info for {base_name} {isomer_energy} {uncertainty}")
+            isotopes.append(Isotope(atomic_numbers[atomicNumber] + str(mass) + s, 0.0, keVToAtomicMass(massKeV), mass, atomicNumber, massKeV, base_name))
             continue
 
         half_life = isomer_info[14]
+        if half_life == '':
+            half_life = 0.0
         element = atomic_numbers[atomicNumber]
 
-        isotope = Isotope(element + str(mass) + s, half_life, keVToAtomicMass(massKeV), mass, atomicNumber, massKeV)
+        isotope = Isotope(element + str(mass) + s, float(half_life), keVToAtomicMass(massKeV), mass, atomicNumber, massKeV, base_name)
 
         decays = []
         for i in range(16, 24, 3):
@@ -491,18 +521,151 @@ def get_all_isotopes() -> list[Isotope]:
                 continue
             decay_type = isomer_info[i]
             if isomer_info[i + 1] == '':
-                decays += (1.0, [])
+                decays.append([1.0, []])
                 continue
             decay_chance = float(isomer_info[i + 1]) / 100.0
-            decays += (decay_chance, get_decay_results(isotope, decay_type, isomer_info))
+            decays.append([decay_chance, get_decay_results(isotope, decay_type, isomer_info)])
 
-
-
+        isotope.setDecayProducts(decays)
+        isotopes.append(isotope)
     return isotopes
+
+def getIsotopeFromMassElementInfo(isotopes, mass, element, info):
+    name = atomic_numbers[element] + str(mass) + info
+    return next((x for x in isotopes if x.name == name), None)
+
+def getDecayProductString(isotopes, isotope, decayProduct, decayProducts):
+    if decayProduct["type"] == "alpha":
+        originalEnergy = isotope.massKeV
+        finalEnergy = 3.7273794118*(10**6) # mass of alpha particle in keV
+        for product in decayProducts:
+            if product["type"] == "substance":
+                newIsotope = getIsotopeFromMassElementInfo(isotopes, product["mass"], product["element"], product.get("info", ""))
+                if newIsotope is not None:
+                    finalEnergy += newIsotope.massKeV
+                else:
+                    print(f"Could not find isotope {product['mass']} {product['element']} {product.get('info', '')}")
+
+        return f"{{ {decayProduct["chance"]}d, new AlphaParticle({round(originalEnergy - finalEnergy, 5) * 1000}) }}"
+    if decayProduct["type"] == "B-" or decayProduct["type"] == "B+":
+        charge = -1 if decayProduct["type"] == "B-" else 1
+        originalEnergy = isotope.massKeV
+        finalEnergy = 0
+        for product in decayProducts:
+            if product["type"] == "substance":
+                newIsotope = getIsotopeFromMassElementInfo(isotopes, product["mass"], product["element"], product.get("info", ""))
+                if newIsotope is not None:
+                    finalEnergy += newIsotope.massKeV
+                else:
+                    print(f"Could not find isotope {product['mass']} {product['element']} {product.get('info', '')}")
+
+        return f"{{ {decayProduct["chance"]}d, new BetaParticle({charge}, {round((originalEnergy - finalEnergy)/2 * 1000, 5)}) }}"
+    if decayProduct["type"] == "gamma":
+        energy = decayProduct["energy"]
+
+        planckEV = 4.135667696 * (10 ** -15)
+        c = 299792458.0
+
+        wavelength = round(((planckEV * c) / energy) * 10**9, 5)
+        return f"{{ {decayProduct["chance"]}d, new GammaParticle({round(energy, 5)}, {wavelength}) }}"
+    if decayProduct["type"] == "proton":
+        return f"{{ {decayProduct["chance"]}d, new ProtonParticle() }}"
+    if decayProduct["type"] == "neutron":
+        return f"{{ {decayProduct["chance"]}d, new NeutronParticle() }}"
+    if decayProduct["type"] == "substance":
+        name = atomic_numbers[decayProduct["element"]] + str(decayProduct["mass"])
+        isotope = getIsotopeFromMassElementInfo(isotopes, decayProduct["mass"], decayProduct["element"], decayProduct.get("info", ""))
+        if isotope is None:
+            print(f"Could not find isotope {decayProduct['mass']} {decayProduct['element']} {decayProduct.get('info', '')}")
+            return ""
+
+        if "info" in decayProduct:
+            name += decayProduct["info"]
+        return f"{{ {decayProduct["chance"]}d, new {name}() }}"
+    else:
+        print(f"Unknown decay product: {decayProduct}")
+    return ""
+
+
+def generateFile(isotopes, isotope: Isotope):
+    name = isotope.name
+    halfLife = round(isotope.halfLife, 5)
+    if halfLife == 0:
+        halfLife = "double.PositiveInfinity"
+    else:
+        halfLife = str(halfLife) + "d"
+    atomicWeight = round(isotope.atomicWeight, 5)
+
+    decayProducts = ""
+    for decayProduct in isotope.decayProducts:
+        decayProducts += f"""            {{ {str(decayProduct[0])}d, new Dictionary<double, RadioactiveSubstance> {{ {', '.join(filter(lambda x: x != "", [getDecayProductString(isotopes, isotope, product, decayProduct[1]) for product in decayProduct[1]]))} }} }},
+"""
+
+    return f"""using System;
+using System.Collections.Generic;
+using RadiationModel.constants;
+
+namespace RadiationModel.substances
+{{
+    public class {name} : RadioactiveSubstance
+    {{
+        public override string name {{ get; }} = "{name}";
+        public override double halfLife {{ get; }} = {str(halfLife)};
+        public override double atomicWeight {{ get; }} = {str(atomicWeight)}d;
+
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts {{ get; }} = new()
+        {{
+{decayProducts}
+        }};
+    }}
+}}
+    """
+
+def generateSubstancesFile(isotopes):
+    with open("Substances.cs", 'w') as file:
+        file.write(f"""using System;
+using System.Collections.Generic;
+using RadiationModel.substances;
+
+namespace RadiationModel
+{{
+    // list of all radioactive substances names with their respective class
+    public static class Substances
+    {{
+        private static readonly Dictionary<string, Type> substances = new()
+        {{
+            {{ "AlphaParticle", typeof(AlphaParticle) }},
+            {{ "BetaParticle", typeof(BetaParticle) }},
+            {{ "GammaParticle", typeof(GammaParticle) }}, 
+
+            {',\n            '.join([f'{{ "{isotope.name}", typeof({isotope.name}) }}' for isotope in isotopes])}
+        }};
+        
+        public static RadioactiveSubstance GetSubstanceByName(string name)
+        {{
+            return (RadioactiveSubstance) Activator.CreateInstance(substances[name]);
+        }}
+    }}
+
+}}
+""")
+
+
+def write_to_cs(isotopes: list[Isotope]):
+    folder = "substances"
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+
+    for isotope in isotopes:
+        with open(f"{folder}/{isotope.name}.cs", "w") as file:
+            file.write(generateFile(isotopes, isotope))
+
 
 
 def main():
-    get_all_isotopes()
+    isotopes = get_all_isotopes()
+    write_to_cs(isotopes)
+    generateSubstancesFile(isotopes)
 
 
 if __name__ == "__main__":

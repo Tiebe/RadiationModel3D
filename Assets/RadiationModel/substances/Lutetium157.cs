@@ -7,14 +7,14 @@ namespace RadiationModel.substances
     public class Lutetium157 : RadioactiveSubstance
     {
         public override string name { get; } = "Lutetium157";
-        public override double halfLife { get; } = 7.7d;
+        public override double halfLife { get; } = 6.8d;
         public override double atomicWeight { get; } = 156.95014d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
+            { 0.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Thulium153() }, { 1.0d, new AlphaParticle(6130002.09) } } },
 
         };
     }
 }
-    
     

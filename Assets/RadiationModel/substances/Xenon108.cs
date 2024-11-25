@@ -7,15 +7,15 @@ namespace RadiationModel.substances
     public class Xenon108 : RadioactiveSubstance
     {
         public override string name { get; } = "Xenon108";
-        public override double halfLife { get; } = 7e-05d;
+        public override double halfLife { get; } = 5e-05d;
         public override double atomicWeight { get; } = 107.95423d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new AlphaParticle(5597002.09), new Tellurium104() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Tellurium104() }, { 1.0d, new AlphaParticle(5597002.09) } } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> {  } },
 
         };
     }
 }
-    
     

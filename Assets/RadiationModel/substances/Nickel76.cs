@@ -7,15 +7,15 @@ namespace RadiationModel.substances
     public class Nickel76 : RadioactiveSubstance
     {
         public override string name { get; } = "Nickel76";
-        public override double halfLife { get; } = 0.2346d;
+        public override double halfLife { get; } = 0.2347d;
         public override double atomicWeight { get; } = 75.95471d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(-1, 8791600.0), new Copper76() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Copper76() }, { 1.0d, new BetaParticle(-1, 4395800.0) } } },
+            { 0.14d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Copper76() }, { 1.0d, new BetaParticle(-1, 4395800.0) } } },
 
         };
     }
 }
-    
     

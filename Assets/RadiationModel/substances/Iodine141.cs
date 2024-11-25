@@ -7,15 +7,15 @@ namespace RadiationModel.substances
     public class Iodine141 : RadioactiveSubstance
     {
         public override string name { get; } = "Iodine141";
-        public override double halfLife { get; } = 0.42d;
+        public override double halfLife { get; } = 0.418d;
         public override double atomicWeight { get; } = 140.93567d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(-1, 8270299.999999999), new Xenon141() } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Xenon141() }, { 1.0d, new BetaParticle(-1, 4135150.0) } } },
+            { 0.212d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Xenon141() }, { 1.0d, new BetaParticle(-1, 4135150.0) } } },
 
         };
     }
 }
-    
     

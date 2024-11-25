@@ -7,14 +7,13 @@ namespace RadiationModel.substances
     public class Hassium267m : RadioactiveSubstance
     {
         public override string name { get; } = "Hassium267m";
-        public override double halfLife { get; } = 0.00099d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 267.13172d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
 
         };
     }
 }
-    
     
