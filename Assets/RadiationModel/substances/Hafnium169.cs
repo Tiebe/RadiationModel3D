@@ -10,9 +10,9 @@ namespace RadiationModel.substances
         public override double halfLife { get; } = 194.4d;
         public override double atomicWeight { get; } = 168.94126d;
 
-        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Ytterbium169() }, { 1.0d, new BetaParticle(1, betaPlusSpectrum) }, { 0.015960000000000002d, new GammaParticle(68400.0, 0.01813) }, { 0.00588d, new GammaParticle(72900.0, 0.01701) }, { 0.03864d, new GammaParticle(123600.0, 0.01003) }, { 0.09744d, new GammaParticle(369500.0, 0.00336) }, { 0.84d, new GammaParticle(492860.0, 0.00252) }, { 0.3d, new GammaParticle(511000.0, 0.00243) }, { 0.192d, new GammaParticle(8810.0, 0.14073) }, { 0.203d, new GammaParticle(52965.0, 0.02341) }, { 0.35600000000000004d, new GammaParticle(54070.0, 0.02293) }, { 0.11699999999999999d, new GammaParticle(61387.0, 0.0202) }, { 0.14800000000000002d, new GammaParticle(62084.0, 0.01997) }, { 0.030899999999999997d, new GammaParticle(62927.0, 0.0197) } } },
+            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Ytterbium169()), new(1.0d, new BetaParticle(1, betaPlusSpectrum)), new(0.015960000000000002d, new GammaParticle(68400.0, 0.01813)), new(0.00588d, new GammaParticle(72900.0, 0.01701)), new(0.03864d, new GammaParticle(123600.0, 0.01003)), new(0.09744d, new GammaParticle(369500.0, 0.00336)), new(0.84d, new GammaParticle(492860.0, 0.00252)), new(0.3d, new GammaParticle(511000.0, 0.00243)), new(0.192d, new GammaParticle(8810.0, 0.14073)), new(0.203d, new GammaParticle(52965.0, 0.02341)), new(0.35600000000000004d, new GammaParticle(54070.0, 0.02293)), new(0.11699999999999999d, new GammaParticle(61387.0, 0.0202)), new(0.14800000000000002d, new GammaParticle(62084.0, 0.01997)), new(0.030899999999999997d, new GammaParticle(62927.0, 0.0197)) } },
 
         }; 
         

@@ -11,6 +11,6 @@ namespace RadiationModel
         public override double atomicWeight => 0;
         public double energy { get; set; }
         public Dictionary<double, double> spectrum { get; set; }
-        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new();
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new();
     }
 }

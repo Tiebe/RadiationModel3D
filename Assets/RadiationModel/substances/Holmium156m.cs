@@ -10,9 +10,9 @@ namespace RadiationModel.substances
         public override double halfLife { get; } = 9.5d;
         public override double atomicWeight { get; } = 155.92969d;
 
-        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Holmium156() }, { 0.00024d, new GammaParticle(52370.0, 0.02367) }, { 0.15244d, new GammaParticle(7656.0, 0.16194) } } },
+            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Holmium156()), new(0.00024d, new GammaParticle(52370.0, 0.02367)), new(0.15244d, new GammaParticle(7656.0, 0.16194)) } },
 
         }; 
         

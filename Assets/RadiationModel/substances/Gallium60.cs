@@ -10,11 +10,11 @@ namespace RadiationModel.substances
         public override double halfLife { get; } = 0.07d;
         public override double atomicWeight { get; } = 59.9575d;
 
-        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Copper60() }, { 1.0d, new BetaParticle(1, betaPlusSpectrum) }, { 0.87d, new GammaParticle(1003700.0, 0.00124) }, { 0.10439999999999999d, new GammaParticle(1554900.0, 0.0008) }, { 0.087d, new GammaParticle(2293000.0, 0.00054) }, { 0.1131d, new GammaParticle(2559000.0, 0.00048) }, { 0.4959d, new GammaParticle(3848300.0, 0.00032) }, { 2.0d, new GammaParticle(511000.0, 0.00243) }, { 1.258371828e-05d, new GammaParticle(1035.0, 1.19791) }, { 0.00011728469401811403d, new GammaParticle(8616.0, 0.1439) }, { 0.0002280915869663828d, new GammaParticle(8639.0, 0.14352) }, { 4.89398190155032e-05d, new GammaParticle(9610.0, 0.12902) }, { 4.89398190155032e-05d, new GammaParticle(9610.0, 0.12902) } } },
-            { 0.016d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Copper59() }, { 1.0d, new BetaParticle(1, betaPlusSpectrum) }, { 1.0d, new ProtonParticle() } } },
-            { 0.00023d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Zinc60() }, { 1.0d, new BetaParticle(1, betaPlusSpectrum) } } },
+            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Copper60()), new(1.0d, new BetaParticle(1, betaPlusSpectrum)), new(0.87d, new GammaParticle(1003700.0, 0.00124)), new(0.10439999999999999d, new GammaParticle(1554900.0, 0.0008)), new(0.087d, new GammaParticle(2293000.0, 0.00054)), new(0.1131d, new GammaParticle(2559000.0, 0.00048)), new(0.4959d, new GammaParticle(3848300.0, 0.00032)), new(2.0d, new GammaParticle(511000.0, 0.00243)), new(1.258371828e-05d, new GammaParticle(1035.0, 1.19791)), new(0.00011728469401811403d, new GammaParticle(8616.0, 0.1439)), new(0.0002280915869663828d, new GammaParticle(8639.0, 0.14352)), new(4.89398190155032e-05d, new GammaParticle(9610.0, 0.12902)), new(4.89398190155032e-05d, new GammaParticle(9610.0, 0.12902)) } },
+            { 0.016d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Copper59()), new(1.0d, new BetaParticle(1, betaPlusSpectrum)), new(1.0d, new ProtonParticle()) } },
+            { 0.00023d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Zinc60()), new(1.0d, new BetaParticle(1, betaPlusSpectrum)) } },
 
         }; 
         

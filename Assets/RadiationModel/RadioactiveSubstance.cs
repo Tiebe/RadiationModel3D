@@ -36,6 +36,6 @@ namespace RadiationModel
          * Key: the probability of decaying into this product
          * Value: the list of substances that the substance decays into
          */
-        public abstract Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; }
+        public abstract Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; }
     }
 }

@@ -563,6 +563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MassAttenuationCoefficient: 0.5021
+  materialString: Lead
 --- !u!65 &421180940
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -680,7 +681,7 @@ GameObject:
   - component: {fileID: 448574872}
   m_Layer: 0
   m_Name: Detector
-  m_TagString: Untagged
+  m_TagString: Detector
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -976,6 +977,7 @@ MonoBehaviour:
   radioactiveSubstanceName: Cobalt60m
   emitting: 1
   debugRender: 1
+  debugRenderAll: 0
   resetter: 0
 --- !u!136 &680841585
 CapsuleCollider:

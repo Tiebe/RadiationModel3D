@@ -573,7 +573,7 @@ def getDecayProductString(isotopes, isotope, decayProduct, decayProducts):
                 else:
                     print(f"Could not find isotope {product['mass']} {product['element']} {product.get('info', '')}")
 
-        return f"{{ {decayProduct["chance"]}d, new AlphaParticle({round(originalEnergy - finalEnergy, 5) * 1000}) }}"
+        return f"new({decayProduct["chance"]}d, new AlphaParticle({round(originalEnergy - finalEnergy, 5) * 1000}))"
     if decayProduct["type"] == "B-" or decayProduct["type"] == "B+":
         charge = -1 if decayProduct["type"] == "B-" else 1
 
@@ -582,7 +582,7 @@ def getDecayProductString(isotopes, isotope, decayProduct, decayProducts):
         else:
             spectrum = "betaPlusSpectrum"
 
-        return f"{{ {decayProduct["chance"]}d, new BetaParticle({charge}, {spectrum}) }}"
+        return f"new({decayProduct["chance"]}d, new BetaParticle({charge}, {spectrum}))"
     if decayProduct["type"] == "gamma":
         energy = decayProduct["energy"]
 
@@ -590,11 +590,11 @@ def getDecayProductString(isotopes, isotope, decayProduct, decayProducts):
         c = 299792458.0
 
         wavelength = round(((planckEV * c) / energy) * 10**9, 5)
-        return f"{{ {decayProduct["chance"]}d, new GammaParticle({round(energy, 5)}, {wavelength}) }}"
+        return f"new({decayProduct["chance"]}d, new GammaParticle({round(energy, 5)}, {wavelength}))"
     if decayProduct["type"] == "proton":
-        return f"{{ {decayProduct["chance"]}d, new ProtonParticle() }}"
+        return f"new({decayProduct["chance"]}d, new ProtonParticle())"
     if decayProduct["type"] == "neutron":
-        return f"{{ {decayProduct["chance"]}d, new NeutronParticle() }}"
+        return f"new({decayProduct["chance"]}d, new NeutronParticle())"
     if decayProduct["type"] == "substance":
         name = atomic_numbers[decayProduct["element"]] + str(decayProduct["mass"])
         isotope = getIsotopeFromMassElementInfo(isotopes, decayProduct["mass"], decayProduct["element"], decayProduct.get("info", ""))
@@ -604,7 +604,7 @@ def getDecayProductString(isotopes, isotope, decayProduct, decayProducts):
 
         if "info" in decayProduct:
             name += decayProduct["info"]
-        return f"{{ {decayProduct["chance"]}d, new {name}() }}"
+        return f"new({decayProduct["chance"]}d, new {name}())"
     else:
         print(f"Unknown decay product: {decayProduct}")
     return ""
@@ -621,7 +621,7 @@ def generateFile(isotopes, isotope: Isotope):
 
     decayProducts = ""
     for decayProduct in isotope.decayProducts:
-        decayProducts += f"""            {{ {str(decayProduct[0])}d, new Dictionary<double, RadioactiveSubstance> {{ {', '.join(filter(lambda x: x != "", [getDecayProductString(isotopes, isotope, product, decayProduct[1]) for product in decayProduct[1]]))} }} }},
+        decayProducts += f"""            {{ {str(decayProduct[0])}d, new List<KeyValuePair<double, RadioactiveSubstance>> {{ {', '.join(filter(lambda x: x != "", [getDecayProductString(isotopes, isotope, product, decayProduct[1]) for product in decayProduct[1]]))} }} }},
 """
 
     betaPlusSpectrum = ""
@@ -646,7 +646,7 @@ namespace RadiationModel.substances
         public override double halfLife {{ get; }} = {str(halfLife)};
         public override double atomicWeight {{ get; }} = {str(atomicWeight)}d;
 
-        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts {{ get; }} = new()
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts {{ get; }} = new()
         {{
 {decayProducts}
         }}; 

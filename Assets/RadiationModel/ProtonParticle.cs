@@ -7,6 +7,6 @@ namespace RadiationModel.substances
         public override string name => "Proton";
         public override double halfLife => double.PositiveInfinity;
         public override double atomicWeight => 1.007276;
-        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new();
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new();
     }
 }

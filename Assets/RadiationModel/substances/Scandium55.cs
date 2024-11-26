@@ -10,10 +10,10 @@ namespace RadiationModel.substances
         public override double halfLife { get; } = 0.096d;
         public override double atomicWeight { get; } = 54.96689d;
 
-        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Titanium55() }, { 1.0d, new BetaParticle(-1, betaMinusSpectrum) }, { 0.02d, new GammaParticle(349600.0, 0.00355) }, { 0.83d, new GammaParticle(591700.0, 0.0021) }, { 0.11d, new GammaParticle(712300.0, 0.00174) }, { 0.35d, new GammaParticle(1203800.0, 0.00103) }, { 0.09d, new GammaParticle(1554100.0, 0.0008) } } },
-            { 0.17d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Titanium55() }, { 1.0d, new BetaParticle(-1, betaMinusSpectrum) }, { 0.02d, new GammaParticle(349600.0, 0.00355) }, { 0.83d, new GammaParticle(591700.0, 0.0021) }, { 0.11d, new GammaParticle(712300.0, 0.00174) }, { 0.35d, new GammaParticle(1203800.0, 0.00103) }, { 0.09d, new GammaParticle(1554100.0, 0.0008) } } },
+            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Titanium55()), new(1.0d, new BetaParticle(-1, betaMinusSpectrum)), new(0.02d, new GammaParticle(349600.0, 0.00355)), new(0.83d, new GammaParticle(591700.0, 0.0021)), new(0.11d, new GammaParticle(712300.0, 0.00174)), new(0.35d, new GammaParticle(1203800.0, 0.00103)), new(0.09d, new GammaParticle(1554100.0, 0.0008)) } },
+            { 0.17d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Titanium55()), new(1.0d, new BetaParticle(-1, betaMinusSpectrum)), new(0.02d, new GammaParticle(349600.0, 0.00355)), new(0.83d, new GammaParticle(591700.0, 0.0021)), new(0.11d, new GammaParticle(712300.0, 0.00174)), new(0.35d, new GammaParticle(1203800.0, 0.00103)), new(0.09d, new GammaParticle(1554100.0, 0.0008)) } },
 
         }; 
         

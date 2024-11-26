@@ -10,10 +10,10 @@ namespace RadiationModel.substances
         public override double halfLife { get; } = 2.3d;
         public override double atomicWeight { get; } = 141.94619d;
 
-        public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Gadolinium142() }, { 1.0d, new BetaParticle(1, betaPlusSpectrum) }, { 0.043d, new GammaParticle(181900.0, 0.00682) }, { 0.0027119138520000003d, new GammaParticle(7118.0, 0.17418) }, { 0.0039129818614882525d, new GammaParticle(43743.0, 0.02834) }, { 0.00701628449253766d, new GammaParticle(44481.0, 0.02787) }, { 0.0022405430071279495d, new GammaParticle(50494.0, 0.02455) }, { 0.0028208436459740884d, new GammaParticle(51040.0, 0.02429) }, { 0.0005803006388461389d, new GammaParticle(51699.0, 0.02398) } } },
-            { 0.0006d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Gadolinium141() }, { 1.0d, new ProtonParticle() } } },
+            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Gadolinium142()), new(1.0d, new BetaParticle(1, betaPlusSpectrum)), new(0.043d, new GammaParticle(181900.0, 0.00682)), new(0.0027119138520000003d, new GammaParticle(7118.0, 0.17418)), new(0.0039129818614882525d, new GammaParticle(43743.0, 0.02834)), new(0.00701628449253766d, new GammaParticle(44481.0, 0.02787)), new(0.0022405430071279495d, new GammaParticle(50494.0, 0.02455)), new(0.0028208436459740884d, new GammaParticle(51040.0, 0.02429)), new(0.0005803006388461389d, new GammaParticle(51699.0, 0.02398)) } },
+            { 0.0006d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Gadolinium141()), new(1.0d, new ProtonParticle()) } },
 
         }; 
         
