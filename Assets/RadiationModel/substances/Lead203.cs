@@ -14,7 +14,16 @@ namespace RadiationModel.substances
         {
             { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Thallium203() }, { 0.8094d, new GammaParticle(279195.2, 0.00444) }, { 0.0335d, new GammaParticle(401320.0, 0.00309) }, { 0.00754d, new GammaParticle(680515.0, 0.00182) }, { 0.348072261704804d, new GammaParticle(12148.0, 0.10206) }, { 0.2547749186122931d, new GammaParticle(70832.0, 0.0175) }, { 0.43007244870407346d, new GammaParticle(72874.0, 0.01701) }, { 0.1462626991107429d, new GammaParticle(82629.0, 0.015) }, { 0.18970272074663355d, new GammaParticle(83631.0, 0.01483) }, { 0.04344002163589065d, new GammaParticle(84866.0, 0.01461) } } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
     

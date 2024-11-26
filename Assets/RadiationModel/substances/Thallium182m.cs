@@ -12,10 +12,19 @@ namespace RadiationModel.substances
 
         public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 0.975d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Gold182() }, { 1.0d, new BetaParticle(1, 7512000.0) } } },
+            { 0.975d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Gold182() }, { 1.0d, new BetaParticle(1, betaPlusSpectrum) } } },
             { 0.05d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Gold178() }, { 1.0d, new AlphaParticle(7620002.09) } } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
     

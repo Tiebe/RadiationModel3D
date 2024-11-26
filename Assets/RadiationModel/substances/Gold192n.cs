@@ -14,7 +14,16 @@ namespace RadiationModel.substances
         {
             { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Gold192() }, { 0.0212d, new GammaParticle(31610.0, 0.03922) }, { 0.00041d, new GammaParticle(59800.0, 0.02073) }, { 0.505239d, new GammaParticle(11419.0, 0.10858) } } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
     

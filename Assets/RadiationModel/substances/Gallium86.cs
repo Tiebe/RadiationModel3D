@@ -12,11 +12,20 @@ namespace RadiationModel.substances
 
         public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts { get; } = new()
         {
-            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Germanium86() }, { 1.0d, new BetaParticle(-1, 7820000.0) }, { 0.07d, new GammaParticle(527000.0, 0.00235) } } },
-            { 0.6d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Germanium86() }, { 1.0d, new BetaParticle(-1, 7820000.0) }, { 0.07d, new GammaParticle(527000.0, 0.00235) } } },
-            { 0.2d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Germanium84() }, { 1.0d, new BetaParticle(-1, 943688103.47199) }, { 1.0d, new NeutronParticle() } } },
+            { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Germanium86() }, { 1.0d, new BetaParticle(-1, betaMinusSpectrum) }, { 0.07d, new GammaParticle(527000.0, 0.00235) } } },
+            { 0.6d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Germanium86() }, { 1.0d, new BetaParticle(-1, betaMinusSpectrum) }, { 0.07d, new GammaParticle(527000.0, 0.00235) } } },
+            { 0.2d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Germanium84() }, { 1.0d, new BetaParticle(-1, betaMinusSpectrum) }, { 1.0d, new NeutronParticle() } } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
     

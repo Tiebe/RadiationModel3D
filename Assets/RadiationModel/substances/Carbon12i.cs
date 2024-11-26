@@ -15,7 +15,16 @@ namespace RadiationModel.substances
             { 0.9590000000000001d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Carbon12() } } },
             { 0.040999999999999995d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Beryllium8() }, { 1.0d, new AlphaParticle(8763332.09) } } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
     

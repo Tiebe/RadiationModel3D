@@ -16,7 +16,16 @@ namespace RadiationModel.substances
             { 0.096d, new Dictionary<double, RadioactiveSubstance> {  } },
             { 0.025d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Rutherfordium260() } } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
     

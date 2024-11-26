@@ -75,6 +75,11 @@ public class RadiationEmitter : MonoBehaviour
                 {
                     for (var i = 0; i < particleAmount; i++)
                     {
+                        if (particle is BetaParticle betaParticle)
+                        {
+                            betaParticle.energy = Statistics.RandomBetaEnergy(betaParticle.spectrum);
+                        }
+                        
                         var origin = transform.position;
                         var direction = UnityEngine.Random.onUnitSphere;
 

@@ -16,7 +16,16 @@ namespace RadiationModel.substances
             { 0.15d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Lawrencium259() } } },
             { 0.08d, new Dictionary<double, RadioactiveSubstance> {  } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
     

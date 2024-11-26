@@ -14,7 +14,16 @@ namespace RadiationModel.substances
         {
             { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Holmium165() }, { 0.16964612939999998d, new GammaParticle(7656.0, 0.16194) }, { 0.21419843526540572d, new GammaParticle(46700.0, 0.02655) }, { 0.3814753967326905d, new GammaParticle(47547.0, 0.02608) }, { 0.12324775238246324d, new GammaParticle(53982.0, 0.02297) }, { 0.15529216800190368d, new GammaParticle(54577.0, 0.02272) }, { 0.03204441561944044d, new GammaParticle(55293.0, 0.02242) } } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
     

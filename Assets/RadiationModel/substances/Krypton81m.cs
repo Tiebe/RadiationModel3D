@@ -15,7 +15,16 @@ namespace RadiationModel.substances
             { 0.9999750000000001d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Krypton81() }, { 0.676983d, new GammaParticle(190460.0, 0.00651) }, { 0.0076340506439625d, new GammaParticle(1648.0, 0.75233) }, { 0.05102946680865877d, new GammaParticle(12596.0, 0.09843) }, { 0.09839850907955798d, new GammaParticle(12649.0, 0.09802) }, { 0.023578887547041467d, new GammaParticle(14169.0, 0.0875) }, { 0.02595563941178325d, new GammaParticle(14209.0, 0.08726) }, { 0.0023767518647417798d, new GammaParticle(14313.0, 0.08662) } } },
             { 2.5e-05d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Bromine81() }, { 5.48540238e-07d, new GammaParticle(1535.0, 0.80771) }, { 4.009306793576123e-06d, new GammaParticle(11879.0, 0.10437) }, { 7.738480589801434e-06d, new GammaParticle(11925.0, 0.10397) }, { 1.8354554554608644e-06d, new GammaParticle(13345.0, 0.09291) }, { 1.977152616622443e-06d, new GammaParticle(13377.0, 0.09268) }, { 1.4169716116157874e-07d, new GammaParticle(13469.0, 0.09205) } } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
     

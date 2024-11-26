@@ -14,7 +14,16 @@ namespace RadiationModel.substances
         {
             { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Polonium194() }, { 0.121d, new GammaParticle(209400.0, 0.00592) }, { 0.156d, new GammaParticle(248000.0, 0.005) }, { 0.061d, new GammaParticle(296800.0, 0.00418) }, { 0.865d, new GammaParticle(319300.0, 0.00388) }, { 0.10400000000000001d, new GammaParticle(340100.0, 0.00365) }, { 0.121d, new GammaParticle(358800.0, 0.00346) }, { 0.10400000000000001d, new GammaParticle(362200.0, 0.00342) }, { 0.69d, new GammaParticle(366100.0, 0.00339) }, { 0.355d, new GammaParticle(373300.0, 0.00332) }, { 0.0208d, new GammaParticle(421000.0, 0.00294) }, { 0.069d, new GammaParticle(434100.0, 0.00286) }, { 0.061d, new GammaParticle(438400.0, 0.00283) }, { 0.061d, new GammaParticle(453000.0, 0.00274) }, { 0.225d, new GammaParticle(458800.0, 0.0027) }, { 0.64d, new GammaParticle(461600.0, 0.00269) }, { 0.052000000000000005d, new GammaParticle(493600.0, 0.00251) }, { 0.052000000000000005d, new GammaParticle(524900.0, 0.00236) }, { 0.303d, new GammaParticle(545000.0, 0.00227) }, { 0.019d, new GammaParticle(622000.0, 0.00199) }, { 0.043d, new GammaParticle(757600.0, 0.00164) }, { 0.061d, new GammaParticle(802000.0, 0.00155) }, { 0.138d, new GammaParticle(918500.0, 0.00135) }, { 0.027000000000000003d, new GammaParticle(958700.0, 0.00129) }, { 0.272d, new GammaParticle(13292.0, 0.09328) }, { 0.172d, new GammaParticle(76862.0, 0.01613) }, { 0.287d, new GammaParticle(79290.0, 0.01564) }, { 0.099d, new GammaParticle(89837.0, 0.0138) }, { 0.129d, new GammaParticle(90941.0, 0.01363) }, { 0.030699999999999998d, new GammaParticle(92315.0, 0.01343) } } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
     

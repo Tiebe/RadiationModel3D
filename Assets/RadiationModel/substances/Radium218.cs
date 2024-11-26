@@ -14,7 +14,16 @@ namespace RadiationModel.substances
         {
             { 1.0d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Radon214() }, { 1.0d, new AlphaParticle(9563002.09) }, { 0.00121d, new GammaParticle(695000.0, 0.00178) }, { 6.903236824e-06d, new GammaParticle(14088.0, 0.08801) }, { 4.278528001319789e-06d, new GammaParticle(81070.0, 0.01529) }, { 7.057947874166592e-06d, new GammaParticle(83789.0, 0.0148) }, { 2.447648200389105e-06d, new GammaParticle(94878.0, 0.01307) }, { 3.230895624513619e-06d, new GammaParticle(96054.0, 0.01291) }, { 7.832474241245136e-07d, new GammaParticle(97530.0, 0.01271) } } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
     

@@ -257,9 +257,15 @@ class Isotope:
         self.elementNumber = elementNumber
         self.massKeV = massKeV
         self.simple_name = simple_name
+        self.betaPlusSpectrum = []
+        self.betaMinusSpectrum = []
 
     def setDecayProducts(self, products):
         self.decayProducts = products
+    def setBetaPlusSpectrum(self, spectrum):
+        self.betaPlusSpectrum = spectrum
+    def setBetaMinusSpectrum(self, spectrum):
+        self.betaMinusSpectrum = spectrum
 
 def atomicMassToKeV(atomicMass):
     return atomicMass * 931494.103472
@@ -305,7 +311,7 @@ def get_all_basic_isotope_info():
 def do_iaea_request(query: str):
     response = requests.get("https://nds.iaea.org/relnsd/v1/data?" + query)
     csv_response = csv.reader(response.text.splitlines(), delimiter=',')
-    return list(csv_response)[1:]
+    return list(filter(lambda x: len(x) != 0, list(csv_response)[1:]))
 
 level_cache = {}
 
@@ -327,6 +333,23 @@ def get_gamma_emissions(isotope: str, energy: float, decay_type: str):
         gamma_emission_cache[isotope] = all_emissions
     return filter(lambda x: len(x) != 0 and x[17] != '' and float(x[17]) == energy and x[26] == decay_type, all_emissions)
 
+beta_plus_cache = {}
+
+def get_beta_plus_spectrum(isotope: str, idx: int):
+    if isotope + str(idx) in beta_plus_cache:
+        return beta_plus_cache[isotope + str(idx)]
+    spectrum = do_iaea_request(f"fields=bin_beta&nuclides={isotope}&rad_types=bp&metastable_seqno={idx}")
+    beta_plus_cache[isotope + str(idx)] = spectrum
+    return spectrum
+
+beta_minus_cache = {}
+
+def get_beta_minus_spectrum(isotope: str, idx: int):
+    if isotope + str(idx) in beta_minus_cache:
+        return beta_minus_cache[isotope + str(idx)]
+    spectrum = do_iaea_request(f"fields=bin_beta&nuclides={isotope}&rad_types=bm&metastable_seqno={idx}")
+    beta_minus_cache[isotope + str(idx)] = spectrum
+    return spectrum
 def find_level(levels, value, uncertainty):
     target_min = value - uncertainty
     target_max = value + uncertainty
@@ -513,6 +536,8 @@ def get_all_isotopes() -> list[Isotope]:
             half_life = 0.0
         element = atomic_numbers[atomicNumber]
 
+        idx = int(isomer_info[3])
+
         isotope = Isotope(element + str(mass) + s, float(half_life), keVToAtomicMass(massKeV), mass, atomicNumber, massKeV, base_name)
 
         decays = []
@@ -527,6 +552,8 @@ def get_all_isotopes() -> list[Isotope]:
             decays.append([decay_chance, get_decay_results(isotope, decay_type, isomer_info)])
 
         isotope.setDecayProducts(decays)
+        isotope.setBetaPlusSpectrum(get_beta_plus_spectrum(base_name, idx))
+        isotope.setBetaMinusSpectrum(get_beta_minus_spectrum(base_name, idx))
         isotopes.append(isotope)
     return isotopes
 
@@ -549,17 +576,13 @@ def getDecayProductString(isotopes, isotope, decayProduct, decayProducts):
         return f"{{ {decayProduct["chance"]}d, new AlphaParticle({round(originalEnergy - finalEnergy, 5) * 1000}) }}"
     if decayProduct["type"] == "B-" or decayProduct["type"] == "B+":
         charge = -1 if decayProduct["type"] == "B-" else 1
-        originalEnergy = isotope.massKeV
-        finalEnergy = 0
-        for product in decayProducts:
-            if product["type"] == "substance":
-                newIsotope = getIsotopeFromMassElementInfo(isotopes, product["mass"], product["element"], product.get("info", ""))
-                if newIsotope is not None:
-                    finalEnergy += newIsotope.massKeV
-                else:
-                    print(f"Could not find isotope {product['mass']} {product['element']} {product.get('info', '')}")
 
-        return f"{{ {decayProduct["chance"]}d, new BetaParticle({charge}, {round((originalEnergy - finalEnergy)/2 * 1000, 5)}) }}"
+        if decayProduct["type"] == "B-":
+            spectrum = "betaMinusSpectrum"
+        else:
+            spectrum = "betaPlusSpectrum"
+
+        return f"{{ {decayProduct["chance"]}d, new BetaParticle({charge}, {spectrum}) }}"
     if decayProduct["type"] == "gamma":
         energy = decayProduct["energy"]
 
@@ -601,6 +624,16 @@ def generateFile(isotopes, isotope: Isotope):
         decayProducts += f"""            {{ {str(decayProduct[0])}d, new Dictionary<double, RadioactiveSubstance> {{ {', '.join(filter(lambda x: x != "", [getDecayProductString(isotopes, isotope, product, decayProduct[1]) for product in decayProduct[1]]))} }} }},
 """
 
+    betaPlusSpectrum = ""
+    for spectrum in isotope.betaPlusSpectrum:
+        betaPlusSpectrum += f"""            {{ {str(spectrum[7])}d, {str(spectrum[8])}d }},
+"""
+
+    betaMinusSpectrum = ""
+    for spectrum in isotope.betaMinusSpectrum:
+        betaMinusSpectrum += f"""            {{ {str(spectrum[7])}d, {str(spectrum[8])}d }},
+"""
+
     return f"""using System;
 using System.Collections.Generic;
 using RadiationModel.constants;
@@ -616,7 +649,16 @@ namespace RadiationModel.substances
         public override Dictionary<double, Dictionary<double, RadioactiveSubstance>> decayProducts {{ get; }} = new()
         {{
 {decayProducts}
-        }};
+        }}; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum {{ get; }} = new()
+        {{
+{betaPlusSpectrum}
+        }}; 
+        public static Dictionary<double, double> betaMinusSpectrum {{ get; }} = new()
+        {{
+{betaMinusSpectrum}
+        }}; 
     }}
 }}
     """
@@ -674,9 +716,17 @@ if __name__ == "__main__":
             level_cache = pickle.load(fi)
         with open("gamma_emission_cache.pk", 'rb+') as fi:
             gamma_emission_cache = pickle.load(fi)
+        with open("beta_plus_cache.pk", 'rb+') as fi:
+            beta_plus_cache = pickle.load(fi)
+        with open("beta_minus_cache.pk", 'rb+') as fi:
+            beta_minus_cache = pickle.load(fi)
         main()
     finally:
         with open("level_cache.pk", 'wb+') as fi:
             pickle.dump(level_cache, fi)
         with open("gamma_emission_cache.pk", 'wb+') as fi:
             pickle.dump(gamma_emission_cache, fi)
+        with open("beta_plus_cache.pk", 'wb+') as fi:
+            pickle.dump(beta_plus_cache, fi)
+        with open("beta_minus_cache.pk", 'wb+') as fi:
+            pickle.dump(beta_minus_cache, fi)

@@ -42,17 +42,84 @@ namespace RadiationModel.statistics
                 var productAmount = (long)(decayed * probability);
                 foreach (var product in substanceProducts)
                 {
-                    if (!products.ContainsKey(product))
-                    {
-                        products.Add(product, 0);
-                    }
-                    products[product] += productAmount;
+                    products.TryAdd(product.Value, 0);
+                    products[product.Value] += (long) (productAmount * product.Key);
                 }
             }
 
             products[substance] = remainingItems;
 
             return products;
+        }
+
+        public static double RandomBetaEnergy(Dictionary<double, double> spectrum)
+        {
+            // Initialize random number generator
+            var random = new Random();
+
+            // Extract keys (energies) and values (dN/dE)
+            var binEnergies = spectrum.Keys.ToList();
+            var dnDeValues = spectrum.Values.ToList();
+
+            // Calculate probabilities by integrating within each bin
+            var binProbabilities = new List<double>();
+            for (int i = 0; i < dnDeValues.Count - 1; i++)
+            {
+                // Approximate the area (trapezoidal integration)
+                double binWidth = binEnergies[i + 1] - binEnergies[i];
+                double binArea = 0.5 * (dnDeValues[i] + dnDeValues[i + 1]) * binWidth;
+                binProbabilities.Add(binArea);
+            }
+
+            // Normalize the probabilities
+            double totalProbability = binProbabilities.Sum();
+            for (int i = 0; i < binProbabilities.Count; i++)
+            {
+                binProbabilities[i] /= totalProbability;
+            }
+            
+            // Build the cumulative distribution function (CDF)
+            List<double> cdf = new List<double>();
+            double cumulative = 0.0;
+            foreach (var prob in binProbabilities)
+            {
+                cumulative += prob;
+                cdf.Add(cumulative);
+            }
+
+            // Generate a random number in [0, 1]
+            double r = random.NextDouble();
+
+            // Find the corresponding bin
+            int binIndex = 0;
+            for (int i = 0; i < cdf.Count; i++)
+            {
+                if (r <= cdf[i])
+                {
+                    binIndex = i;
+                    break;
+                }
+            }
+
+            // Interpolate within the bin
+            double energyLow = binEnergies[binIndex];
+            double energyHigh = binEnergies[binIndex + 1];
+            double dnDeLow = binProbabilities[binIndex];
+            double dnDeHigh = binProbabilities[Math.Min(binIndex + 1, binProbabilities.Count - 1)];
+
+            // Generate a random energy within the bin
+            double binSize = energyHigh - energyLow;
+            while (true)
+            {
+                double randomEnergy = energyLow + random.NextDouble() * binSize;
+                double interpolatedDnDe = dnDeLow + (dnDeHigh - dnDeLow) * (randomEnergy - energyLow) / binSize;
+
+                // Accept or reject based on interpolated dN/dE
+                if (random.NextDouble() <= interpolatedDnDe)
+                {
+                    return randomEnergy;
+                }
+            }
         }
     }
 }

@@ -15,7 +15,16 @@ namespace RadiationModel.substances
             { 0.999896d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Barium133() }, { 0.014199999999999999d, new GammaParticle(12327.0, 0.10058) }, { 0.177d, new GammaParticle(275925.0, 0.00449) }, { 3.1799999999999996e-06d, new GammaParticle(288000.0, 0.00431) }, { 0.166d, new GammaParticle(4966.0, 0.24967) }, { 0.156d, new GammaParticle(31816.0, 0.03897) }, { 0.28800000000000003d, new GammaParticle(32193.0, 0.03851) }, { 0.085d, new GammaParticle(36482.0, 0.03399) }, { 0.106d, new GammaParticle(36827.0, 0.03367) }, { 0.0213d, new GammaParticle(37255.0, 0.03328) } } },
             { 0.000104d, new Dictionary<double, RadioactiveSubstance> { { 1.0d, new Cesium133() }, { 0.000103d, new GammaParticle(632590.0, 0.00196) }, { 9.3742008152e-06d, new GammaParticle(4749.0, 0.26107) }, { 2.0976077261936436e-05d, new GammaParticle(30625.0, 0.04048) }, { 3.875129736178909e-05d, new GammaParticle(30973.0, 0.04003) }, { 1.1321314257455369e-05d, new GammaParticle(35089.0, 0.03533) }, { 1.4083714936274477e-05d, new GammaParticle(35414.0, 0.03501) }, { 2.7624006788191106e-06d, new GammaParticle(35818.0, 0.03462) } } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
     
