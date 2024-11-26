@@ -626,12 +626,12 @@ def generateFile(isotopes, isotope: Isotope):
 
     betaPlusSpectrum = ""
     for spectrum in isotope.betaPlusSpectrum:
-        betaPlusSpectrum += f"""            {{ {str(spectrum[7] * 1000)}d, {str(spectrum[8])}d }},
+        betaPlusSpectrum += f"""            {{ {str(float(spectrum[7]) * 1000)}d, {str(spectrum[8])}d }},
 """
 
     betaMinusSpectrum = ""
     for spectrum in isotope.betaMinusSpectrum:
-        betaMinusSpectrum += f"""            {{ {str(spectrum[7] * 1000)}d, {str(spectrum[8])}d }},
+        betaMinusSpectrum += f"""            {{ {str(float(spectrum[7]) * 1000)}d, {str(spectrum[8])}d }},
 """
 
     return f"""using System;
