@@ -7,18 +7,25 @@ namespace RadiationModel.substances
     public class Mendelevium260 : RadioactiveSubstance
     {
         public override string name { get; } = "Mendelevium260";
-        public override double halfLife { get; } = 2401920.0d;
+        public override double halfLife { get; } = 2747520.0d;
         public override double atomicWeight { get; } = 260.10365d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> {  } },
-            { 0.05d, new List<RadioactiveSubstance> { new AlphaParticle(7957002.09), new Einsteinium256() } },
-            { 0.05d, new List<RadioactiveSubstance> { new Fermium260() } },
-            { 0.035d, new List<RadioactiveSubstance> { new BetaParticle(-1, 940000.0), new Nobelium260() } },
+            { 0.42d, new List<KeyValuePair<double, RadioactiveSubstance>> {  } },
+            { 0.25d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Einsteinium256()), new(1.0d, new AlphaParticle(7957002.09)) } },
+            { 0.23d, new List<KeyValuePair<double, RadioactiveSubstance>> {  } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
-    
     

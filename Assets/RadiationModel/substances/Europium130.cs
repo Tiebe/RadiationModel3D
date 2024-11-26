@@ -7,15 +7,23 @@ namespace RadiationModel.substances
     public class Europium130 : RadioactiveSubstance
     {
         public override string name { get; } = "Europium130";
-        public override double halfLife { get; } = 0.001d;
+        public override double halfLife { get; } = 0.0009d;
         public override double atomicWeight { get; } = 129.96403d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new ProtonParticle(), new Samarium129() } },
+            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Samarium129()), new(1.0d, new ProtonParticle()) } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
-    
     

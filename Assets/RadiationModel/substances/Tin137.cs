@@ -7,15 +7,24 @@ namespace RadiationModel.substances
     public class Tin137 : RadioactiveSubstance
     {
         public override string name { get; } = "Tin137";
-        public override double halfLife { get; } = 0.249d;
+        public override double halfLife { get; } = 0.19d;
         public override double atomicWeight { get; } = 136.94616d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(-1, 9910000.0), new Antimony137() } },
+            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Antimony137()), new(1.0d, new BetaParticle(-1, betaMinusSpectrum)) } },
+            { 0.58d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Antimony137()), new(1.0d, new BetaParticle(-1, betaMinusSpectrum)) } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
-    
     

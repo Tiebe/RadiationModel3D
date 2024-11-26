@@ -559,7 +559,7 @@ def getDecayProductString(isotopes, isotope, decayProduct, decayProducts):
                 else:
                     print(f"Could not find isotope {product['mass']} {product['element']} {product.get('info', '')}")
 
-        return f"new BetaParticle({charge}, {round(originalEnergy - finalEnergy, 5) * 1000})"
+        return f"new BetaParticle({charge}, {round((originalEnergy - finalEnergy)/2, 5) * 1000})"
     if decayProduct["type"] == "gamma":
         originalEnergy = isotope.massKeV
         finalEnergy = 0
@@ -580,7 +580,7 @@ def getDecayProductString(isotopes, isotope, decayProduct, decayProducts):
             leftOverEnergyEV = 0.00000001
 
         wavelength = round(((planckEV * c) / leftOverEnergyEV) * 10**9, 5)
-        return f"new GammaParticle({round(leftOverEnergyEV, 5), wavelength})"
+        return f"new GammaParticle({round(leftOverEnergyEV, 5)}, {wavelength})"
     if decayProduct["type"] == "proton":
         return "new ProtonParticle()"
     if decayProduct["type"] == "neutron":

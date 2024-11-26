@@ -7,15 +7,24 @@ namespace RadiationModel.substances
     public class Yttrium102m : RadioactiveSubstance
     {
         public override string name { get; } = "Yttrium102m";
-        public override double halfLife { get; } = 0.3d;
+        public override double halfLife { get; } = 0.36d;
         public override double atomicWeight { get; } = 101.93444d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(-1, 10511000.0), new Zirconium102() } },
+            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Zirconium102()), new(1.0d, new BetaParticle(-1, betaMinusSpectrum)) } },
+            { 0.049d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Zirconium102()), new(1.0d, new BetaParticle(-1, betaMinusSpectrum)) } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
-    
     

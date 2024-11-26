@@ -7,16 +7,22 @@ namespace RadiationModel.substances
     public class Einsteinium247 : RadioactiveSubstance
     {
         public override string name { get; } = "Einsteinium247";
-        public override double halfLife { get; } = 273.0d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 247.07362d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 0.93d, new List<RadioactiveSubstance> { new BetaParticle(1, 2469000.0), new Californium247() } },
-            { 0.07d, new List<RadioactiveSubstance> { new AlphaParticle(8485002.09), new Berkelium243() } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
-    
     

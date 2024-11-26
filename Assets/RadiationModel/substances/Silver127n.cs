@@ -7,16 +7,22 @@ namespace RadiationModel.substances
     public class Silver127n : RadioactiveSubstance
     {
         public override string name { get; } = "Silver127n";
-        public override double halfLife { get; } = 0.0675d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 126.93912d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 0.912d, new List<RadioactiveSubstance> { new BetaParticle(-1, 12031000.0), new Cadmium127() } },
-            { 0.08800000000000001d, new List<RadioactiveSubstance> { new GammaParticle((1940000.0, 0.00064)), new Silver127() } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
-    
     

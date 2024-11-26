@@ -7,16 +7,24 @@ namespace RadiationModel.substances
     public class Francium204n : RadioactiveSubstance
     {
         public override string name { get; } = "Francium204n";
-        public override double halfLife { get; } = 1.65d;
+        public override double halfLife { get; } = 0.8d;
         public override double atomicWeight { get; } = 204.001d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 0.53d, new List<RadioactiveSubstance> { new AlphaParticle(8519002.09), new Astatine200() } },
-            { 0.47d, new List<RadioactiveSubstance> { new GammaParticle((327000.0, 0.00379)), new Francium204() } },
+            { 0.74d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Astatine200()), new(1.0d, new AlphaParticle(8519002.09)) } },
+            { 0.26d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Astatine204()), new(1.0d, new BetaParticle(1, betaPlusSpectrum)) } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
-    
     

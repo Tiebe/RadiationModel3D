@@ -7,16 +7,24 @@ namespace RadiationModel.substances
     public class Tantalum159 : RadioactiveSubstance
     {
         public override string name { get; } = "Tantalum159";
-        public override double halfLife { get; } = 1.04d;
+        public override double halfLife { get; } = 0.83d;
         public override double atomicWeight { get; } = 158.96303d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 0.66d, new List<RadioactiveSubstance> { new BetaParticle(1, 8414000.0), new Hafnium159() } },
-            { 0.34d, new List<RadioactiveSubstance> { new AlphaParticle(6703002.09), new Lutetium155() } },
+            { 0.66d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Lutetium159()), new(1.0d, new BetaParticle(1, betaPlusSpectrum)) } },
+            { 0.34d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Lutetium155()), new(1.0d, new AlphaParticle(6703002.09)) } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
-    
     

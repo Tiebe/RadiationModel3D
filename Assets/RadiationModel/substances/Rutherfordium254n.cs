@@ -7,16 +7,22 @@ namespace RadiationModel.substances
     public class Rutherfordium254n : RadioactiveSubstance
     {
         public override string name { get; } = "Rutherfordium254n";
-        public override double halfLife { get; } = 0.00025d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 254.1022d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new GammaParticle((2000000.0, 0.00062)), new Rutherfordium254() } },
-            { 0.4d, new List<RadioactiveSubstance> {  } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
-    
     

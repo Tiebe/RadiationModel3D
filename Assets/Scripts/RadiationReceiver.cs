@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using RadiationModel;
 using RadiationModel.substances;
 using UnityEngine;
 

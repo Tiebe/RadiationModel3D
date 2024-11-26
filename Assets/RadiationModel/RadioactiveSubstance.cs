@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace RadiationModel.substances
+namespace RadiationModel
 {
 
     /**
@@ -36,6 +36,6 @@ namespace RadiationModel.substances
          * Key: the probability of decaying into this product
          * Value: the list of substances that the substance decays into
          */
-        public abstract Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; }
+        public abstract Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; }
     }
 }

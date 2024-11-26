@@ -7,17 +7,25 @@ namespace RadiationModel.substances
     public class Curium234 : RadioactiveSubstance
     {
         public override string name { get; } = "Curium234";
-        public override double halfLife { get; } = 52.0d;
+        public override double halfLife { get; } = 51.0d;
         public override double atomicWeight { get; } = 234.05016d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 0.71d, new List<RadioactiveSubstance> { new BetaParticle(1, 2262000.0), new Americium234() } },
-            { 0.27d, new List<RadioactiveSubstance> { new AlphaParticle(8387002.09), new Plutonium230() } },
-            { 0.02d, new List<RadioactiveSubstance> {  } },
+            { 0.4d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Plutonium230()), new(1.0d, new AlphaParticle(8387002.09)) } },
+            { 0.4d, new List<KeyValuePair<double, RadioactiveSubstance>> {  } },
+            { 0.2d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Plutonium234()), new(1.0d, new BetaParticle(1, betaPlusSpectrum)) } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
-    
     

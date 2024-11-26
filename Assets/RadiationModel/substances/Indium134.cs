@@ -7,15 +7,24 @@ namespace RadiationModel.substances
     public class Indium134 : RadioactiveSubstance
     {
         public override string name { get; } = "Indium134";
-        public override double halfLife { get; } = 0.136d;
+        public override double halfLife { get; } = 0.14d;
         public override double atomicWeight { get; } = 133.94421d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(-1, 14464000.0), new Tin134() } },
+            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Tin134()), new(1.0d, new BetaParticle(-1, betaMinusSpectrum)) } },
+            { 0.65d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Tin134()), new(1.0d, new BetaParticle(-1, betaMinusSpectrum)) } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
-    
     

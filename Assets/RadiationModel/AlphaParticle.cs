@@ -16,6 +16,6 @@ namespace RadiationModel.substances
         
         public double speed => Math.Sqrt(2 * energy * 1.602176634e-19 / (atomicWeight * 1.66053906892e-27));
         
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new();
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new();
     }
 }

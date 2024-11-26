@@ -7,15 +7,23 @@ namespace RadiationModel.substances
     public class Gadolinium167 : RadioactiveSubstance
     {
         public override string name { get; } = "Gadolinium167";
-        public override double halfLife { get; } = 4.2d;
+        public override double halfLife { get; } = 4.26d;
         public override double atomicWeight { get; } = 166.94549d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(-1, 5107100.0), new Terbium167() } },
+            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Terbium167()), new(1.0d, new BetaParticle(-1, betaMinusSpectrum)) } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
-    
     

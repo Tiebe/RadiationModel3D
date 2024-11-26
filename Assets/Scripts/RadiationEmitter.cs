@@ -14,6 +14,7 @@ public class RadiationEmitter : MonoBehaviour
     public string radioactiveSubstanceName;
     public bool emitting;
     public bool debugRender = false;
+    public bool debugRenderAll = false;
     [HideInInspector]
     public bool resetter = false;
 
@@ -74,8 +75,13 @@ public class RadiationEmitter : MonoBehaviour
                 {
                     for (var i = 0; i < particleAmount; i++)
                     {
+                        if (particle is BetaParticle betaParticle)
+                        {
+                            betaParticle.energy = Statistics.RandomBetaEnergy(betaParticle.spectrum);
+                        }
+                        
                         var origin = transform.position;
-                        var direction = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f));
+                        var direction = UnityEngine.Random.onUnitSphere;
 
                         //var direction = new Vector3(0, 0, 1);
                         var ray = new Ray(origin, direction);
@@ -84,14 +90,14 @@ public class RadiationEmitter : MonoBehaviour
                         // sort hits by distance
                         hits.Sort((hit1, hit2) => hit1.distance.CompareTo(hit2.distance));
                         
-                        // renders green lines for debugging
-                        if (debugRender)
-                        {
-                            Debug.DrawRay(transform.position, direction, Color.green, 0.1f);
-                        }
-                        
                         if (hits.Count == 0)
                         {
+                            // renders green lines for debugging
+                            if (debugRenderAll)
+                            {
+                                Debug.DrawRay(transform.position, direction * 50, Color.green, 0.1f);
+                            }
+                            
                             continue;
                         }
                         
@@ -118,6 +124,7 @@ public class RadiationEmitter : MonoBehaviour
                         }
 
                         var done = false;
+                        var hasHitMaterial = false;
                         
                         foreach (var (hitGameObject, points) in hitPoints)
                         {
@@ -132,15 +139,18 @@ public class RadiationEmitter : MonoBehaviour
                             var material = RadiationModelMaterial.GetRadiationModelMaterial(hitGameObject);
                             if (material is not null)
                             {
+                                hasHitMaterial = true;
                                 if (particle is GammaParticle gammaParticle)
                                 {
-                                    var attenuation = Math.Exp(-material.MassAttenuationCoefficient * distance);
+                                    var massAttenuationCoefficient = material.material.GetClosestMAC(gammaParticle.energy);
+                                    
+                                    var attenuation = Math.Exp(-massAttenuationCoefficient * distance);
                                     var absorbed = 1 - attenuation;
                                     if (UnityEngine.Random.value < absorbed)
                                     {
                                         if (debugRender)
                                         {
-                                            Debug.DrawRay(transform.position, direction, Color.red, 0.2f);
+                                            Debug.DrawRay(transform.position, direction * distance, Color.red, 0.2f);
                                         }
                                         
                                         // kill this loop, which will cause it to continue in the parent loop
@@ -150,7 +160,25 @@ public class RadiationEmitter : MonoBehaviour
                                 }
                                 else if (particle is BetaParticle electronParticle)
                                 {
-                                    // todo: implement electron attenuation
+                                    var stoppingPower = material.material.GetClosestMSP(electronParticle.energy);
+                                    // mass thickness in g/cm^2
+                                    var massThickness = material.material.density * distance;
+                                    
+                                    var energyLost = stoppingPower * massThickness;
+                                    electronParticle.energy -= energyLost;
+                                    
+                                    // if electron has lost all energy, remove it
+                                    if (electronParticle.energy <= 0)
+                                    {
+                                        if (debugRender)
+                                        {
+                                            Debug.DrawRay(transform.position, direction * distance, Color.red, 0.2f);
+                                        }
+                                        
+                                        // kill this loop, which will cause it to continue in the parent loop
+                                        done = true;
+                                        break;
+                                    }
                                 }
                             }
 
@@ -166,6 +194,17 @@ public class RadiationEmitter : MonoBehaviour
                         if (!done && RadiationReceiver.radiationReceivers.TryGetValue(lastHit.collider.gameObject, out var receiverLast))
                         {
                             receiverLast.RadiationHit(particle);
+                            if (debugRender)
+                            {
+                                var distanceSinceStart = Vector3.Distance(origin, lastHit.point);
+                                Debug.DrawRay(transform.position, direction * distanceSinceStart, Color.blue, 0.2f);
+                            }
+                        } else if (debugRender && !done && hasHitMaterial)
+                        {
+                            Debug.DrawRay(transform.position, direction * 50, Color.cyan, 0.2f);
+                        } else if (debugRenderAll && !done)
+                        {
+                            Debug.DrawRay(transform.position, direction * 50, Color.green, 0.2f);
                         }
                     }
                 }

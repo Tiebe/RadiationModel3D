@@ -7,16 +7,22 @@ namespace RadiationModel.substances
     public class Protactinium234m : RadioactiveSubstance
     {
         public override string name { get; } = "Protactinium234m";
-        public override double halfLife { get; } = 69.54d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 234.04339d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(-1, 2272900.0), new Uranium234() } },
-            { 0.0016d, new List<RadioactiveSubstance> { new GammaParticle((78900.00001, 0.01571)), new Protactinium234() } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
-    
     

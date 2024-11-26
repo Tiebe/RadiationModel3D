@@ -7,15 +7,24 @@ namespace RadiationModel.substances
     public class Gadolinium139 : RadioactiveSubstance
     {
         public override string name { get; } = "Gadolinium139";
-        public override double halfLife { get; } = 5.7d;
+        public override double halfLife { get; } = 5.8d;
         public override double atomicWeight { get; } = 138.93813d;
 
-        public override Dictionary<double, List<RadioactiveSubstance>> decayProducts { get; } = new()
+        public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<RadioactiveSubstance> { new BetaParticle(1, 7768000.0), new Europium139() } },
+            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Samarium139()), new(1.0d, new BetaParticle(1, betaPlusSpectrum)) } },
+            { 0.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Samarium138()), new(1.0d, new ProtonParticle()) } },
 
-        };
+        }; 
+        
+        public static Dictionary<double, double> betaPlusSpectrum { get; } = new()
+        {
+
+        }; 
+        public static Dictionary<double, double> betaMinusSpectrum { get; } = new()
+        {
+
+        }; 
     }
 }
-    
     
