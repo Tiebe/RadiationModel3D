@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using MathNet.Numerics.Distributions;
 using MathNet.Numerics.Random;
-using RadiationModel.substances;
 
 namespace RadiationModel.statistics
 {

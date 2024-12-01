@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using MathNet.Numerics;
+using RadiationModel;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public abstract class Manager : MonoBehaviour
 {
@@ -44,6 +41,8 @@ public abstract class Manager : MonoBehaviour
         }
 
         Time.timeScale = timeScale;
+        
+        StartOverride();
     }
 
     protected abstract void StartOverride();
@@ -56,6 +55,11 @@ public abstract class Manager : MonoBehaviour
         }
         
         RunExperiment();
+    }
+    
+    public void OnHit(RadioactiveSubstance particle)
+    {
+        hits++;
     }
     
     protected abstract void RunExperiment();

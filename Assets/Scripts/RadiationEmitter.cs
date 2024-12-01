@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using RadiationModel;
 using RadiationModel.statistics;
-using RadiationModel.substances;
 using UnityEngine;
 using UnityEngine.Serialization;
 
