@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using RadiationModel.constants;
 
 namespace RadiationModel.substances
 {

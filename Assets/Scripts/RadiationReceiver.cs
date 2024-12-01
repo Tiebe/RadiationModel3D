@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using RadiationModel;
-using RadiationModel.substances;
 using UnityEngine;
 
 public abstract class RadiationReceiver : MonoBehaviour

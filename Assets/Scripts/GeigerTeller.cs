@@ -1,9 +1,6 @@
-﻿using RadiationModel;
-using RadiationModel.substances;
-using TMPro;
-using Unity.VisualScripting;
+﻿using System.Linq;
+using RadiationModel;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GeigerTeller : RadiationReceiver
 {
@@ -16,19 +13,19 @@ public class GeigerTeller : RadiationReceiver
     {
         if (manager == null)
         {
-            manager = GameObject.FindWithTag("Manager").GetComponent<Manager>();
+            manager = GameObject.FindWithTag("Manager").GetComponents<Manager>().First(m => m.enabled);
         }
     }
+    
 
     public override void RadiationHit(RadioactiveSubstance particle)
     {
-        if (particle is GammaParticle && detectGamma)
+        switch (particle)
         {
-            manager.hits++;
-        }
-        else if ((particle is BetaParticle) && detectBeta)
-        {
-            manager.hits++;
+            case GammaParticle when detectGamma:
+            case BetaParticle when detectBeta:
+                manager.OnHit(particle);
+                break;
         }
     }
 }

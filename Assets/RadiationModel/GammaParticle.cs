@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using RadiationModel.substances;
 
 namespace RadiationModel
 {

@@ -1,8 +1,5 @@
-using System;
-using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 namespace Unity.VRTemplate
 {
