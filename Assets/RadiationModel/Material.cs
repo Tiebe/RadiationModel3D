@@ -8,6 +8,11 @@ namespace RadiationModel
         public abstract double density { get; }
         public abstract double atomicWeight { get; }
 
+        /**
+         * The mass attenuation coefficients of the material.
+         * Key: the energy of the gamma particle in eV
+         * Value: the mass attenuation coefficient in cm^2/g
+         */
         protected abstract Dictionary<double, double> massAttenuationCoefficients { get; }
         protected abstract Dictionary<double, double> massStoppingPowers { get; }
         
