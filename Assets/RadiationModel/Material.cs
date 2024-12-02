@@ -5,11 +5,11 @@ namespace RadiationModel
     public abstract class Material
     {
         public abstract string name { get; }
-        public abstract double density { get; }
-        public abstract double atomicWeight { get; }
+        public abstract double density { get; } // Kg/m^3
+        public abstract double atomicWeight { get; } // useless (just like me frfr)
 
-        protected abstract Dictionary<double, double> massAttenuationCoefficients { get; }
-        protected abstract Dictionary<double, double> massStoppingPowers { get; }
+        protected abstract Dictionary<double, double> massAttenuationCoefficients { get; } // { ev, cm^2/g }
+        protected abstract Dictionary<double, double> massStoppingPowers { get; } // { eV, cm^2/g }
         
         public double GetClosestMAC(double energy)
         {
