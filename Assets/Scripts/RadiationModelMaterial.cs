@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using RadiationModel;
 using UnityEngine;
 using Material = RadiationModel.Material;
 
 public class RadiationModelMaterial : MonoBehaviour
 {
-    private static readonly Dictionary<GameObject, RadiationModelMaterial> radiationModelMaterials = new();
 
-    public double MassAttenuationCoefficient;
     public string materialString;
 
     [HideInInspector]
+    public static Dictionary<GameObject, RadiationModelMaterial> radiationModelMaterials = new();
     public Material material;
     
     
@@ -19,11 +19,18 @@ public class RadiationModelMaterial : MonoBehaviour
         radiationModelMaterials.TryGetValue(gameObject, out var radiationModelMaterial);
         return radiationModelMaterial;
     }
-    
-    private void Start()
+
+    public void ResetMaterial(string String = null)
     {
+        radiationModelMaterials.Clear();
+        if (String != null) materialString = String;
         material = Materials.GetMaterialByName(materialString);
         radiationModelMaterials.Add(gameObject, this);
+    }
+
+    private void Start()
+    {
+        ResetMaterial();
     }
         
 }

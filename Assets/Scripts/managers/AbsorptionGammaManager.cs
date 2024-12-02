@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using MathNet.Numerics;
 using UnityEngine;
 
 namespace managers
@@ -30,7 +31,10 @@ namespace managers
 
             counter.text = hits.ToString();
 
-            absorber.localScale = new Vector3(thicknesses[iteration / 3] * 0.01f, 0.15f, 0.15f);
+            if (absorber.localScale.x.Round(2) != thicknesses[iteration / 3].Round(2))
+            {
+                absorber.localScale = new Vector3(thicknesses[iteration / 3] * 0.01f, 0.15f, 0.15f);
+            }
 
             if (timer > 0)
             {
@@ -39,10 +43,9 @@ namespace managers
             }
 
             sb.AppendLine(thicknesses[iteration / 3].ToString() + "," + hits.ToString());
-            Debug.Log(thicknesses[iteration / 3].ToString() + "," + hits.ToString() + ", " + iteration);
             hits = 0;
             timer += 10f;
-            iteration += 1;
+            iteration++;
 
             if (iteration >= thicknesses.Length * 3)
             {

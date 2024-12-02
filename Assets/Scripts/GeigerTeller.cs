@@ -13,7 +13,7 @@ public class GeigerTeller : RadiationReceiver
     {
         if (manager == null)
         {
-            manager = GameObject.FindWithTag("Manager").GetComponents<Manager>().First(m => m.enabled);
+            manager = GameObject.FindGameObjectsWithTag("Manager").Select(go => go.GetComponent<Manager>()).First(m => m.enabled);
         }
     }
     
