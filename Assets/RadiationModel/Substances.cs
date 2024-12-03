@@ -1,11 +1,14 @@
+using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using RadiationModel.substances;
 
 namespace RadiationModel
 {
     // list of all radioactive substances names with their respective class
     public static class Substances
     {
-        private static readonly Dictionary<string, Type> substances = new()
+        public static readonly Dictionary<string, Type> substances = new()
         {
             { "AlphaParticle", typeof(AlphaParticle) },
             { "BetaParticle", typeof(BetaParticle) },

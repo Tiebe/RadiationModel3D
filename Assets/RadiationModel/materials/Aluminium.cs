@@ -7,8 +7,8 @@ namespace RadiationModel.materials
         public override string name { get; } = "Aluminium";
         public override double density { get; } = 2669d;
         public override double atomicWeight { get; } = 26.9815384d;
-        
-        protected override Dictionary<double, double> massAttenuationCoefficients { get; } = new()
+
+        public override Dictionary<double, double> massAttenuationCoefficients { get; } = new()
         {
             { 1000, 1185 },
             { 1500, 402.2 },
@@ -50,7 +50,7 @@ namespace RadiationModel.materials
             { 20000000, 0.02168 },
         };
 
-        protected override Dictionary<double, double> massStoppingPowers { get; } = new()
+        public override Dictionary<double, double> massStoppingPowers { get; } = new()
         {
             { 10000, 16.5 },
             { 12500, 13.98 },

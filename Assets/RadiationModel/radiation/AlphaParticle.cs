@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace RadiationModel.substances
 {
     public class AlphaParticle : RadioactiveSubstance
     {
+        public AlphaParticle() { Debug.LogWarning("Alpha particle created with default constructor. Are you sure?"); }
+
         public AlphaParticle(double energy)
         {
             this.energy = energy;

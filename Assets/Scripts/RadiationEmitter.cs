@@ -141,7 +141,7 @@ public class RadiationEmitter : MonoBehaviour
                                 hasHitMaterial = true;
                                 if (particle is GammaParticle gammaParticle)
                                 {
-                                    var massAttenuationCoefficient = material.material.GetClosestMAC(gammaParticle.energy);
+                                    var massAttenuationCoefficient = material.material.GetMACForEnergy(gammaParticle.energy);
                                     
                                     var attenuation = Math.Exp(-massAttenuationCoefficient * distance);
                                     var absorbed = 1 - attenuation;
@@ -159,7 +159,7 @@ public class RadiationEmitter : MonoBehaviour
                                 }
                                 else if (particle is BetaParticle electronParticle)
                                 {
-                                    var stoppingPower = material.material.GetClosestMSP(electronParticle.energy);
+                                    var stoppingPower = material.material.GetMSPForEnergy(electronParticle.energy);
                                     // mass thickness in g/cm^2
                                     var massThickness = material.material.density * distance;
                                     
