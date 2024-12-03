@@ -30,11 +30,6 @@ public abstract class Manager : MonoBehaviour
             emitter = GameObject.FindWithTag("Emitter").GetComponent<RadiationEmitter>();
         }
 
-        if (absorber == null)
-        {
-            absorber  = GameObject.FindWithTag("Absorber").GetComponent<Transform>();
-        }
-
         if (detector == null)
         {
             detector = GameObject.FindWithTag("Detector").GetComponent<Transform>();
