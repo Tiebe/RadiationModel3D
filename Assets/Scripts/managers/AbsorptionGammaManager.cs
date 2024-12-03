@@ -14,7 +14,10 @@ namespace managers
         
         protected override void StartOverride()
         {
-            
+            if (absorber == null)
+            {
+                absorber  = GameObject.FindWithTag("Absorber").GetComponent<Transform>();
+            }
         }
 
         protected override void RunExperiment()
