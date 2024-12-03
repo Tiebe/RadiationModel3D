@@ -634,9 +634,7 @@ def generateFile(isotopes, isotope: Isotope):
         betaMinusSpectrum += f"""            {{ {str(float(spectrum[7]) * 1000)}d, {str(spectrum[8])}d }},
 """
 
-    return f"""using System;
-using System.Collections.Generic;
-using RadiationModel.constants;
+    return f"""using System.Collections.Generic;
 
 namespace RadiationModel.substances
 {{
