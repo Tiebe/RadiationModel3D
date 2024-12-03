@@ -5,13 +5,11 @@ namespace RadiationModel.substances
     public class Germanium63 : RadioactiveSubstance
     {
         public override string name { get; } = "Germanium63";
-        public override double halfLife { get; } = 0.1533d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 62.94963d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Zinc63()), new(1.0d, new BetaParticle(1, betaPlusSpectrum)) } },
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> {  } },
 
         }; 
         

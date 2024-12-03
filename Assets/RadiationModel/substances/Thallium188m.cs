@@ -5,7 +5,7 @@ namespace RadiationModel.substances
     public class Thallium188m : RadioactiveSubstance
     {
         public override string name { get; } = "Thallium188m";
-        public override double halfLife { get; } = 71.0d;
+        public override double halfLife { get; } = 71.5d;
         public override double atomicWeight { get; } = 187.97605d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()

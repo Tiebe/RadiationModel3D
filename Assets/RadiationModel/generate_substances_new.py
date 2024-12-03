@@ -302,8 +302,8 @@ def get_all_basic_isotope_info():
                 isomer_energy = float(energy_string)
                 uncertainty = float(line[54:65].replace('#', '').strip())
 
-
-            isotopes.append((mass, atomicNumber, base_name, s, isomer_energy, uncertainty, massKeV))
+            spin = line[88:102].strip().replace("*", "").replace("#", "")
+            isotopes.append((mass, atomicNumber, base_name, s, isomer_energy, uncertainty, massKeV, spin))
     return isotopes
 
 
@@ -350,16 +350,20 @@ def get_beta_minus_spectrum(isotope: str, energy: float):
     spectrum = do_iaea_request(f"fields=bin_beta&nuclides={isotope}&rad_types=bm")
     beta_minus_cache[isotope] = spectrum
     return filter(lambda x: x[3] == energy, spectrum)
-def find_level(levels, value, uncertainty):
+def find_level(levels, value, uncertainty, spin):
     target_min = value - uncertainty
     target_max = value + uncertainty
 
     for level in levels:
         if len(level) == 0 or level[5] == '':
             continue
+
+        if level[8] != spin:
+            if spin != '' and level[8] != '':
+                continue
         value_i = float(level[5])
         if level[6] == '':
-            uncertainty_i = 0.0
+            uncertainty_i = 5.0
         else:
             uncertainty_i = float(level[6])
         min_i = value_i - uncertainty_i
@@ -368,9 +372,9 @@ def find_level(levels, value, uncertainty):
             return level
     return None  # No matching value found
 
-def get_isomer_info(isotope: str, energy: float, uncertainty: float):
+def get_isomer_info(isotope: str, energy: float, uncertainty: float, spin: str):
     levels = get_isomer_levels(isotope)
-    return find_level(levels, energy, uncertainty)
+    return find_level(levels, energy, uncertainty, spin)
 
 states = []
 
@@ -519,12 +523,12 @@ def get_all_isotopes() -> list[Isotope]:
     isotopes = []
 
     for basic_isotope in basic_isotope_info:
-        mass, atomicNumber, base_name, s, isomer_energy, uncertainty, massKeV = basic_isotope
+        mass, atomicNumber, base_name, s, isomer_energy, uncertainty, massKeV, spin = basic_isotope
         isotope_info = get_isotope_info(atomicNumber, mass)
         if isotope_info is None:
             print(f"Could not find isotope info for {atomicNumber} {mass}")
             continue
-        isomer_info = get_isomer_info(base_name, isomer_energy, uncertainty)
+        isomer_info = get_isomer_info(base_name, isomer_energy, uncertainty, spin)
 
         if isomer_info is None:
             #print(f"Could not find isomer info for {base_name} {isomer_energy} {uncertainty}")

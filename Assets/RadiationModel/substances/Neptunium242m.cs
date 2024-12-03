@@ -5,7 +5,7 @@ namespace RadiationModel.substances
     public class Neptunium242m : RadioactiveSubstance
     {
         public override string name { get; } = "Neptunium242m";
-        public override double halfLife { get; } = 132.0d;
+        public override double halfLife { get; } = 330.0d;
         public override double atomicWeight { get; } = 242.0617d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()

@@ -5,12 +5,11 @@ namespace RadiationModel.substances
     public class Bismuth200n : RadioactiveSubstance
     {
         public override string name { get; } = "Bismuth200n";
-        public override double halfLife { get; } = 0.4d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 199.97859d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Bismuth200()) } },
 
         }; 
         

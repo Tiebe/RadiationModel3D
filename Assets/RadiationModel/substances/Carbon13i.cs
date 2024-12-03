@@ -10,9 +10,6 @@ namespace RadiationModel.substances
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 0.008199999999999999d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Carbon13()) } },
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> {  } },
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> {  } },
 
         }; 
         

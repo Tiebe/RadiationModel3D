@@ -5,13 +5,14 @@ namespace RadiationModel.substances
     public class Iodine140 : RadioactiveSubstance
     {
         public override string name { get; } = "Iodine140";
-        public override double halfLife { get; } = 0.86d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 139.93172d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Xenon140()), new(1.0d, new BetaParticle(-1, betaMinusSpectrum)), new(0.006999999999999999d, new GammaParticle(258600.0, 0.00479)), new(0.013000000000000001d, new GammaParticle(355000.0, 0.00349)), new(0.98d, new GammaParticle(376657.0, 0.00329)), new(0.68d, new GammaParticle(457630.0, 0.00271)), new(0.09300000000000001d, new GammaParticle(582400.0, 0.00213)), new(0.017d, new GammaParticle(678700.0, 0.00183)), new(0.188d, new GammaParticle(937400.0, 0.00132)), new(0.044000000000000004d, new GammaParticle(1136700.0, 0.00109)), new(0.00252d, new GammaParticle(4540.0, 0.27309)), new(0.0062d, new GammaParticle(29458.0, 0.04209)), new(0.0115d, new GammaParticle(29778.0, 0.04164)), new(0.00333d, new GammaParticle(33726.0, 0.03676)), new(0.0041199999999999995d, new GammaParticle(34030.0, 0.03643)), new(0.00079d, new GammaParticle(34414.0, 0.03603)) } },
-            { 0.076d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Xenon140()), new(1.0d, new BetaParticle(-1, betaMinusSpectrum)), new(0.006999999999999999d, new GammaParticle(258600.0, 0.00479)), new(0.013000000000000001d, new GammaParticle(355000.0, 0.00349)), new(0.98d, new GammaParticle(376657.0, 0.00329)), new(0.68d, new GammaParticle(457630.0, 0.00271)), new(0.09300000000000001d, new GammaParticle(582400.0, 0.00213)), new(0.017d, new GammaParticle(678700.0, 0.00183)), new(0.188d, new GammaParticle(937400.0, 0.00132)), new(0.044000000000000004d, new GammaParticle(1136700.0, 0.00109)), new(0.00252d, new GammaParticle(4540.0, 0.27309)), new(0.0062d, new GammaParticle(29458.0, 0.04209)), new(0.0115d, new GammaParticle(29778.0, 0.04164)), new(0.00333d, new GammaParticle(33726.0, 0.03676)), new(0.0041199999999999995d, new GammaParticle(34030.0, 0.03643)), new(0.00079d, new GammaParticle(34414.0, 0.03603)) } },
+            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> {  } },
+            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> {  } },
+            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> {  } },
 
         }; 
         

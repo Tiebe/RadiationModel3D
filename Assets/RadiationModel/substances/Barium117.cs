@@ -5,14 +5,11 @@ namespace RadiationModel.substances
     public class Barium117 : RadioactiveSubstance
     {
         public override string name { get; } = "Barium117";
-        public override double halfLife { get; } = 1.75d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 116.93831d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Xenon117()), new(1.0d, new BetaParticle(1, betaPlusSpectrum)) } },
-            { 0.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Xenon116()), new(1.0d, new BetaParticle(1, betaPlusSpectrum)), new(1.0d, new ProtonParticle()) } },
-            { 0.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Cesium117()), new(1.0d, new BetaParticle(1, betaPlusSpectrum)) } },
 
         }; 
         

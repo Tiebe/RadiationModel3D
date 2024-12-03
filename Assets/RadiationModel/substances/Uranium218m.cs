@@ -5,13 +5,11 @@ namespace RadiationModel.substances
     public class Uranium218m : RadioactiveSubstance
     {
         public override string name { get; } = "Uranium218m";
-        public override double halfLife { get; } = 0.00056d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 218.02577d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> {  } },
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> {  } },
 
         }; 
         

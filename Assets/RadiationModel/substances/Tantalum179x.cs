@@ -5,12 +5,11 @@ namespace RadiationModel.substances
     public class Tantalum179x : RadioactiveSubstance
     {
         public override string name { get; } = "Tantalum179x";
-        public override double halfLife { get; } = 0.0541d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 178.94877d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Tantalum179()) } },
 
         }; 
         

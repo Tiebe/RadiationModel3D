@@ -5,7 +5,7 @@ namespace RadiationModel.substances
     public class Tin123n : RadioactiveSubstance
     {
         public override string name { get; } = "Tin123n";
-        public override double halfLife { get; } = 1e-05d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 122.90781d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
