@@ -335,21 +335,21 @@ def get_gamma_emissions(isotope: str, energy: float, decay_type: str):
 
 beta_plus_cache = {}
 
-def get_beta_plus_spectrum(isotope: str, idx: int):
-    if isotope + str(idx) in beta_plus_cache:
-        return beta_plus_cache[isotope + str(idx)]
-    spectrum = do_iaea_request(f"fields=bin_beta&nuclides={isotope}&rad_types=bp&metastable_seqno={idx}")
-    beta_plus_cache[isotope + str(idx)] = spectrum
-    return spectrum
+def get_beta_plus_spectrum(isotope: str, energy: float):
+    if isotope in beta_plus_cache:
+        return filter(lambda x: x[3] == energy, beta_plus_cache[isotope])
+    spectrum = do_iaea_request(f"fields=bin_beta&nuclides={isotope}&rad_types=bp")
+    beta_plus_cache[isotope] = spectrum
+    return filter(lambda x: x[3] == energy, spectrum)
 
 beta_minus_cache = {}
 
-def get_beta_minus_spectrum(isotope: str, idx: int):
-    if isotope + str(idx) in beta_minus_cache:
-        return beta_minus_cache[isotope + str(idx)]
-    spectrum = do_iaea_request(f"fields=bin_beta&nuclides={isotope}&rad_types=bm&metastable_seqno={idx}")
-    beta_minus_cache[isotope + str(idx)] = spectrum
-    return spectrum
+def get_beta_minus_spectrum(isotope: str, energy: float):
+    if isotope in beta_minus_cache:
+        return filter(lambda x: x[3] == energy, beta_minus_cache[isotope])
+    spectrum = do_iaea_request(f"fields=bin_beta&nuclides={isotope}&rad_types=bm")
+    beta_minus_cache[isotope] = spectrum
+    return filter(lambda x: x[3] == energy, spectrum)
 def find_level(levels, value, uncertainty):
     target_min = value - uncertainty
     target_max = value + uncertainty
@@ -536,8 +536,6 @@ def get_all_isotopes() -> list[Isotope]:
             half_life = 0.0
         element = atomic_numbers[atomicNumber]
 
-        idx = int(isomer_info[3])
-
         isotope = Isotope(element + str(mass) + s, float(half_life), keVToAtomicMass(massKeV), mass, atomicNumber, massKeV, base_name)
 
         decays = []
@@ -552,8 +550,8 @@ def get_all_isotopes() -> list[Isotope]:
             decays.append([decay_chance, get_decay_results(isotope, decay_type, isomer_info)])
 
         isotope.setDecayProducts(decays)
-        isotope.setBetaPlusSpectrum(get_beta_plus_spectrum(base_name, idx))
-        isotope.setBetaMinusSpectrum(get_beta_minus_spectrum(base_name, idx))
+        isotope.setBetaPlusSpectrum(get_beta_plus_spectrum(base_name, isomer_info[5]))
+        isotope.setBetaMinusSpectrum(get_beta_minus_spectrum(base_name, isomer_info[5]))
         isotopes.append(isotope)
     return isotopes
 
@@ -663,9 +661,7 @@ namespace RadiationModel.substances
 
 def generateSubstancesFile(isotopes):
     with open("Substances.cs", 'w') as file:
-        file.write(f"""using System;
-using System.Collections.Generic;
-using RadiationModel.substances;
+        file.write(f"""using System.Collections.Generic;
 
 namespace RadiationModel
 {{

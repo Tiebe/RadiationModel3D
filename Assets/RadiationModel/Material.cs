@@ -8,8 +8,13 @@ namespace RadiationModel
         public abstract double density { get; } // Kg/m^3
         public abstract double atomicWeight { get; } // useless (just like me frfr)
 
-        protected abstract Dictionary<double, double> massAttenuationCoefficients { get; } // { ev, cm^2/g }
-        protected abstract Dictionary<double, double> massStoppingPowers { get; } // { eV, cm^2/g }
+        /**
+         * The mass attenuation coefficients of the material.
+         * Key: the energy of the gamma particle in eV
+         * Value: the mass attenuation coefficient in cm^2/g
+         */
+        protected abstract Dictionary<double, double> massAttenuationCoefficients { get; }
+        protected abstract Dictionary<double, double> massStoppingPowers { get; }
         
         public double GetClosestMAC(double energy)
         {
@@ -41,4 +46,3 @@ namespace RadiationModel
             return closestMSP;
         }
     }
-}
