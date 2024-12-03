@@ -14,8 +14,9 @@ namespace RadiationModel
          * Value: the mass attenuation coefficient in cm^2/g
          */
         protected abstract Dictionary<double, double> massAttenuationCoefficients { get; }
+
         protected abstract Dictionary<double, double> massStoppingPowers { get; }
-        
+
         public double GetClosestMAC(double energy)
         {
             var closestMAC = 0d;
@@ -30,7 +31,7 @@ namespace RadiationModel
 
             return closestMAC;
         }
-        
+
         public double GetClosestMSP(double energy)
         {
             var closestMSP = 0d;
@@ -46,3 +47,4 @@ namespace RadiationModel
             return closestMSP;
         }
     }
+}
