@@ -13,7 +13,10 @@ namespace managers
         
         protected override void StartOverride()
         {
-            
+            if (absorber == null)
+            {
+                absorber  = GameObject.FindWithTag("Absorber").GetComponent<Transform>();
+            }
         }
 
         protected override void RunExperiment()
@@ -28,7 +31,7 @@ namespace managers
                 sb.AppendLine("d(cm), I (pulsen/10s)");
             }
 
-            counter.text = hits.ToString();
+            counter.SetText(hits.ToString());
 
             absorber.localScale = new Vector3(thicknesses[iteration / 3] * 0.01f, 0.15f, 0.15f);
 
