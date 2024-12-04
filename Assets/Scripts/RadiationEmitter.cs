@@ -112,7 +112,7 @@ public class RadiationEmitter : MonoBehaviour
         var energyLost = massStoppingPower * massThickness;
         betaParticle.energy -= energyLost;
 
-        // only return true if the particle still has energy left
+        // only return false if the particle still has energy left
         return betaParticle.energy <= 0;
     }
 
