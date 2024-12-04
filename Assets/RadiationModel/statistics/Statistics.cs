@@ -24,11 +24,11 @@ namespace RadiationModel.statistics
             {
                 var probability = decayProduct.Key;
                 var substanceProducts = decayProduct.Value;
-                var productAmount = (long)(amountDecayed * probability);
+                var productAmount = amountDecayed * probability;
                 foreach (var product in substanceProducts)
                 {
                     products.TryAdd(product.Value, 0);
-                    products[product.Value] += (long) (productAmount * product.Key);
+                    products[product.Value] += (long)Math.Round(productAmount * product.Key);
                 }
             }
 

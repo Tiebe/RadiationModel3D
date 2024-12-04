@@ -117,7 +117,7 @@ public class RadiationEmitter : MonoBehaviour
         // get entry and exit points, and do quick check if exit point is zero
         var (entryPoint, exitPoint) = (points[0], points[1]);
         if (exitPoint.Equals(Vector3.zero)) Debug.Log("No exit point found. Is the collider configured correctly?");
-                        
+        
         // get distance traveled through material in cm
         var distance = Vector3.Distance(entryPoint, exitPoint) * 100;
         // if distance is zero, the particle can never be absorbed
