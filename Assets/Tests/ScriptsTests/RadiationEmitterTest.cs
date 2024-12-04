@@ -67,11 +67,5 @@ namespace Tests.ScriptsTests
             Assert.AreEqual(false, result2);
             Assert.AreEqual(true, result3);
         }
-
-        [Test]
-        public void HasParticleBeenAbsorbedTest()
-        {
-            
-        }
     }
 }
