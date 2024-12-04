@@ -20,10 +20,6 @@ public class RadiationEmitter : MonoBehaviour
     private Dictionary<RadioactiveSubstance, long> particles = new();
     private void OnEnable()
     {
-        if (emitting)
-        {
-            Emit();
-        }
         if (emitting) Emit();
     }
 
