@@ -9,17 +9,10 @@ namespace Tests.ScriptsTests
     public class RadiationEmitterTest
     {
         [Test]
-        public void GetHitPointsTest()
-        {
-            // todo: have to do unity play mode tests for this
-            // find out how to do that
-        }
-
-        [Test]
         public void HasGammaAbsorbedTest()
         {
             var total = 0L;
-            var amount = 200;
+            const int amount = 200;
             
             // run a million times, and check if expected value
             const int startingAmount = 1000000;
