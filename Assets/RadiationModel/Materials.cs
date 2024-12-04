@@ -8,7 +8,7 @@ namespace RadiationModel
 {
     public static class Materials
     {
-        private static readonly Dictionary<string, Type> materials = new()
+        public static readonly Dictionary<string, Type> materials = new()
         {
             { "Lead", typeof(Lead) },
             { "Aluminium", typeof(Aluminium) },

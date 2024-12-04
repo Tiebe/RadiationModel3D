@@ -52,8 +52,9 @@ namespace managers
 
             if (iteration >= thicknesses.Length * 3)
             {
-                WriteData(sb, "AbsorbtieGammaData");
+                WriteData(sb, "AbsorbtieGammaData"+FileNameEnd);
                 emitter.emitting = false;
+                return;
             }
 
             emitter.resetter = true;

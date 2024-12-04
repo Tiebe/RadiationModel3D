@@ -166,8 +166,9 @@ MonoBehaviour:
   counter: {fileID: 0}
   absorber: {fileID: 0}
   detector: {fileID: 0}
+  FileNameEnd: v2-1
   hits: 0
-  timeScale: 1
+  timeScale: 5
 --- !u!1001 &62432304
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -562,7 +563,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3606e9cdaa064a92a28b1da1b1b03ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MassAttenuationCoefficient: 0.5021
   materialString: Lead
 --- !u!65 &421180940
 BoxCollider:
