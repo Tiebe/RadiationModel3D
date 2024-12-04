@@ -549,7 +549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c46b99df390134696370df8d175f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initalAmount: 51000
+  initalAmount: 25000
   radioactiveSubstanceName: Protactinium234m
   emitting: 1
   debugRender: 1
@@ -870,7 +870,7 @@ MonoBehaviour:
   absorber: {fileID: 0}
   detector: {fileID: 0}
   hits: 0
-  timeScale: 1
+  timeScale: 2
   experimentDuration: 270
   interval: 10
 --- !u!4 &425687369
@@ -1064,7 +1064,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &554212339
 Transform:
   m_ObjectHideFlags: 0
@@ -1087,7 +1087,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 554212337}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7f92b7a253448cab47a7a7312331130, type: 3}
   m_Name: 
@@ -2710,5 +2710,5 @@ SceneRoots:
   - {fileID: 1535069133}
   - {fileID: 850791062}
   - {fileID: 1092801771}
-  - {fileID: 554212339}
   - {fileID: 425687369}
+  - {fileID: 554212339}
