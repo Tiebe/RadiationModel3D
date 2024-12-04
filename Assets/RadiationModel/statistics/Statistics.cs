@@ -8,6 +8,33 @@ namespace RadiationModel.statistics
 {
     public static class Statistics
     {
+        public static double CalculateLambda(double halfLife, long itemAmount, double elapsedTime)
+        {
+            // calculate lambda for the poisson function
+            var decayConstant = Math.Log(2) / halfLife;
+            return itemAmount * (1 - Math.Exp(-decayConstant * elapsedTime));
+        }
+
+        public static Dictionary<RadioactiveSubstance, long> GetDecayProducts(
+            Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts, long amountDecayed)
+        {
+            var products = new Dictionary<RadioactiveSubstance, long>();
+
+            foreach (var decayProduct in decayProducts)
+            {
+                var probability = decayProduct.Key;
+                var substanceProducts = decayProduct.Value;
+                var productAmount = (long)(amountDecayed * probability);
+                foreach (var product in substanceProducts)
+                {
+                    products.TryAdd(product.Value, 0);
+                    products[product.Value] += (long) (productAmount * product.Key);
+                }
+            }
+
+            return products;
+        }
+        
         /**
          * calculates the remaining amount of particles after a specified amount of time
          * <param name="substance">The radioactive substance</param>
@@ -20,10 +47,8 @@ namespace RadiationModel.statistics
         public static Dictionary<RadioactiveSubstance, long> Decay(RadioactiveSubstance substance, long itemAmount,
             double elapsedTime)
         {
-            // calculate lambda for the poisson function
-            var decayConstant = Math.Log(2) / substance.halfLife;
-            var lambda = itemAmount * (1 - Math.Exp(-decayConstant * elapsedTime));
-
+            var lambda = CalculateLambda(substance.halfLife, itemAmount, elapsedTime);
+            
             // error handling in case lambda <= 0
             // lambda can by definition not be less than or equal to 0, but when lambda is very small floating point errors occur and that causes errors
             long decayed = lambda > 0 ? Poisson.Sample(SystemRandomSource.Default, lambda) : 0;
@@ -31,22 +56,9 @@ namespace RadiationModel.statistics
             // convert decayed amount into usable data
             var remainingItems = itemAmount - decayed;
 
-            var decayProducts = substance.decayProducts;
-            var products = new Dictionary<RadioactiveSubstance, long>();
-
-            foreach (var decayProduct in decayProducts)
-            {
-                var probability = decayProduct.Key;
-                var substanceProducts = decayProduct.Value;
-                var productAmount = (long)(decayed * probability);
-                foreach (var product in substanceProducts)
-                {
-                    products.TryAdd(product.Value, 0);
-                    products[product.Value] += (long) (productAmount * product.Key);
-                }
-            }
-
-            products[substance] = remainingItems;
+            var products = GetDecayProducts(substance.decayProducts, decayed);
+            products.TryAdd(substance, 0);
+            products[substance] += remainingItems;
 
             return products;
         }
