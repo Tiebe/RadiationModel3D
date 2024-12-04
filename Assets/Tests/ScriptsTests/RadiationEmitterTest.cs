@@ -49,12 +49,12 @@ namespace Tests.ScriptsTests
                 energy = 100
             };
             
-            var result = RadiationEmitter.HasBetaAbsorbed(betaParticle, 500, 1, 1);
+            var result = RadiationEmitter.HasBetaAbsorbed(betaParticle, 500, 1, 1000);
             Debug.Log("Result: " + betaParticle.energy);
             betaParticle.energy = 100;
-             var result2 = RadiationEmitter.HasBetaAbsorbed(betaParticle, 50, 1, 1);
+             var result2 = RadiationEmitter.HasBetaAbsorbed(betaParticle, 50, 1, 1000);
             betaParticle.energy = 100;
-            var result3 = RadiationEmitter.HasBetaAbsorbed(betaParticle, 100, 1, 1);
+            var result3 = RadiationEmitter.HasBetaAbsorbed(betaParticle, 100, 1, 1000);
             
             Assert.AreEqual(true, result);
             Assert.AreEqual(false, result2);
