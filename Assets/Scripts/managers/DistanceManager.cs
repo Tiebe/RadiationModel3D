@@ -49,7 +49,7 @@ namespace managers
 
             if (iteration >= DistanceList.Length * 3)
             {
-                WriteData(sb, "AfstandBetaData");
+                WriteData(sb, "AfstandBetaData"+FileNameEnd);
                 emitter.emitting = false;
             }
             

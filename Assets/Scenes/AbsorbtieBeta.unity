@@ -166,8 +166,9 @@ MonoBehaviour:
   counter: {fileID: 0}
   absorber: {fileID: 0}
   detector: {fileID: 0}
+  FileNameEnd: v2-1
   hits: 0
-  timeScale: 1
+  timeScale: 5
 --- !u!1001 &62432304
 PrefabInstance:
   m_ObjectHideFlags: 0

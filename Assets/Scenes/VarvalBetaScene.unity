@@ -549,11 +549,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c46b99df390134696370df8d175f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initalAmount: 25000
+  initalAmount: 50000
   radioactiveSubstanceName: Protactinium234m
   emitting: 1
-  debugRender: 1
-  debugRenderAll: 1
+  debugRender: 0
+  debugRenderAll: 0
   resetter: 0
 --- !u!1 &184090137
 GameObject:
@@ -870,9 +870,10 @@ MonoBehaviour:
   absorber: {fileID: 0}
   detector: {fileID: 0}
   hits: 0
-  timeScale: 10
-  experimentDuration: 60
+  timeScale: 1
+  experimentDuration: 270
   interval: 10
+  FileNameEnd: 
 --- !u!4 &425687369
 Transform:
   m_ObjectHideFlags: 0

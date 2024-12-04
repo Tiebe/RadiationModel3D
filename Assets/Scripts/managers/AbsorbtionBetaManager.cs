@@ -53,7 +53,7 @@ namespace managers
 
             if (iteration >= thicknesses.Length * 3)
             {
-                WriteData(sb, "AbsorbtieBetaData");
+                WriteData(sb, "AbsorbtieBetaData"+FileNameEnd);
                 emitter.emitting = false;
             }
         }
