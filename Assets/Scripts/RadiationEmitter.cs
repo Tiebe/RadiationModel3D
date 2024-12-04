@@ -96,7 +96,7 @@ public class RadiationEmitter : MonoBehaviour
         return (hitPoints, direction);
     }
     
-    private bool HasGammaAbsorbed(GammaParticle gammaParticle, double distance, double massAttenuationCoefficient)
+    public static bool HasGammaAbsorbed(GammaParticle gammaParticle, double distance, double massAttenuationCoefficient)
     {
         var attenuation = Math.Exp(-massAttenuationCoefficient * distance);
         var absorbed = 1 - attenuation;
@@ -104,7 +104,7 @@ public class RadiationEmitter : MonoBehaviour
         return UnityEngine.Random.value >= absorbed;
     }
     
-    private static bool HasBetaAbsorbed(BetaParticle betaParticle, double distance, double massStoppingPower, double density)
+    public static bool HasBetaAbsorbed(BetaParticle betaParticle, double distance, double massStoppingPower, double density)
     {
         // mass thickness in g/cm^2
         var massThickness = density * distance;
@@ -113,7 +113,7 @@ public class RadiationEmitter : MonoBehaviour
         betaParticle.energy -= energyLost;
 
         // only return true if the particle still has energy left
-        return betaParticle.energy > 0;
+        return betaParticle.energy <= 0;
     }
 
     private bool HasParticleBeenAbsorbed(GameObject hitGameObject, Vector3[] points, RadioactiveSubstance particle, Vector3 direction)

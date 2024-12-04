@@ -1,13 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using RadiationModel;
 using RadiationModel.statistics;
-using RadiationModel.substances;
-using UnityEngine.TestTools;
 
-namespace Tests
+namespace Tests.RadiationModelTests
 {
     public class StatisticsTest
     {

@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using RadiationModel;
 
-namespace Tests
+namespace Tests.RadiationModelTests
 {
     public class MaterialsTest
     {
