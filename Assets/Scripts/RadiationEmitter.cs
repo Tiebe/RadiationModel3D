@@ -107,7 +107,7 @@ public class RadiationEmitter : MonoBehaviour
     public static bool HasBetaAbsorbed(BetaParticle betaParticle, double distance, double massStoppingPower, double density)
     {
         // mass thickness in g/cm^2
-        var massThickness = density * distance;
+        var massThickness = density/1000 * distance;
 
         var energyLost = massStoppingPower * massThickness;
         betaParticle.energy -= energyLost;
@@ -122,8 +122,8 @@ public class RadiationEmitter : MonoBehaviour
         var (entryPoint, exitPoint) = (points[0], points[1]);
         if (exitPoint.Equals(Vector3.zero)) Debug.Log("No exit point found. Is the collider configured correctly?");
                         
-        // get distance traveled through material
-        var distance = Vector3.Distance(entryPoint, exitPoint);
+        // get distance traveled through material in cm
+        var distance = Vector3.Distance(entryPoint, exitPoint) * 100;
         // if distance is zero, the particle can never be absorbed
         if (distance == 0) return false;
                         
