@@ -3,6 +3,7 @@ using System.Text;
 using RadiationModel;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public abstract class Manager : MonoBehaviour
 {
