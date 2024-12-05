@@ -48,14 +48,14 @@ namespace RadiationModel
             if (lowerBound == double.MinValue)
             {
                 // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
-                Debug.LogWarning("Energy is lower than the lowest value in the MAC table. Returning the lowest value.");
+                Debug.LogWarning($"Energy {energy} is lower than the lowest value in the MAC table. Returning the lowest value.");
                 return massAttenuationCoefficients.Values.First();
             }
 
             if (upperBound == double.MaxValue)
             {
                 // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
-                Debug.LogWarning("Energy is higher than the highest value in the MAC table. Returning the highest value.");
+                Debug.LogWarning($"Energy {energy} is higher than the highest value in the MAC table. Returning the highest value.");
                 return massAttenuationCoefficients.Values.Last();
             }
 

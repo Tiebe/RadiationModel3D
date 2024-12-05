@@ -162,10 +162,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 835c01c77f644cab8e5b0833f2cf5f0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emitter: {fileID: 0}
-  counter: {fileID: 0}
-  absorber: {fileID: 0}
-  detector: {fileID: 0}
+  emitter: {fileID: 680841584}
+  counter: {fileID: 498189205}
+  absorber: {fileID: 421180937}
+  detector: {fileID: 448574871}
   FileNameEnd: v2-1
   hits: 0
   timeScale: 5
@@ -988,7 +988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initalAmount: 5000000
-  radioactiveSubstanceName: Cobalt60m
+  radioactiveSubstanceName: Cobalt60
   emitting: 1
   debugRender: 1
   debugRenderAll: 0
