@@ -27,7 +27,7 @@ namespace managers
                 timer += 60f;
             }
 
-            counter.text = hits.ToString();
+            counter.SetText(hits.ToString());
 
             var distance = DistanceList[iteration / 3]; // dividing int's in this manner floors automatically
             if (Vector3.Distance(emitterTransform.position, detector.position).Round(2) != distance.Round(2)) // floating point error :(

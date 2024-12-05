@@ -26,7 +26,7 @@ namespace managers
                 timer += interval;
             }
 
-            counter.text = hits.ToString();
+            counter.SetText(hits.ToString());
 
             if (timer > 0)
             {

@@ -7,7 +7,7 @@ using UnityEngine;
 public abstract class Manager : MonoBehaviour
 {
     public RadiationEmitter emitter;
-    public TextMeshProUGUI counter;
+    public Counter counter;
     public Transform absorber;
     public Transform detector;
     public string FileNameEnd;
@@ -21,10 +21,10 @@ public abstract class Manager : MonoBehaviour
         if (counter == null)
         {
             var go = GameObject.FindWithTag("Counter");
-            counter = go.GetComponents<TextMeshProUGUI>()[0];
+            counter = go.GetComponents<Counter>()[0];
         }
     
-        counter.text = "0";
+        counter.SetText("0");
         
         if (emitter == null)
         {

@@ -32,7 +32,7 @@ namespace managers
                 sb.AppendLine("d(cm), I (pulsen/10s)");
             }
 
-            counter.text = hits.ToString();
+            counter.SetText(hits.ToString());
 
             if (absorber.localScale.x.Round(2) != thicknesses[iteration / 3].Round(2))
             {

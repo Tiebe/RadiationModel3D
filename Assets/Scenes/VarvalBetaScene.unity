@@ -552,7 +552,7 @@ MonoBehaviour:
   initalAmount: 50000
   radioactiveSubstanceName: Protactinium234m
   emitting: 1
-  debugRender: 0
+  debugRender: 1
   debugRenderAll: 0
   resetter: 0
 --- !u!1 &184090137
@@ -860,7 +860,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 425687367}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89670c9cc122494eb7a79a80cc6d8b3d, type: 3}
   m_Name: 
@@ -2044,6 +2044,7 @@ GameObject:
   - component: {fileID: 1599782661}
   - component: {fileID: 1599782663}
   - component: {fileID: 1599782662}
+  - component: {fileID: 1599782664}
   m_Layer: 5
   m_Name: 7 Segment display
   m_TagString: Counter
@@ -2090,7 +2091,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: <mspace=1.3em></mspace>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9c2e2c6aeaacc584699a4269175ff1f5, type: 2}
   m_sharedMaterial: {fileID: 6921464969103286691, guid: 9c2e2c6aeaacc584699a4269175ff1f5, type: 2}
@@ -2169,6 +2170,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1599782660}
   m_CullTransparentMesh: 1
+--- !u!114 &1599782664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1599782660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8167f39b67cb4214fadeed52c85c4ec1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
 --- !u!1 &1644259420
 GameObject:
   m_ObjectHideFlags: 0

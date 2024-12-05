@@ -6,7 +6,7 @@
 
         protected override void RunExperiment()
         {
-            counter.text = hits.ToString();
+            counter.SetText(hits.ToString());
         }
     }
 }
