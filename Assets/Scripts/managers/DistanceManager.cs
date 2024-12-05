@@ -49,8 +49,8 @@ namespace managers
 
             if (iteration >= DistanceList.Length * 3)
             {
-                WriteData(sb, "AfstandBetaData"+FileNameEnd);
                 emitter.emitting = false;
+                WriteData(sb, "AfstandBetaData"+FileNameEnd);
             }
             
         }

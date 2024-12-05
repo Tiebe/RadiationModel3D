@@ -19,6 +19,8 @@ namespace managers
             {
                 absorber  = GameObject.FindWithTag("Absorber").GetComponent<Transform>();
             }
+
+            timer = 10f;
         }
 
         protected override void RunExperiment()
@@ -49,18 +51,13 @@ namespace managers
             sb.AppendLine(thicknesses[iteration / 3].ToString(CultureInfo.InvariantCulture) + "," + hits);
             hits = 0;
             timer += 10f;
-            iteration++;
+            iteration += 1;
 
             if (iteration >= thicknesses.Length * 3)
             {
-                WriteData(sb, "AbsorbtieGammaData"+FileNameEnd);
                 emitter.emitting = false;
-                return;
+                WriteData(sb, "AbsorbtieGammaData"+FileNameEnd);
             }
-
-            emitter.resetter = true;
-            Debug.Log("Resetting");
-            
         }
     }
 }
