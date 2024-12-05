@@ -92,12 +92,14 @@ public class RadiationEmitter : MonoBehaviour
         return (hitPoints, direction);
     }
     
-    public static bool HasGammaAbsorbed(GammaParticle gammaParticle, double distance, double massAttenuationCoefficient)
+    public static bool HasGammaAbsorbed(GammaParticle gammaParticle, double distance, double density, double massAttenuationCoefficient)
     {
-        var attenuation = Math.Exp(-massAttenuationCoefficient * distance);
-        var absorbed = 1 - attenuation;
+        var attenuation = Math.Exp(-massAttenuationCoefficient * distance * (density / 1000));
+        Debug.Log("Mass attenuation coefficient: " + massAttenuationCoefficient);
+        Debug.Log("Attenuation: " + attenuation);
+        Debug.Log("Distance: " + distance);
         
-        return UnityEngine.Random.value >= absorbed;
+        return UnityEngine.Random.value >= attenuation;
     }
     
     public static bool HasBetaAbsorbed(BetaParticle betaParticle, double distance, double massStoppingPower, double density)
@@ -131,7 +133,7 @@ public class RadiationEmitter : MonoBehaviour
         
         switch (particle)
         {
-            case GammaParticle gammaParticle when HasGammaAbsorbed(gammaParticle, distance, material.material.GetMACForEnergy(gammaParticle.energy)):
+            case GammaParticle gammaParticle when HasGammaAbsorbed(gammaParticle, distance, material.material.density, material.material.GetMACForEnergy(gammaParticle.energy)):
             case BetaParticle electronParticle when HasBetaAbsorbed(electronParticle, distance, material.material.GetMSPForEnergy(electronParticle.energy), material.material.density):
                 if (debugRender) Debug.DrawRay(transform.position, direction * distance, Color.red, 0.2f);
                 return true;

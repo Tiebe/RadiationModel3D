@@ -8,6 +8,7 @@ public class RadiationModelMaterial : MonoBehaviour
 {
 
     public string materialString;
+    public bool warnings = false;
 
     [HideInInspector]
     public static Dictionary<GameObject, RadiationModelMaterial> radiationModelMaterials = new();
@@ -25,6 +26,7 @@ public class RadiationModelMaterial : MonoBehaviour
         radiationModelMaterials.Clear();
         if (String != null) materialString = String;
         material = Materials.GetMaterialByName(materialString);
+        material.warnings = warnings;
         radiationModelMaterials.Add(gameObject, this);
     }
 

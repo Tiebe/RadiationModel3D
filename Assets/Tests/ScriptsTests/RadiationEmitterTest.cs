@@ -20,14 +20,14 @@ namespace Tests.ScriptsTests
             const double distance = 1.0;
             const double density = 1.0;
 
-            var expected = startingAmount * Math.Exp(-(mu / density) * (distance * density));
+            var expected = startingAmount * Math.Exp(-mu * distance * density);
 
             for (var i = 0; i < amount; i++)
             {
                 var result = 0;
                 for (var j = 0; j < startingAmount; j++)
                 {
-                    result += RadiationEmitter.HasGammaAbsorbed(null, distance, mu) ? 1 : 0;
+                    result += RadiationEmitter.HasGammaAbsorbed(null, distance,  density, mu) ? 1 : 0;
                 }
 
                 Debug.Log("Off by: " + (expected - result));

@@ -35,9 +35,9 @@ namespace managers
 
             counter.SetText(hits.ToString());
 
-            if (absorber.localScale.x.Round(2) != thicknesses[iteration / 3].Round(2))
+            if ((absorber.localScale.x / 100).Round(2) != thicknesses[iteration / 3].Round(2))
             {
-                absorber.localScale = new Vector3(thicknesses[iteration / 3] * 0.01f, 0.15f, 0.15f);
+                absorber.localScale = new Vector3(thicknesses[iteration / 3] / 100f, 0.15f, 0.15f);
             }
 
             if (timer > 0)

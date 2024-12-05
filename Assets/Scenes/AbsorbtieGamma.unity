@@ -564,6 +564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   materialString: Lead
+  warnings: 0
 --- !u!65 &421180940
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -939,7 +940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8167f39b67cb4214fadeed52c85c4ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 0}
+  text: {fileID: 498189203}
 --- !u!1 &680841582
 GameObject:
   m_ObjectHideFlags: 0
@@ -987,11 +988,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c46b99df390134696370df8d175f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initalAmount: 5000000
+  initalAmount: 50000000000
   radioactiveSubstanceName: Cobalt60
   emitting: 1
   debugRender: 1
-  debugRenderAll: 0
+  debugRenderAll: 1
   resetter: 0
 --- !u!136 &680841585
 CapsuleCollider:
