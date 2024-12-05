@@ -5,12 +5,11 @@ namespace RadiationModel.substances
     public class Lutetium162m : RadioactiveSubstance
     {
         public override string name { get; } = "Lutetium162m";
-        public override double halfLife { get; } = 82.2d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 161.94341d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Thulium162()), new(1.0d, new BetaParticle(1, betaPlusSpectrum)) } },
 
         }; 
         

@@ -5,12 +5,11 @@ namespace RadiationModel.substances
     public class Silver114m : RadioactiveSubstance
     {
         public override string name { get; } = "Silver114m";
-        public override double halfLife { get; } = 0.0015d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 113.90904d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Silver114()) } },
 
         }; 
         

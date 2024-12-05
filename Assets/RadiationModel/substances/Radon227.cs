@@ -5,12 +5,11 @@ namespace RadiationModel.substances
     public class Radon227 : RadioactiveSubstance
     {
         public override string name { get; } = "Radon227";
-        public override double halfLife { get; } = 20.2d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 227.0353d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Francium227()), new(1.0d, new BetaParticle(-1, betaMinusSpectrum)) } },
 
         }; 
         

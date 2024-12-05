@@ -5,7 +5,7 @@ namespace RadiationModel.substances
     public class Yttrium78m : RadioactiveSubstance
     {
         public override string name { get; } = "Yttrium78m";
-        public override double halfLife { get; } = 0.053d;
+        public override double halfLife { get; } = 5.8d;
         public override double atomicWeight { get; } = 77.94399d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()

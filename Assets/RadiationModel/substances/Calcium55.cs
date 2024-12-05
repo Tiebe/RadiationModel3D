@@ -5,14 +5,11 @@ namespace RadiationModel.substances
     public class Calcium55 : RadioactiveSubstance
     {
         public override string name { get; } = "Calcium55";
-        public override double halfLife { get; } = 0.022d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 54.97998d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Scandium55()), new(1.0d, new BetaParticle(-1, betaMinusSpectrum)) } },
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> {  } },
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> {  } },
 
         }; 
         

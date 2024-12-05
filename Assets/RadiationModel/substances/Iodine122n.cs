@@ -5,7 +5,7 @@ namespace RadiationModel.substances
     public class Iodine122n : RadioactiveSubstance
     {
         public override string name { get; } = "Iodine122n";
-        public override double halfLife { get; } = 8e-05d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 121.908d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()

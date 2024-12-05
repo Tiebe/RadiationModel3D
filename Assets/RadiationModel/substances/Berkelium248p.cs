@@ -5,7 +5,7 @@ namespace RadiationModel.substances
     public class Berkelium248p : RadioactiveSubstance
     {
         public override string name { get; } = "Berkelium248p";
-        public override double halfLife { get; } = 284012333.77133d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 248.07319d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()

@@ -5,12 +5,11 @@ namespace RadiationModel.substances
     public class Bismuth194m : RadioactiveSubstance
     {
         public override string name { get; } = "Bismuth194m";
-        public override double halfLife { get; } = 125.0d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 193.98295d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Thallium194()), new(1.0d, new BetaParticle(1, betaPlusSpectrum)) } },
 
         }; 
         

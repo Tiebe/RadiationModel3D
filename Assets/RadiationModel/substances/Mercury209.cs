@@ -5,12 +5,11 @@ namespace RadiationModel.substances
     public class Mercury209 : RadioactiveSubstance
     {
         public override string name { get; } = "Mercury209";
-        public override double halfLife { get; } = 36.0d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 208.99076d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Thallium209()), new(1.0d, new BetaParticle(-1, betaMinusSpectrum)) } },
 
         }; 
         

@@ -5,12 +5,11 @@ namespace RadiationModel.substances
     public class Rhenium167 : RadioactiveSubstance
     {
         public override string name { get; } = "Rhenium167";
-        public override double halfLife { get; } = 3.4d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 166.96261d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Tantalum163()), new(1.0d, new AlphaParticle(6297002.09)) } },
 
         }; 
         

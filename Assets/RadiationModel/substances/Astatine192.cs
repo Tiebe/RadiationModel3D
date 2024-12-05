@@ -5,7 +5,7 @@ namespace RadiationModel.substances
     public class Astatine192 : RadioactiveSubstance
     {
         public override string name { get; } = "Astatine192";
-        public override double halfLife { get; } = 0.088d;
+        public override double halfLife { get; } = 0.0115d;
         public override double atomicWeight { get; } = 192.00314d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()

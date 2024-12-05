@@ -5,7 +5,7 @@ namespace RadiationModel.substances
     public class Antimony120m : RadioactiveSubstance
     {
         public override string name { get; } = "Antimony120m";
-        public override double halfLife { get; } = 953.4d;
+        public override double halfLife { get; } = 497664.0d;
         public override double atomicWeight { get; } = 119.90508d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()

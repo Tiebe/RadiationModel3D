@@ -10,6 +10,7 @@ public abstract class Manager : MonoBehaviour
     public Counter counter;
     public Transform absorber;
     public Transform detector;
+    public string FileNameEnd;
     
     [HideInInspector]
     public int hits = 0;

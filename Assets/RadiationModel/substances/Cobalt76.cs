@@ -5,7 +5,7 @@ namespace RadiationModel.substances
     public class Cobalt76 : RadioactiveSubstance
     {
         public override string name { get; } = "Cobalt76";
-        public override double halfLife { get; } = 0.016d;
+        public override double halfLife { get; } = 0.0217d;
         public override double atomicWeight { get; } = 75.97245d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()

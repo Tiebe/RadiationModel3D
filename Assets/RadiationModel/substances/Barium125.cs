@@ -5,12 +5,11 @@ namespace RadiationModel.substances
     public class Barium125 : RadioactiveSubstance
     {
         public override string name { get; } = "Barium125";
-        public override double halfLife { get; } = 198.0d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 124.91447d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Xenon125()), new(1.0d, new BetaParticle(1, betaPlusSpectrum)) } },
 
         }; 
         

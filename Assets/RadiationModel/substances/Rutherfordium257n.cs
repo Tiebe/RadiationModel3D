@@ -5,7 +5,7 @@ namespace RadiationModel.substances
     public class Rutherfordium257n : RadioactiveSubstance
     {
         public override string name { get; } = "Rutherfordium257n";
-        public override double halfLife { get; } = 0.00014d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 257.10416d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()

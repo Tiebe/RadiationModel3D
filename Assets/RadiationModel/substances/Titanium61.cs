@@ -5,14 +5,11 @@ namespace RadiationModel.substances
     public class Titanium61 : RadioactiveSubstance
     {
         public override string name { get; } = "Titanium61";
-        public override double halfLife { get; } = 0.015d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 60.98243d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()
         {
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> { new(1.0d, new Vanadium61()), new(1.0d, new BetaParticle(-1, betaMinusSpectrum)) } },
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> {  } },
-            { 1.0d, new List<KeyValuePair<double, RadioactiveSubstance>> {  } },
 
         }; 
         

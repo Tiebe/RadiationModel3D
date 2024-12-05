@@ -5,7 +5,7 @@ namespace RadiationModel.substances
     public class Hafnium176q : RadioactiveSubstance
     {
         public override string name { get; } = "Hafnium176q";
-        public override double halfLife { get; } = 4e-05d;
+        public override double halfLife { get; } = double.PositiveInfinity;
         public override double atomicWeight { get; } = 175.94663d;
 
         public override Dictionary<double, List<KeyValuePair<double, RadioactiveSubstance>>> decayProducts { get; } = new()

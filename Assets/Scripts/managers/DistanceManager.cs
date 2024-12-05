@@ -30,8 +30,7 @@ namespace managers
             counter.SetText(hits.ToString());
 
             var distance = DistanceList[iteration / 3]; // dividing int's in this manner floors automatically
-            if (Vector3.Distance(emitterTransform.position, detector.position).Round(2) !=
-                distance.Round(2)) // floating point error :(
+            if (Vector3.Distance(emitterTransform.position, detector.position).Round(2) != distance.Round(2)) // floating point error :(
             {
                 detector.position = new Vector3(0f, emitterTransform.position.y + distance, 0);
                 Debug.Log("moved detector");
@@ -50,7 +49,7 @@ namespace managers
 
             if (iteration >= DistanceList.Length * 3)
             {
-                WriteData(sb, "AfstandBetaData");
+                WriteData(sb, "AfstandBetaData"+FileNameEnd);
                 emitter.emitting = false;
             }
             
