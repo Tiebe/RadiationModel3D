@@ -168,7 +168,7 @@ MonoBehaviour:
   detector: {fileID: 448574871}
   FileNameEnd: v2-1
   hits: 0
-  timeScale: 5
+  timeScale: 1
 --- !u!1001 &62432304
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -564,6 +564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   materialString: Aluminium
+  warnings: 0
 --- !u!65 &421180940
 BoxCollider:
   m_ObjectHideFlags: 0

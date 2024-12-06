@@ -95,7 +95,6 @@ public class RadiationEmitter : MonoBehaviour
     public static bool HasGammaAbsorbed(GammaParticle gammaParticle, double distance, double density, double massAttenuationCoefficient)
     {
         var attenuation = Math.Exp(-massAttenuationCoefficient * distance * (density / 1000));
-        
         return UnityEngine.Random.value >= attenuation;
     }
     

@@ -21,6 +21,8 @@ namespace managers
             {
                 absorber  = GameObject.FindWithTag("Absorber").GetComponent<Transform>();
             }
+
+            timer = 10f;
         }
 
         protected override void RunExperiment()
@@ -53,8 +55,8 @@ namespace managers
 
             if (iteration >= thicknesses.Length * 3)
             {
-                WriteData(sb, "AbsorbtieBetaData"+FileNameEnd);
                 emitter.emitting = false;
+                WriteData(sb, "AbsorbtieBetaData"+FileNameEnd);
             }
         }
     }
