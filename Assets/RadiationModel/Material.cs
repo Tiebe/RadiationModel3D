@@ -11,8 +11,6 @@ namespace RadiationModel
         public abstract double density { get; } // Kg/m^3
         public abstract double atomicWeight { get; } // useless (just like me frfr)
         
-        public bool warnings = false;
-
         /**
          * The mass attenuation coefficients of the material.
          * Key: the energy of the gamma particle in eV
@@ -50,14 +48,14 @@ namespace RadiationModel
             if (lowerBound == double.MinValue)
             {
                 // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
-                if (warnings) Debug.LogWarning($"Energy {energy} is lower than the lowest value in the MAC table. Returning the lowest value.");
+                Debug.LogWarning($"Energy {energy} is lower than the lowest value in the MAC table. Returning the lowest value.");
                 return massAttenuationCoefficients.Values.First();
             }
 
             if (upperBound == double.MaxValue)
             {
                 // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
-                if (warnings) Debug.LogWarning($"Energy {energy} is higher than the highest value in the MAC table. Returning the highest value.");
+                Debug.LogWarning($"Energy {energy} is higher than the highest value in the MAC table. Returning the highest value.");
                 return massAttenuationCoefficients.Values.Last();
             }
 
@@ -93,14 +91,14 @@ namespace RadiationModel
             if (lowerBound == double.MinValue)
             {
                 // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
-                if (warnings) Debug.LogWarning($"Energy {energy} is lower than the lowest value in the MSP table. Returning the lowest value.");
+                Debug.LogWarning($"Energy {energy} is lower than the lowest value in the MSP table. Returning the lowest value.");
                 return massStoppingPowers.Values.First();
             }
 
             if (upperBound == double.MaxValue)
             {
                 // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
-                if (warnings) Debug.LogWarning($"Energy {energy} is higher than the highest value in the MSP table. Returning the highest value.");
+                Debug.LogWarning($"Energy {energy} is higher than the highest value in the MSP table. Returning the highest value.");
                 return massStoppingPowers.Values.Last();
             }
 

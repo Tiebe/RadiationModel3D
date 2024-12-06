@@ -95,10 +95,6 @@ public class RadiationEmitter : MonoBehaviour
     public static bool HasGammaAbsorbed(GammaParticle gammaParticle, double distance, double density, double massAttenuationCoefficient)
     {
         var attenuation = Math.Exp(-massAttenuationCoefficient * distance * (density / 1000));
-        // Debug.Log("Mass attenuation coefficient: " + massAttenuationCoefficient);
-        // Debug.Log("Attenuation: " + attenuation);
-        // Debug.Log("Distance: " + distance);
-        
         return UnityEngine.Random.value >= attenuation;
     }
     
@@ -107,7 +103,7 @@ public class RadiationEmitter : MonoBehaviour
         // mass thickness in g/cm^2
         var massThickness = density/1000 * distance;
 
-        var energyLost = massStoppingPower * massThickness;
+        var energyLost = massStoppingPower * 1000000 * massThickness;
         betaParticle.energy -= energyLost;
 
         // only return false if the particle still has energy left
