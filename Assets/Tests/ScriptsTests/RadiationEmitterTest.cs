@@ -46,15 +46,15 @@ namespace Tests.ScriptsTests
         {
             var betaParticle = new BetaParticle(1, new Dictionary<double, double>())
             {
-                energy = 100
+                energy = 5000
             };
             
-            var result = RadiationEmitter.HasBetaAbsorbed(betaParticle, 500, 1, 1000);
+            var result = RadiationEmitter.HasBetaAbsorbed(betaParticle, 500, 0.000001, 1000);
             Debug.Log("Result: " + betaParticle.energy);
             betaParticle.energy = 100;
-             var result2 = RadiationEmitter.HasBetaAbsorbed(betaParticle, 50, 1, 1000);
+             var result2 = RadiationEmitter.HasBetaAbsorbed(betaParticle, 50, 0.000001, 1000);
             betaParticle.energy = 100;
-            var result3 = RadiationEmitter.HasBetaAbsorbed(betaParticle, 100, 1, 1000);
+            var result3 = RadiationEmitter.HasBetaAbsorbed(betaParticle, 100, 0.00000001, 1000);
             
             Assert.AreEqual(true, result);
             Assert.AreEqual(false, result2);
