@@ -5,7 +5,7 @@ namespace RadiationModel.materials
     public class Perspex : Material
     {
         public override string name { get; } = "Perspex";
-        public override double density { get; } = 1.18d;
+        public override double density { get; } = 1190d;
         public override double atomicWeight { get; } = 0d;
 
         public override Dictionary<double, double> massAttenuationCoefficients { get; } = new()
