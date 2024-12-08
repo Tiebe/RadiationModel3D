@@ -564,7 +564,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   materialString: Lead
-  warnings: 0
 --- !u!65 &421180940
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -988,7 +987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c46b99df390134696370df8d175f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initalAmount: 50000000000
+  initalAmount: 300000000000
   radioactiveSubstanceName: Cobalt60
   emitting: 1
   debugRender: 1
