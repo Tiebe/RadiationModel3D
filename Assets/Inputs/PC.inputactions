@@ -1,0 +1,34 @@
+{
+    "name": "PC",
+    "maps": [
+        {
+            "name": "Navigation",
+            "id": "b9343a74-3268-4473-a557-60b104053834",
+            "actions": [
+                {
+                    "name": "Back",
+                    "type": "Button",
+                    "id": "7a347426-7a7a-4032-b232-f1e640c33e14",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "cd761f21-2dde-4923-858e-8a183d91e04a",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Back",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
