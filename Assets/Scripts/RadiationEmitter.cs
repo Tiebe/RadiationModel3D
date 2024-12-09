@@ -6,16 +6,19 @@ using RadiationModel.statistics;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+[Serializable]
+public struct StartingSubstance
+{
+    public string name;
+    public long amount;
+}
+
 public class RadiationEmitter : MonoBehaviour
 {
-
-    [FormerlySerializedAs("amount")] public long initalAmount;
-    public string radioactiveSubstanceName;
     public bool emitting;
     public bool debugRender = false;
     public bool debugRenderAll = false;
-    [HideInInspector]
-    public bool resetter = false;
+    public List<StartingSubstance> startingSubstancesList = new();
 
     private Dictionary<RadioactiveSubstance, long> particles = new();
     private void OnEnable()
@@ -30,15 +33,11 @@ public class RadiationEmitter : MonoBehaviour
 
     public void Emit()
     {
-        var substance = Substances.GetSubstanceByName(radioactiveSubstanceName);
-        particles.Add(substance, initalAmount);
-    }
-
-    private void ResetEmitter()
-    {
         particles.Clear();
-        Emit();
-        resetter = false;
+        foreach (var startingSubstance in startingSubstancesList)
+        {
+            particles.Add(Substances.GetSubstanceByName(startingSubstance.name), startingSubstance.amount);
+        }
     }
     
     private (List<KeyValuePair<GameObject, Vector3[]>> hitPoints, Vector3 direction) GetHitPoints()
@@ -97,11 +96,19 @@ public class RadiationEmitter : MonoBehaviour
         var attenuation = Math.Exp(-massAttenuationCoefficient * distance * (density / 1000));
         return UnityEngine.Random.value >= attenuation;
     }
+
+    public static double maxEnergyFound = 0;
     
     public static bool HasBetaAbsorbed(BetaParticle betaParticle, double distance, double massStoppingPower, double density)
     {
         // mass thickness in g/cm^2
         var massThickness = density/1000 * distance;
+        
+        if (betaParticle.energy > maxEnergyFound)
+        {
+            maxEnergyFound = betaParticle.energy;
+            Debug.Log("Max energy found: " + maxEnergyFound);
+        }
 
         var energyLost = massStoppingPower * 1000000 * massThickness;
         betaParticle.energy -= energyLost;
@@ -176,12 +183,6 @@ public class RadiationEmitter : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (resetter)
-        {
-            ResetEmitter();
-            return;
-        }
-
         if (!emitting) return;
         
         double time = Time.deltaTime;

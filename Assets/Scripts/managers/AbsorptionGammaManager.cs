@@ -25,11 +25,6 @@ namespace managers
 
         protected override void RunExperiment()
         {
-            if (emitter.resetter)
-            {
-                return;
-            }
-
             if (sb.Length == 0)
             {
                 sb.AppendLine("d(cm), I (pulsen/10s)");

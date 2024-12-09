@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,7 +27,7 @@ public class StartButton : MonoBehaviour
             emitter = GameObject.FindWithTag("Emitter").GetComponent<RadiationEmitter>();
         }
 
-        inputField.text = emitter.initalAmount.ToString();
+        inputField.text = emitter.startingSubstancesList.First().amount.ToString();
     }
 
     private void OnClick()
@@ -35,7 +36,10 @@ public class StartButton : MonoBehaviour
         {
             if (inputField.text.Length != 0)
             {
-                emitter.initalAmount = long.Parse(inputField.text);
+                var substance = emitter.startingSubstancesList[0];
+                substance.amount = long.Parse(inputField.text);
+                emitter.startingSubstancesList[0] = substance;
+
             }
 
             // TODO add method for this to be set to false when the experiment finishes
