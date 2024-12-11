@@ -90,7 +90,6 @@ public class RadiationEmitter : MonoBehaviour
 
             for (var i = 0f; i < preRunFor; i += preRunInterval)
             {
-
                 // create copy of particles dictionary to put changes in, since editing a dictionary that is currently being iterated over, throws an error
                 var tempParticles = new Dictionary<RadioactiveSubstance, long>();
 
@@ -308,10 +307,12 @@ public class RadiationEmitter : MonoBehaviour
             tempParticles.TryAdd(substance, 0);
             foreach (var (particle, particleAmount) in decayed)
             {
-                tempParticles.TryAdd(particle, 0);
-                tempParticles[particle] += particleAmount;
-
-                if (particle is not (GammaParticle or BetaParticle)) continue;
+                if (particle is not (GammaParticle or BetaParticle))
+                {
+                    tempParticles.TryAdd(particle, 0);
+                    tempParticles[particle] += particleAmount;
+                    continue;
+                }
 
                 for (var i = 0; i < particleAmount; i++)
                 {
