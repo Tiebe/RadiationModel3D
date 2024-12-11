@@ -23,16 +23,15 @@ namespace managers
             }
 
             timer = 10f;
+            
+            using var csv = CSVManager.CreateFile("AbsorbtieBetaData"+FileNameEnd);
+            csv.WriteLine("index, d(cm), hits");
+            absorber.GetComponent<RadiationModelMaterial>().ResetMaterial("Aluminium");
         }
 
         protected override void RunExperiment()
         {
-            using var csv = CSVManager.CreateFile("AbsorbtieBetaData"+FileNameEnd);
-            if (csv.BaseStream.Length == 0)
-            {
-                csv.WriteLine("index, d(cm), hits");
-                absorber.GetComponent<RadiationModelMaterial>().ResetMaterial("Aluminium");
-            }
+            using var csv = CSVManager.AppendFile("AbsorbtieBetaData"+FileNameEnd);
             
             counter.SetText(hits.ToString());
 

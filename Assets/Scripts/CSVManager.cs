@@ -14,7 +14,17 @@ public static class CSVManager
         
         var filepath = Path.Combine(folder, fileName + ".csv");
 
-        File.Create(filepath).Dispose();
+        File.Create(filepath);
+        return File.AppendText(filepath);
+    }
+
+    public static StreamWriter AppendFile(string fileName)
+    {
+        var documentFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
+        var folder = Path.Combine(documentFolder, "RadiationModel3D", "Output");
+        
+        var filepath = Path.Combine(folder, fileName + ".csv");
+
         return File.AppendText(filepath);
     }
 }
