@@ -1,0 +1,20 @@
+using System.IO;
+using UnityEngine;
+
+public static class CSVManager
+{
+    public static StreamWriter CreateFile(string fileName)
+    {
+        var documentFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
+        var folder = Path.Combine(documentFolder, "RadiationModel3D", "Output");
+        if (!Directory.Exists(folder))
+        {
+            Directory.CreateDirectory(folder);
+        }
+        
+        var filepath = Path.Combine(folder, fileName + ".csv");
+
+        File.Create(filepath).Dispose();
+        return File.AppendText(filepath);
+    }
+}

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using RadiationModel;
 using RadiationModel.statistics;
+using RadiationModel.substances;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [Serializable]
 public struct StartingSubstance
@@ -19,6 +19,10 @@ public class RadiationEmitter : MonoBehaviour
     public bool debugRender = false;
     public bool debugRenderAll = false;
     public List<StartingSubstance> startingSubstancesList = new();
+    public bool preRun = false;
+    public long preRunFor = 0;
+    public float preRunInterval = 1;
+    public bool onlyPreRun = false;
 
     private Dictionary<RadioactiveSubstance, long> particles = new();
     private void OnEnable()
@@ -37,6 +41,85 @@ public class RadiationEmitter : MonoBehaviour
         foreach (var startingSubstance in startingSubstancesList)
         {
             particles.Add(Substances.GetSubstanceByName(startingSubstance.name), startingSubstance.amount);
+        }
+
+        if (preRun)
+        {
+            using var csv = CSVManager.CreateFile("PreRunData");
+            var headerItems = particles.Keys.Select(particle => particle.name).ToList();
+            var sb = new System.Text.StringBuilder();
+
+            var stopwatch = new System.Diagnostics.Stopwatch();
+            stopwatch.Start();
+
+            for (var i = 0f; i < preRunFor; i += preRunInterval)
+            {
+
+                // create copy of particles dictionary to put changes in, since editing a dictionary that is currently being iterated over, throws an error
+                var tempParticles = new Dictionary<RadioactiveSubstance, long>();
+
+                // iterate over all items in the copy of the dictionary
+                foreach (var (substance, amount) in particles)
+                {
+                    // initiate variables, calculate the decay product and writes it to particles
+                    var decayed = Statistics.Decay(substance, amount, preRunInterval);
+                    tempParticles.TryAdd(substance, 0);
+                    foreach (var (particle, amount2) in decayed)
+                    {
+                        if (particle is GammaParticle or BetaParticle) continue;
+
+                        tempParticles.TryAdd(particle, 0);
+                        tempParticles[particle] += amount2;
+                    }
+                }
+
+                foreach (var (particle, amount) in tempParticles)
+                {
+                    particles[particle] = amount;
+                }
+
+                var line = "";
+                line += i + ",";
+
+                var items = new string[particles.Count];
+
+                foreach (var (substance, amount) in particles)
+                {
+                    var index = headerItems.FindIndex(particle => particle == substance.name);
+                    if (index == -1)
+                    {
+                        headerItems.Add(substance.name);
+                        index = headerItems.Count - 1;
+                    }
+
+                    items[index] = amount.ToString();
+                }
+
+                line = items.Aggregate(line, (current, item) => current + item + ",");
+
+                sb.AppendLine(line);
+            }
+
+            stopwatch.Stop();
+            Debug.Log("Pre run time: " + stopwatch.ElapsedMilliseconds + "ms");
+
+            sb.Insert(0, "Time," + string.Join(",", headerItems) + "\n");
+
+
+            csv.Write(sb.ToString());
+
+            Debug.Log("Pre run finished");
+            // print out particles and amounts
+            foreach (var (particle, amount) in particles)
+            {
+                Debug.Log(particle.name + ": " + amount);
+            }
+        }
+
+        if (onlyPreRun)
+        {
+            emitting = false;
+            particles.Clear();
         }
     }
     
@@ -145,12 +228,13 @@ public class RadiationEmitter : MonoBehaviour
         return false;
     }
 
-    private void SimulateParticle(RadioactiveSubstance particle)
+    private void SimulateParticle(RadioactiveSubstance particle, RadioactiveSubstance substance)
     {
         // give beta particles a random energy for absorption
         if (particle is BetaParticle betaParticle)
         {
             betaParticle.energy = Statistics.RandomBetaEnergy(betaParticle.spectrum);
+            if (substance is Yttrium90) Debug.Log("Beta particle energy: " + betaParticle.energy);
         }
                     
         var (hitPoints, direction) = GetHitPoints();
@@ -183,35 +267,38 @@ public class RadiationEmitter : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!emitting) return;
+        if (!emitting || onlyPreRun) return;
         
         double time = Time.deltaTime;
 
-        // create copy of particles dictionary to iterate over, since editing a dictionary that is currently being iterated over, throws an error
-        var particlesCopy = particles.ToDictionary(entry => entry.Key, entry => entry.Value);
-    
+        // create copy of particles dictionary to put changes in, since editing a dictionary that is currently being iterated over, throws an error
+        var tempParticles = new Dictionary<RadioactiveSubstance, long>();
+
         // iterate over all items in the copy of the dictionary
-        foreach (var (substance, amount) in particlesCopy) {
+        foreach (var (substance, amount) in particles) {
             // initiate variables, calculate the decay product and writes it to particles
             var decayed = Statistics.Decay(substance, amount, time);
-            particles[substance] = 0;
+            tempParticles.TryAdd(substance, 0);
             foreach (var (particle, particleAmount) in decayed)
             {
-                // if the particle is not a gamma or beta particle, add the new particles to the dictionary for the next run
-                if (particle is not (GammaParticle or BetaParticle))
-                {
-                    particles.TryGetValue(particle, out var existing);
-                    particles[particle] = existing + particleAmount;
-                    continue;
-                }
-                
-                
+                tempParticles.TryAdd(particle, 0);
+                tempParticles[particle] += particleAmount;
+
+                if (particle is not (GammaParticle or BetaParticle)) continue;
+
                 for (var i = 0; i < particleAmount; i++)
                 {
-                    SimulateParticle(particle);
+                    SimulateParticle(particle, substance);
                 }
             }
         }
+            
+        foreach (var (particle, amount) in tempParticles)
+        {
+            particles[particle] = amount;
+        }
+        
+        particles = particles.Where(pair => pair.Value > 0).ToDictionary(pair => pair.Key, pair => pair.Value);
 
     }
 }

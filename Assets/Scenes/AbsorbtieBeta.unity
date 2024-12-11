@@ -713,7 +713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9620dbbd13924d739ed03279fd96056f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectGamma: 0
+  detectGamma: 1
   detectBeta: 1
 --- !u!64 &448574873
 MeshCollider:
@@ -989,12 +989,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emitting: 1
   debugRender: 1
-  debugRenderAll: 0
+  debugRenderAll: 1
   startingSubstancesList:
   - name: Strontium90
     amount: 2000000000000
-  - name: Yttrium90
-    amount: 8547905
+  preRun: 1
+  preRunFor: 100000000
+  preRunInterval: 1
+  onlyPreRun: 1
 --- !u!136 &680841585
 CapsuleCollider:
   m_ObjectHideFlags: 0
