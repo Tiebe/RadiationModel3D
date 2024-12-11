@@ -23,7 +23,7 @@ namespace managers
         {
             if (sb.Length == 0)
             {
-                sb.AppendLine("d(m), hits/60s");
+                sb.AppendLine("index, d(m), hits/60s");
                 timer += 60f;
             }
 
@@ -42,7 +42,7 @@ namespace managers
                 return;
             }
 
-            sb.AppendLine(distance.ToString() + "," + hits.ToString());
+            sb.AppendLine(iteration + "," + distance + "," + hits);
             hits = 0;
             timer += 60f;
             iteration++;

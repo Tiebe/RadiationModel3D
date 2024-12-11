@@ -47,7 +47,7 @@ namespace managers
                 return;
             }
             
-            csv.WriteLine(thicknesses[iteration / 3] + "," + hits);
+            csv.WriteLine(iteration + "," + thicknesses[iteration / 3] + "," + hits);
             hits = 0;
             timer += 10f;
             iteration++;

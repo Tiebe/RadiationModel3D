@@ -22,7 +22,7 @@ namespace managers
         {
             if (sb.Length == 0)
             {
-                sb.AppendLine("t(s), hits");
+                sb.AppendLine("index, t(s), hits");
                 timer += interval;
             }
 
@@ -35,7 +35,7 @@ namespace managers
             }
 
             iteration += 1;
-            sb.AppendLine((iteration * interval).ToString(CultureInfo.InvariantCulture) + "," + hits);
+            sb.AppendLine(iteration + "," + (iteration * interval).ToString(CultureInfo.InvariantCulture) + "," + hits);
             hits = 0;
             timer += interval;
 
