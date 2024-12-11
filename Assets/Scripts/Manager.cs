@@ -8,6 +8,7 @@ public abstract class Manager : MonoBehaviour
 {
     public RadiationEmitter emitter;
     public Counter counter;
+    public GeigerTeller geigerTeller;
     public Transform absorber;
     public Transform detector;
     public string FileNameEnd;
@@ -25,6 +26,13 @@ public abstract class Manager : MonoBehaviour
         }
     
         counter.SetText("0");
+
+        if (geigerTeller == null)
+        {
+            geigerTeller = GameObject.FindWithTag("Detector").GetComponent<GeigerTeller>();
+        }
+        
+        geigerTeller.manager = this;
         
         if (emitter == null)
         {
