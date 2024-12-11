@@ -42,7 +42,7 @@ namespace managers
             if (iteration * interval >= experimentDuration)
             {
                 emitter.emitting = false;
-                WriteData(sb, "VarvalBetaData" + FileNameEnd);
+                WriteData(sb, "VervalBetaData" + FileNameEnd);
             }
         }
     }

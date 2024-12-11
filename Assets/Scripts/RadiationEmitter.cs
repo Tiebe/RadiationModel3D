@@ -215,19 +215,11 @@ public class RadiationEmitter : MonoBehaviour
         var attenuation = Math.Exp(-massAttenuationCoefficient * distance * (density / 1000));
         return UnityEngine.Random.value >= attenuation;
     }
-
-    public static double maxEnergyFound = 0;
     
     public static bool HasBetaAbsorbed(BetaParticle betaParticle, double distance, double massStoppingPower, double density)
     {
         // mass thickness in g/cm^2
         var massThickness = density/1000 * distance;
-        
-        if (betaParticle.energy > maxEnergyFound)
-        {
-            maxEnergyFound = betaParticle.energy;
-            Debug.Log("Max energy found: " + maxEnergyFound);
-        }
 
         var energyLost = massStoppingPower * 1000000 * massThickness;
         betaParticle.energy -= energyLost;
@@ -264,13 +256,12 @@ public class RadiationEmitter : MonoBehaviour
         return false;
     }
 
-    private void SimulateParticle(RadioactiveSubstance particle, RadioactiveSubstance substance)
+    private void SimulateParticle(RadioactiveSubstance particle)
     {
         // give beta particles a random energy for absorption
         if (particle is BetaParticle betaParticle)
         {
             betaParticle.energy = Statistics.RandomBetaEnergy(betaParticle.spectrum);
-            if (substance is Yttrium90) Debug.Log("Beta particle energy: " + betaParticle.energy);
         }
                     
         var (hitPoints, direction) = GetHitPoints();
@@ -324,7 +315,7 @@ public class RadiationEmitter : MonoBehaviour
 
                 for (var i = 0; i < particleAmount; i++)
                 {
-                    SimulateParticle(particle, substance);
+                    SimulateParticle(particle);
                 }
             }
         }
