@@ -23,6 +23,8 @@ public class RadiationEmitter : MonoBehaviour
     public long preRunFor = 0;
     public float preRunInterval = 1;
     public bool onlyPreRun = false;
+    
+    public bool createBalances = true;
 
     private Dictionary<RadioactiveSubstance, long> particles = new();
     private void OnEnable()
@@ -35,12 +37,46 @@ public class RadiationEmitter : MonoBehaviour
         particles.Clear();
     }
 
+    private void CreateBalance(RadioactiveSubstance substance, double currentChance, long startingAmount)
+    {
+        foreach (var (chance, products) in substance.decayProducts)
+        {
+            foreach (var (productChance, product) in products)
+            {
+                if (product is GammaParticle or BetaParticle or AlphaParticle or ProtonParticle or NeutronParticle) continue;
+                
+                var newChance = currentChance * chance * productChance;
+                
+                var leftOver = product.halfLife / substance.halfLife;
+                if (double.IsPositiveInfinity(leftOver)) leftOver = 0;
+                var amount = (long) Math.Round(startingAmount * newChance * leftOver);
+                
+                if (amount == 0) continue;
+                particles.TryAdd(product, 0);
+                particles[product] += amount;
+                CreateBalance(product, newChance, startingAmount);
+            }
+        }
+    }
+    
     public void Emit()
     {
         particles.Clear();
         foreach (var startingSubstance in startingSubstancesList)
         {
-            particles.Add(Substances.GetSubstanceByName(startingSubstance.name), startingSubstance.amount);
+            var substance = Substances.GetSubstanceByName(startingSubstance.name);
+            particles.TryAdd(substance, 0);
+            particles[substance] += startingSubstance.amount;
+
+            if (createBalances)
+            {
+                CreateBalance(substance, 1, startingSubstance.amount);
+                Debug.Log("Balance created for " + substance.name);
+                foreach (var (particle, amount) in particles)
+                {
+                    Debug.Log(particle.name + ": " + amount);
+                }
+            }
         }
 
         if (preRun)

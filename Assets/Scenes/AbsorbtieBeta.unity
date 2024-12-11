@@ -992,11 +992,12 @@ MonoBehaviour:
   debugRenderAll: 1
   startingSubstancesList:
   - name: Strontium90
-    amount: 2000000000000
-  preRun: 1
+    amount: 2000000000
+  preRun: 0
   preRunFor: 100000000
-  preRunInterval: 1
-  onlyPreRun: 1
+  preRunInterval: 200
+  onlyPreRun: 0
+  createBalances: 1
 --- !u!136 &680841585
 CapsuleCollider:
   m_ObjectHideFlags: 0
