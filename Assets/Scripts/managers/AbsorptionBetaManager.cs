@@ -30,7 +30,7 @@ namespace managers
             using var csv = CSVManager.CreateFile("AbsorbtieBetaData"+FileNameEnd);
             if (csv.BaseStream.Length == 0)
             {
-                csv.WriteLine("d(cm), hits");
+                csv.WriteLine("index, d(cm), hits");
                 absorber.GetComponent<RadiationModelMaterial>().ResetMaterial("Aluminium");
             }
             
