@@ -14,6 +14,8 @@ namespace managers
         
         private float timer;
         private int iteration;
+
+        private bool start = false;
         
         protected override void StartOverride()
         {
@@ -24,13 +26,16 @@ namespace managers
 
             timer = 10f;
             
-            using var csv = CSVManager.CreateFile("AbsorbtieBetaData"+FileNameEnd);
+            var csv = CSVManager.CreateFile("AbsorbtieBetaData"+FileNameEnd);
             csv.WriteLine("index, d(cm), hits");
             absorber.GetComponent<RadiationModelMaterial>().ResetMaterial("Aluminium");
+            csv.Dispose();
+            start = true;
         }
 
         protected override void RunExperiment()
         {
+            if (!start) return;
             using var csv = CSVManager.AppendFile("AbsorbtieBetaData"+FileNameEnd);
             
             counter.SetText(hits.ToString());
