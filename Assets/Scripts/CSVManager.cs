@@ -14,7 +14,7 @@ public static class CSVManager
         
         var filepath = Path.Combine(folder, fileName + ".csv");
 
-        File.Create(filepath);
+        File.Create(filepath).Dispose();
         return File.AppendText(filepath);
     }
 
