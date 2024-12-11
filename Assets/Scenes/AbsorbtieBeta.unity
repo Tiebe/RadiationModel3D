@@ -713,7 +713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9620dbbd13924d739ed03279fd96056f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectGamma: 1
+  detectGamma: 0
   detectBeta: 1
 --- !u!64 &448574873
 MeshCollider:

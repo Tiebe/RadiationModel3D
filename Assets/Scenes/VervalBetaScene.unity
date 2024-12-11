@@ -549,12 +549,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c46b99df390134696370df8d175f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initalAmount: 50000
-  radioactiveSubstanceName: Protactinium234m
   emitting: 1
   debugRender: 1
   debugRenderAll: 0
-  resetter: 0
+  startingSubstancesList:
+  - name: Protactinium234m
+    amount: 50000
+  preRun: 0
+  preRunFor: 0
+  preRunInterval: 1
+  onlyPreRun: 0
+  createBalances: 0
 --- !u!1 &184090137
 GameObject:
   m_ObjectHideFlags: 0

@@ -987,12 +987,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c46b99df390134696370df8d175f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initalAmount: 300000000000
-  radioactiveSubstanceName: Cobalt60
   emitting: 1
   debugRender: 1
   debugRenderAll: 1
-  resetter: 0
+  startingSubstancesList:
+  - name: Cobalt60
+    amount: 300000000000
+  preRun: 0
+  preRunFor: 0
+  preRunInterval: 1
+  onlyPreRun: 0
+  createBalances: 1
 --- !u!136 &680841585
 CapsuleCollider:
   m_ObjectHideFlags: 0
