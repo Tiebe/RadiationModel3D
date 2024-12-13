@@ -15,11 +15,7 @@ public class Counter : MonoBehaviour
 
     public void SetText(string newText)
     {
-        if (text == null)
-        {
-            Debug.LogWarning("Text is null");
-            return;
-        }
+        if (text is null) return;
         text.text = "<mspace=1.3em>"+newText+"</mspace>";
     }
 }

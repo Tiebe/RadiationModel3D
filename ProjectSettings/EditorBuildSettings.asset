@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: a3dbf0ab0042da342b07f669b5e4ce3e
   - enabled: 1
-    path: Assets/Scenes/VarvalBetaScene.unity
+    path: Assets/Scenes/VervalBetaScene.unity
     guid: 80045e7247cfd0741912fa7437036c51
   - enabled: 1
     path: Assets/Scenes/BetaAfstand.unity

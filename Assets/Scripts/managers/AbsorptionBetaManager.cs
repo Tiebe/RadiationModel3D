@@ -1,3 +1,4 @@
+using System.IO;
 using System.Linq;
 using System.Text;
 using MathNet.Numerics;
@@ -10,10 +11,11 @@ namespace managers
         private static float[] thicknessesAluminium = { 0.024f, 0.034f, 0.051f, 0.067f, 0.095f, 0.120f, 0.160f, 0.201f, 0.259f, 0.322f, 0.379f, 0.419f };
         private static float[] thicknessesPerspex = { 0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1.0f, 1.1f, 1.2f };
         private float[] thicknesses = thicknessesAluminium.Concat(thicknessesPerspex).ToArray();
-        private StringBuilder sb = new();
         
         private float timer;
         private int iteration;
+
+        private bool start = false;
         
         protected override void StartOverride()
         {
@@ -23,15 +25,18 @@ namespace managers
             }
 
             timer = 10f;
+            
+            var csv = CSVManager.CreateFile("AbsorbtieBetaData"+FileNameEnd);
+            csv.WriteLine("index, d(cm), hits");
+            absorber.GetComponent<RadiationModelMaterial>().ResetMaterial("Aluminium");
+            csv.Dispose();
+            start = true;
         }
 
         protected override void RunExperiment()
         {
-            if (sb.Length == 0)
-            {
-                sb.AppendLine("d(cm), hits");
-                absorber.GetComponent<RadiationModelMaterial>().ResetMaterial("Aluminium");
-            }
+            if (!start) return;
+            using var csv = CSVManager.AppendFile("AbsorbtieBetaData"+FileNameEnd);
             
             counter.SetText(hits.ToString());
 
@@ -46,7 +51,7 @@ namespace managers
                 return;
             }
             
-            sb.AppendLine(thicknesses[iteration / 3].ToString() + "," + hits.ToString());
+            csv.WriteLine(iteration + "," + thicknesses[iteration / 3] + "," + hits);
             hits = 0;
             timer += 10f;
             iteration++;
@@ -56,7 +61,7 @@ namespace managers
             if (iteration >= thicknesses.Length * 3)
             {
                 emitter.emitting = false;
-                WriteData(sb, "AbsorbtieBetaData"+FileNameEnd);
+                Debug.Log("Experiment finished");
             }
         }
     }
