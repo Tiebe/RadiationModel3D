@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +19,12 @@ public class MeasureModeToggle : MonoBehaviour
         toggle.onValueChanged.AddListener(OnToggle);
 
         // if the manager mode is set to a value that is neither toggle on nor toggle of that will lead to unexpected behaviour
-        toggle.isOn = managerWhenOff.enabled;
+        toggle.isOn = managerWhenOn.enabled;
+        
+        if (managerWhenOff == managerWhenOn)
+        {
+            throw new ArgumentException();
+        }
 
         if (emitter == null)
         {
