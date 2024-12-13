@@ -5,6 +5,7 @@ using RadiationModel;
 using RadiationModel.statistics;
 using RadiationModel.substances;
 using UnityEngine;
+using Material = RadiationModel.Material;
 
 [Serializable]
 public struct StartingSubstance
@@ -23,6 +24,10 @@ public class RadiationEmitter : MonoBehaviour
     public long preRunFor = 0;
     public float preRunInterval = 1;
     public bool onlyPreRun = false;
+    public int betaStepCount = 1000;
+    
+    public bool skipBeta = false;
+    public bool skipGamma = false;
     
     public bool createBalances = true;
 
@@ -215,16 +220,23 @@ public class RadiationEmitter : MonoBehaviour
         return UnityEngine.Random.value >= attenuation;
     }
     
-    public static bool HasBetaAbsorbed(BetaParticle betaParticle, double distance, double massStoppingPower, double density)
+    public bool HasBetaAbsorbed(BetaParticle betaParticle, double distance, Material material)
     {
+        var stepDistance = distance / betaStepCount;
+        
         // mass thickness in g/cm^2
-        var massThickness = density/1000 * distance;
+        var stepMassThickness = material.density / 1000 * stepDistance;
+        
+        for (var i = 0; i < betaStepCount; i++)
+        {
+            var energyLost = material.GetMSPForEnergy(betaParticle.energy) * 1000000 * stepMassThickness;
+            betaParticle.energy -= energyLost;
+            
+            // only return false if the particle still has energy left
+            if (betaParticle.energy <= 0) return true;
+        }
 
-        var energyLost = massStoppingPower * 1000000 * massThickness;
-        betaParticle.energy -= energyLost;
-
-        // only return false if the particle still has energy left
-        return betaParticle.energy <= 0;
+        return false;
     }
 
     private bool HasParticleBeenAbsorbed(GameObject hitGameObject, Vector3[] points, RadioactiveSubstance particle, Vector3 direction)
@@ -247,7 +259,7 @@ public class RadiationEmitter : MonoBehaviour
         switch (particle)
         {
             case GammaParticle gammaParticle when HasGammaAbsorbed(gammaParticle, distance, material.material.density, material.material.GetMACForEnergy(gammaParticle.energy)):
-            case BetaParticle electronParticle when HasBetaAbsorbed(electronParticle, distance, material.material.GetMSPForEnergy(electronParticle.energy), material.material.density):
+            case BetaParticle electronParticle when HasBetaAbsorbed(electronParticle, distance, material.material):
                 if (debugRender) Debug.DrawRay(transform.position, direction * distance, Color.red, 0.2f);
                 return true;
         }
@@ -313,6 +325,9 @@ public class RadiationEmitter : MonoBehaviour
                     tempParticles[particle] += particleAmount;
                     continue;
                 }
+                
+                if (particle is GammaParticle && skipGamma) continue;
+                if (particle is BetaParticle && skipBeta) continue;
 
                 for (var i = 0; i < particleAmount; i++)
                 {
