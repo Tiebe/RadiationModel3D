@@ -39,7 +39,6 @@ public class StartButton : MonoBehaviour
                 var substance = emitter.startingSubstancesList[0];
                 substance.amount = long.Parse(inputField.text);
                 emitter.startingSubstancesList[0] = substance;
-
             }
 
             // TODO add method for this to be set to false when the experiment finishes
