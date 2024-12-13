@@ -164,12 +164,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93c46b99df390134696370df8d175f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initalAmount: 7000000000000
-  radioactiveSubstanceName: Strontium90
   emitting: 1
   debugRender: 1
   debugRenderAll: 0
-  resetter: 0
+  startingSubstancesList:
+  - name: Strontium90
+    amount: 2000000000000
+  preRun: 0
+  preRunFor: 0
+  preRunInterval: 1
+  onlyPreRun: 0
+  createBalances: 1
 --- !u!23 &172069026
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -927,7 +932,7 @@ MonoBehaviour:
   detector: {fileID: 0}
   FileNameEnd: 
   hits: 0
-  timeScale: 2
+  timeScale: 1
 --- !u!1 &1685469451
 GameObject:
   m_ObjectHideFlags: 0

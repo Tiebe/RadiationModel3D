@@ -25,14 +25,9 @@ namespace managers
 
         protected override void RunExperiment()
         {
-            if (emitter.resetter)
-            {
-                return;
-            }
-
             if (sb.Length == 0)
             {
-                sb.AppendLine("d(cm), I (pulsen/10s)");
+                sb.AppendLine("index, d(cm), I (pulsen/10s)");
             }
 
             counter.SetText(hits.ToString());
@@ -48,7 +43,7 @@ namespace managers
                 return;
             }
 
-            sb.AppendLine(thicknesses[iteration / 3].ToString(CultureInfo.InvariantCulture) + "," + hits);
+            sb.AppendLine(iteration + "," + thicknesses[iteration / 3].ToString(CultureInfo.InvariantCulture) + "," + hits);
             hits = 0;
             timer += 10f;
             iteration += 1;
