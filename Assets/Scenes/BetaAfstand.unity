@@ -169,7 +169,7 @@ MonoBehaviour:
   debugRenderAll: 0
   startingSubstancesList:
   - name: Strontium90
-    amount: 7000000000000
+    amount: 2000000000000
   preRun: 0
   preRunFor: 0
   preRunInterval: 1
@@ -932,7 +932,7 @@ MonoBehaviour:
   detector: {fileID: 0}
   FileNameEnd: 
   hits: 0
-  timeScale: 2
+  timeScale: 1
 --- !u!1 &1685469451
 GameObject:
   m_ObjectHideFlags: 0

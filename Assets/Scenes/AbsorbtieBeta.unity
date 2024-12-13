@@ -166,7 +166,7 @@ MonoBehaviour:
   counter: {fileID: 498189205}
   absorber: {fileID: 421180937}
   detector: {fileID: 448574871}
-  FileNameEnd: v2-1
+  FileNameEnd: 
   hits: 0
   timeScale: 1
 --- !u!1001 &62432304
@@ -989,10 +989,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emitting: 1
   debugRender: 1
-  debugRenderAll: 1
+  debugRenderAll: 0
   startingSubstancesList:
   - name: Strontium90
-    amount: 2000000000
+    amount: 3700000000000
   preRun: 0
   preRunFor: 100000000
   preRunInterval: 200

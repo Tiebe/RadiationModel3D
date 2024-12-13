@@ -988,8 +988,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emitting: 1
-  debugRender: 1
-  debugRenderAll: 1
+  debugRender: 0
+  debugRenderAll: 0
   startingSubstancesList:
   - name: Cobalt60
     amount: 300000000000

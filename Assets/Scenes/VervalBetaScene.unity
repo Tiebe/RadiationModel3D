@@ -874,7 +874,7 @@ MonoBehaviour:
   counter: {fileID: 0}
   absorber: {fileID: 0}
   detector: {fileID: 0}
-  FileNameEnd: 
+  FileNameEnd: -3
   hits: 0
   timeScale: 1
   experimentDuration: 270
