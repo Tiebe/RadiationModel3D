@@ -71,7 +71,7 @@ public abstract class Manager : MonoBehaviour
     /**
      * writes output data of an experiment to a csv file
      * <param name="data">StringBuilder containing the data to be written to the file</param>
-     * <param name="fileName">file name of the csv file (do not append csvm the function already does that</param>
+     * <param name="fileName">file name of the csv file (do not append csv the function already does that)</param>
      */
     protected static void WriteData(StringBuilder data, string fileName)
     {
@@ -83,10 +83,21 @@ public abstract class Manager : MonoBehaviour
         }
         
         var filepath = Path.Combine(folder, fileName + ".csv");
-        
-        using var writer = new StreamWriter(filepath, false);
-        writer.Write(data.ToString());
-        
+
+        while (true)
+        {
+            try
+            {
+                using var writer = new StreamWriter(filepath, false);
+                writer.Write(data.ToString());
+                break;
+            }
+            catch
+            {
+                if (!NativeWinAlert.Error("Data kan niet opgeslagen worden, aub excel sluiten \n druk op ok om het opnieuw te proberen", "file write error")) break;
+            }
+        }
+
         Debug.Log("Written file to: " + filepath);
     }
 }
